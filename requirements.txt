@@ -1,0 +1,11 @@
+colorlog~=3.1.2
+gensim
+nltk
+scikit-learn
+numpy
+ibm_db
+ibm_db_sa
+ipython-sql
+pandas
+cassandra-driver
+flask

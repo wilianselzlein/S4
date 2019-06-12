@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>S4</title>
+</head>
+<body>
+    SALT: <b>{{ salt }}</b>
+    <br>
+    <br>
+    <b>Parecidas:</b><br>
+    <table border = 1>
+        {% for relacionado in relacionados %}
+        <tr>
+            <td><img src="/static/like.jpg" alt="Ajudou" height="16" width="16"></td>
+            <td><img src="/static/dislike.jpg" alt="Errado" height="16" width="16"></td>
+            <td><button type="button">Ok</button></td>
+            <td><button type="button">No</button></td>
+            <td> {{ relacionado[1] }} / {{ relacionado[2] }} </td>
+            <td> {{ relacionado[3] }} </td>
+            <td><i> {{ relacionado[0] }} </i></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <b>Severidade:</b>
+    <table border = 1>
+        {% for key, value in severidades %}
+        <tr>
+            <td> {{ key }} </td>
+            <td> {{ value }} </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <b>Tempo m&eacute;dio:</b>
+    <br>
+    <table border = 1>
+        {% for key, value in tempos %}
+        <tr>
+            <td> {{ key }} </td>
+            <td> {{ value }} </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br><b>Pessoas:</b>
+    <br>
+    <table border = 1>
+        {% for key, value in pessoas %}
+        <tr>
+            <td> {{ key }} </td>
+            <td> {{ value }} </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

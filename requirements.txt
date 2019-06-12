@@ -7,5 +7,5 @@ ibm_db
 ibm_db_sa
 ipython-sql
 pandas
-cassandra-driver
 flask
+psycopg2

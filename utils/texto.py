@@ -12,7 +12,11 @@ FRASES = ['Data/Hora',
     'Data e hora da ocorrência',
     'Descrição da SALT',
     'Nome e Telefone do AnalistaLocal informado pelo cliente',
-    'Anexo após o envio do Portal']
+    'Anexo após o envio do Portal',
+    'Local informado pelo cliente',
+    'Bom dia',
+    'Boa tarde'
+    'Boa noite']
 
 class Texto(object):
 
@@ -57,7 +61,7 @@ class Texto(object):
         text = self.re_doublequotes_2.sub('\'', text)
         text = self.re_trim.sub(' ', text)
 
-        text = re.sub(r'[-./?!,":;()=\']', ' ', text)
+        text = re.sub(r'[-./?$@!,":;()=\']', ' ', text)
         text = normalize('NFKD', text).encode('ASCII', 'ignore').decode('ASCII')
         self.pattern = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
         text = self.pattern.sub('', text)
@@ -91,7 +95,7 @@ class Texto(object):
 
     def RemoverFrasesPadrao(self, s):
         for frase in FRASES:
-            s = s.replace(frase, '')
+            s = s.replace(frase.lower(), '')
         return s
 
     def minusculo(self, s):
@@ -110,16 +114,6 @@ class Texto(object):
     def RemoverNumeros(self, s):
         return re.sub(r'[0123456789]',' ',s)
 
-    def RemoveStopWords(self, instancia):
-        instancia = instancia.lower()
-        stopwords = set(nltk.corpus.stopwords.words('portuguese'))
-        for letter in range(97,123):
-            stopwords.add(chr(letter))
-        palavras = [i for i in instancia.split() if not i in stopwords]
-        stopwords = set(nltk.corpus.stopwords.words('english'))
-        palavras = " ".join(palavras)
-        palavras = [i for i in palavras.split() if not i in stopwords]
-        return (" ".join(palavras))
 
     def RemoveAcentos(self, s):
         return normalize('NFKD', s).encode('ASCII', 'ignore').decode('ASCII')

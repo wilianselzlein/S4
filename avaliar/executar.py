@@ -1,44 +1,96 @@
-from S4.avaliar.cassandra import Cassandra
+# from S4.avaliar.cassandra import Cassandra
+from S4.avaliar.postgres import Postgres
 from S4.avaliar.doc2vec import Doc2Vec
-
+from S4.avaliar.bagofwords import BagOfWords
+from S4.avaliar.cosine_distance import CosineDistance
+from S4.avaliar.bm25 import Bm25
+from S4 import importar
+import datetime
+import sys
 
 def executar(salt):
     avaliar(salt)
 
 
 def avaliar(salt):
-    cassandra = Cassandra()
+    postgres = Postgres()
     atendimento = str(salt).split('/')[0]
     item = str(salt).split('/')[1]
-    texto = cassandra.atendimento(cassandra, atendimento, item)
-    row = texto[0]  # for row in texto:
-    atendimentos = cassandra.atendimentos(cassandra)
+    importar.executar(atendimento, item)
+    texto = postgres.atendimento(postgres, atendimento, item)
+
+    atendimentos = postgres.atendimentos(postgres, atendimento, item)
+    print(len(atendimentos), "atendimentos para avaliação")
     # copia = atendimentos
 
-    doc2vec = Doc2Vec()
-    relacionado, relacionadoitem, score = doc2vec.avaliar(doc2vec, texto, atendimentos)
-    cassandra.relacionar(cassandra, atendimento, item, doc2vec.arquivo, relacionado, relacionadoitem, score)
+    datahora()
 
-    print(row.atendimento, '-', row.item)
-    # print(row.texto)
+    try:
+        doc2vec = Doc2Vec()
+        relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, doc2vec.arquivo)
+        if relacionado == 0:
+            relacionado, relacionadoitem, score = doc2vec.avaliar(doc2vec, texto, atendimentos)
+        postgres.relacionar(postgres, atendimento, item, doc2vec.arquivo, relacionado, relacionadoitem, score)
+
+        cosinedistance = CosineDistance()
+        relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, cosinedistance.arquivo)
+        if relacionado == 0:
+            relacionado, relacionadoitem, score = cosinedistance.avaliar(cosinedistance, texto, atendimentos)
+        postgres.relacionar(postgres, atendimento, item, cosinedistance.arquivo, relacionado, relacionadoitem, score)
+
+        bm25 = Bm25()
+        relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bm25.arquivo)
+        if relacionado == 0:
+            relacionado, relacionadoitem, score = bm25.avaliar(bm25, texto, atendimentos)
+        postgres.relacionar(postgres, atendimento, item, bm25.arquivo, relacionado, relacionadoitem, score)
+        datahora()
+
+        bagofwords = BagOfWords()
+        relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bagofwords.arquivo)
+        if relacionado == 0:
+            relacionado, relacionadoitem, score = bagofwords.avaliar(bagofwords, texto, atendimentos)
+        postgres.relacionar(postgres, atendimento, item, bagofwords.arquivo, relacionado, relacionadoitem, score)
+
+    except IOError as e:
+         print("I/O error({0}): {1}".format(e.errno, e.strerror))
+    except:
+        print("Erro:", sys.exc_info()[0])
+        # raise
+
+
+def datahora():
+    now = datetime.datetime.now()
+    print(now)
 
 
 def portal(salt):
     atendimento = str(salt).split('/')[0]
     item = str(salt).split('/')[1]
 
-    s = 'SALT: <b>' + salt + '</b><br><br><b>Parecidas:</b><br>'
-    cassandra = Cassandra()
-    relacionados = cassandra.resultados(cassandra, atendimento, item)
-    for relacionado in relacionados:
-        # s += relacionado.algoritmo + '= ' + relacionado.relacionado + '/' + relacionado.relacionadoitem + ': ' + relacionado.score + '<br>'
-        # s += 'sev ' + relacionado.severidade + ' ' + str(relacionado.horas) + ' horas <br>'
-        s += str(relacionado.relacionado) + '/' + str(relacionado.relacionadoitem) + ' ' + str(relacionado.score) + '<br>'
-        s += '<br><b>Pessoas:</b>' + '<br>'
-        pessoas = cassandra.pessoas(cassandra, relacionado.relacionado, relacionado.relacionadoitem)
-        for pessoa in pessoas:
-            s += pessoa.pessoa + ' ' + str(pessoa.quant) + '<br>'
+    sever = {}
+    tempo = {}
+    pesso = {}
 
-        s += '<br><b>Severidade:</b> 3 80%<br>'
-        s += '<br><b>Tempo médio:</b> 8 horas<br>'
-    return s
+    postgres = Postgres()
+    relacionados = postgres.resultados(postgres, atendimento, item)
+    for relacionado in relacionados:
+
+        if str(relacionado[4]) in sever:
+            sever[str(relacionado[4])] += 1
+        else:
+            sever[str(relacionado[4])] = 1
+
+        if str(relacionado[5]) in tempo:
+            tempo[str(relacionado[5])] += 1
+        else:
+            tempo[str(relacionado[5])] = 1
+
+    pessoas = postgres.pessoas(postgres, relacionados)
+
+    i = 0
+    for pessoa in pessoas:
+        pesso[i] = str(pessoa[1]) + " " + pessoa[0]
+        i += 1
+
+    return relacionados, sever.items(), tempo.items(), pesso.items()
+

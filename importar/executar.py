@@ -1,8 +1,9 @@
 import ibm_db
-from S4 import config
-from S4.utils import Texto
-# from S4.importar.cassandra import Cassandra
-from S4.importar.postgres import Postgres
+import ibm_db_dbi as db
+import config
+from utils import Texto
+# from importar.cassandra import Cassandra
+from importar.postgres import Postgres
 import dateutil.parser
 
 def executar(salt=None, item=None):
@@ -15,8 +16,12 @@ def executar(salt=None, item=None):
 
 
 def atendimento(salt=None, item=None):
-    conn = ibm_db.connect(config.dsn_database, config.dsn_uid, config.dsn_pwd)
-    schema = ibm_db.exec_immediate(conn, "SET SCHEMA SAC")
+    # conn = ibm_db.connect(config.dsn_database, config.dsn_uid, config.dsn_pwd)
+    conn = db.connect("DATABASE=" + config.dsn_database + ";HOSTNAME=" + config.dsn_hostname + ";PORT=" + config.dsn_port +
+                      ";UID=" + config.dsn_uid + ";PWD=" + config.dsn_pwd + ";",
+                      "/home/ivo/Downloads/jdbc_sqlj/db2_db2driver_for_jdbc_sqlj/db2jcc.jar", "")
+
+    #schema = ibm_db.exec_immediate(conn, "SET SCHEMA SAC")
     sql = """
     SELECT ia.NUATENDIMENTO, ia.NUITEM, ia.DEATENDIMENTO, pr.NUORDEM, ra.DTREGISTRO, 
     coalesce((SELECT sum(aa.QTHORASREAL) FROM sac.ESACATIVIDADE AA
@@ -42,16 +47,20 @@ def atendimento(salt=None, item=None):
     texto = Texto()
     postgres = Postgres()
 
-    stmt = ibm_db.exec_immediate(conn, sql)
-    # result = ibm_db.fetch_assoc(stmt)
-
-    row = ibm_db.fetch_assoc(stmt)
+    rows = conn.cursor()
+    rows.execute(sql)
+    #stmt = ibm_db.exec_immediate(conn, sql)
+    #row = ibm_db.fetch_assoc(stmt)
     registro = ''
     i = 0
     total = 0
-    while row:
+    for row in rows:
         total += 1
-        linha = str(row['DTREGISTRO'])
+
+        #NUATENDIMENTO  NUITEM  DEATENDIMENTO   NUORDEM     DTREGISTRO  QTHORASREAL
+        #0              1       2               3           4           5
+
+        linha = str(row[4]) #'DTREGISTRO'
         linha = dateutil.parser.parse(linha).date()
 
         if registro != linha:
@@ -61,19 +70,23 @@ def atendimento(salt=None, item=None):
             i = 0
 
         i += 1
-        original = str(row['DEATENDIMENTO']).replace("\'", "").replace("\"", "")
-        tratado = texto.tratar(texto, str(row['DEATENDIMENTO']))
-        stemming = texto.tratar(texto, str(row['DEATENDIMENTO']), True)
-        postgres.inserir(postgres, row['NUATENDIMENTO'], row['NUITEM'],
+        original = str(row[2]).replace("\'", "").replace("\"", "")
+        tratado = texto.tratar(texto, str(row[2]))
+        stemming = texto.tratar(texto, str(row[2]), True)
+        postgres.inserir(postgres, row[0], row[1],
                           original, tratado, stemming,
-                          row['NUORDEM'], row['QTHORASREAL'], row['DTREGISTRO'])
-        row = ibm_db.fetch_assoc(stmt)
+                          row[3], row[5], row[4])
+        #row = ibm_db.fetch_assoc(stmt)
     print('Registros importados:', total)
 
 
 def pessoas(salt=None, item=None):
-    conn = ibm_db.connect(config.dsn_database, config.dsn_uid, config.dsn_pwd)
-    schema = ibm_db.exec_immediate(conn, "SET SCHEMA SAC")
+    # conn = ibm_db.connect(config.dsn_database, config.dsn_uid, config.dsn_pwd)
+    conn = db.connect("DATABASE=" + config.dsn_database + ";HOSTNAME=" + config.dsn_hostname + ";PORT=" + config.dsn_port +
+                      ";UID=" + config.dsn_uid + ";PWD=" + config.dsn_pwd + ";",
+                      "/home/ivo/Downloads/jdbc_sqlj/db2_db2driver_for_jdbc_sqlj/db2jcc.jar", "")
+
+    # schema = ibm_db.exec_immediate(conn, "SET SCHEMA SAC")
     sql = """
         SELECT ia.NUATENDIMENTO, ia.NUITEM, aa.CDUSUARIO, count(1) AS QUANT
           FROM sac.ESACREGISTROATEND ra
@@ -96,15 +109,18 @@ def pessoas(salt=None, item=None):
     sql += " AND VARCHAR_FORMAT (ra.DTREGISTRO,'YYYY-MM-DD') > '" + config.ultima_importacao + "' " \
         "GROUP BY ia.NUATENDIMENTO, ia.NUITEM, aa.CDUSUARIO"
 
-    texto = Texto()
+    # texto = Texto()
     postgres = Postgres()
 
-    stmt = ibm_db.exec_immediate(conn, sql)
+    # stmt = ibm_db.exec_immediate(conn, sql)
     # result = ibm_db.fetch_assoc(stmt)
+    rows = conn.cursor()
+    rows.execute(sql)
 
-    row = ibm_db.fetch_assoc(stmt)
-    while row:
-        postgres.pessoa(postgres, row['NUATENDIMENTO'], row['NUITEM'], row['CDUSUARIO'], row['QUANT'])
-        row = ibm_db.fetch_assoc(stmt)
+    # row = ibm_db.fetch_assoc(stmt)
+    for row in rows:
+        postgres.pessoa(postgres, row[0], row[1], row[2], row[3])
+        # postgres.pessoa(postgres, row['NUATENDIMENTO'], row['NUITEM'], row['CDUSUARIO'], row['QUANT'])
+        # row = ibm_db.fetch_assoc(stmt)
 
 

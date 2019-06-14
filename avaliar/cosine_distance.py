@@ -1,7 +1,7 @@
 from nltk.corpus import brown, stopwords
 from nltk.cluster.util import cosine_distance
 
-from S4.avaliar import modelo
+from avaliar import modelo
 
 # import os.path
 

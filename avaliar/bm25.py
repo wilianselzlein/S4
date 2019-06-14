@@ -1,8 +1,8 @@
-from S4.avaliar.bm25class.parse import *
-from S4.avaliar.bm25class.query import QueryProcessor
+from avaliar.bm25class.parse import *
+from avaliar.bm25class.query import QueryProcessor
 import operator
 
-from S4.avaliar import modelo
+from avaliar import modelo
 
 # import os.path
 

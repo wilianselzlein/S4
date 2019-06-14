@@ -1,7 +1,7 @@
-from S4 import PostgresBase
+import PostgresBase
 
 
-class Postgres(PostgresBase.base):
+class Postgres(PostgresBase.Base):
 
 
     @staticmethod

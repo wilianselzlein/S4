@@ -1,4 +1,4 @@
-from S4 import config
+import config
 from cassandra.cluster import Cluster
 
 class Cassandra(object):

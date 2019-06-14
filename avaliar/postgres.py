@@ -1,8 +1,8 @@
-from S4 import PostgresBase
-from S4 import config
+import PostgresBase
+import config
 
 
-class Postgres(PostgresBase.base):
+class Postgres(PostgresBase.Base):
 
     @staticmethod
     def atendimento(self, sac, item):
@@ -24,7 +24,7 @@ class Postgres(PostgresBase.base):
         sql += "  where r.atendimento = " + str(sac)
         sql += "  and r.item = " + str(item)
         sql += f" and r.util = {False})"
-        print(sql)
+        #print(sql)
         data = config.data_avaliacao
         if data != '':
             sql += " and s.data > '" + data + "'"
@@ -86,7 +86,7 @@ class Postgres(PostgresBase.base):
         sql += " and r.algoritmo = '" + str(algoritmo) + "'"
         sql += f" and (r.util <> {False} or r.util is null)"
         sql += " order by r.algoritmo;"
-        print(sql)
+        #print(sql)
         self.cur.execute(sql)
 
         relacionado = 0

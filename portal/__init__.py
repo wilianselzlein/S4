@@ -1,3 +1,3 @@
-from S4.portal.executar import executar
+from portal.executar import executar
 
 __all__ = ['executar']

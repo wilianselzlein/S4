@@ -1,5 +1,5 @@
 import gensim
-from S4.avaliar import modelo
+from avaliar import modelo
 
 # import os.path
 

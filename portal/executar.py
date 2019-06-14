@@ -1,6 +1,6 @@
-from S4 import avaliar
+import avaliar
 from flask import Flask, render_template, redirect, url_for
-from S4.portal.postgres import Postgres
+from portal.postgres import Postgres
 
 #app = Flask(__name__, static_url_path='/static')
 app = Flask(__name__, static_url_path='/static')
@@ -12,14 +12,14 @@ DISLIKE = False
 #     app.run()
 
 def executar():
-    app.run()
+    app.run(host="0.0.0.0")
     #app.run(debug=True) #erro
 
 @app.route('/')
 def home():
     # return "S4"
     # return render_template('E:\\OneDrive\\OneDrive - Softplan\\Python\\S4\\S4\\templates\\index.html');
-    return render_template('index.html');
+    return render_template('index.html')
 
 @app.route('/salt/<salt>/<item>')
 def salt(salt, item):

@@ -1,10 +1,10 @@
 # from S4.avaliar.cassandra import Cassandra
-from S4.avaliar.postgres import Postgres
-from S4.avaliar.doc2vec import Doc2Vec
-from S4.avaliar.bagofwords import BagOfWords
-from S4.avaliar.cosine_distance import CosineDistance
-from S4.avaliar.bm25 import Bm25
-from S4 import importar
+from avaliar.postgres import Postgres
+from avaliar.bagofwords import BagOfWords
+from avaliar.doc2vec import Doc2Vec
+from avaliar.cosine_distance import CosineDistance
+from avaliar.bm25 import Bm25
+import importar
 import datetime
 import sys
 

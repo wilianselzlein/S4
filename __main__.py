@@ -1,7 +1,7 @@
 import argparse
 import time
-from S4 import config
-from S4 import importar, avaliar, portal
+import config
+import importar, avaliar, portal
 # import warnings
 
 # warnings.filterwarnings(action='ignore', category=UserWarning, module='gensim')

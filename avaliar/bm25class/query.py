@@ -1,7 +1,7 @@
 __author__ = 'Nick Hirakawa'
 
-from S4.avaliar.bm25class.invdx import build_data_structures
-from S4.avaliar.bm25class.rank import score_BM25
+from avaliar.bm25class.invdx import build_data_structures
+from avaliar.bm25class.rank import score_BM25
 import operator
 
 

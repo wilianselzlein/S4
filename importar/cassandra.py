@@ -1,7 +1,7 @@
-from S4 import config
-from cassandra.cluster import Cluster
-from cassandra.query import SimpleStatement
-from cassandra import ConsistencyLevel
+import config
+#from cassandra.cluster import Cluster
+#from cassandra.query import SimpleStatement
+#from cassandra import ConsistencyLevel
 
 
 class Cassandra(object):

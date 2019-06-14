@@ -1,13 +1,14 @@
-from S4 import PostgresBase
+import PostgresBase
 
-class Postgres(PostgresBase.base):
+
+class Postgres(PostgresBase.Base):
 
     @staticmethod
     def inserir(self, sac, item, texto, tratado, stemming, severidade, tempo, data):
         # tempo = str(tempo).replace(".", ",")
         sql = "insert into sac (atendimento, item, original, texto, stemming, severidade, tempo, data) " \
               "values (" + str(sac) + ", " + str(item) + ", '" + texto + "', '" + tratado + "', '" \
-              + stemming + "', " + str(severidade) + ", " + tempo + ", '" + str(data) + "') " \
+              + stemming + "', " + str(severidade) + ", " + str(tempo) + ", '" + str(data) + "') " \
               " ON CONFLICT (atendimento, item) DO NOTHING;"
 
         self.cur.execute(sql)

@@ -1,0 +1,8 @@
+version: '3'
+services:
+  web:
+     build: .
+     ports:
+        - "5000:5000"
+     entrypoint: python ./__main__.py --portal
+     network_mode: host

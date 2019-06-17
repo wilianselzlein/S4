@@ -39,6 +39,9 @@ Nesse [link](https://virtualenvwrapper.readthedocs.io/en/latest/) você pode enc
 Após instalação e ativação de sua **env** execute o comando **make install** para instalar todas as dependencias do projeto.
 
 ```bash
+sudo apt-get install python-psycopg2
+sudo apt-get install libpq-dev
+pip3 install psycopg2
 $ make install
 ```
 A base de dados o própio app cria, bastando apenas ter um postgreSQL instalado.

@@ -9,3 +9,4 @@ ipython-sql
 pandas
 flask
 psycopg2
+peewee

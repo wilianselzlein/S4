@@ -11,6 +11,7 @@ postgres_db = 's4'
 postgres_dbpostgres = 'postgres'
 postgres_user = 'postgres'
 postgres_pass = 'root'
+postgres_port = 5432
 
 dsn_driver = "IBM DB2 ODBC DRIVER"
 dsn_database = "SAC"            # e.g. "BLUDB"

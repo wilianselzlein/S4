@@ -1,10 +1,33 @@
 import config
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+from peewee import PostgresqlDatabase, SmallIntegerField
+from peewee import Model, CharField, BooleanField, ForeignKeyField, IntegerField, CompositeKey, DateTimeField
+
+db = PostgresqlDatabase(config.postgres_db, user=config.postgres_user, password=config.postgres_pass,
+                        host=config.postgres_host, port=config.postgres_port)
+
+
+class BaseModel(Model):
+
+    class Meta:
+        database = db
+
+
+class Pessoas(BaseModel):
+    atendimento = IntegerField()
+    item = SmallIntegerField()
+    pessoa = CharField(max_length=25)
+    quant = SmallIntegerField()
+
+    class Meta:
+        primary_key = CompositeKey('atendimento', 'item', 'pessoa')
+
+
+TABLES = [Pessoas]
 
 
 class Base(object):
-
 
     @staticmethod
     def create_database(self):
@@ -23,6 +46,9 @@ class Base(object):
 
     @staticmethod
     def create_tables(self):
+
+        db.create_tables(TABLES)
+
         sql = " CREATE TABLE IF NOT EXISTS public.sac ("\
               " atendimento integer," \
               " item smallint," \
@@ -38,15 +64,17 @@ class Base(object):
         # print(sql)
         self.con.commit()
 
-        sql = " CREATE TABLE IF NOT EXISTS public.pessoas ("\
-              " atendimento integer," \
-              " item smallint," \
-              " pessoa varchar(25)," \
-              " quant smallint," \
-              " CONSTRAINT pk_pessoas PRIMARY KEY(atendimento, item, pessoa)" \
-               ");"
-        self.cur.execute(sql)
-        self.con.commit()
+
+
+        # sql = " CREATE TABLE IF NOT EXISTS public.pessoas ("\
+        #       " atendimento integer," \
+        #       " item smallint," \
+        #       " pessoa varchar(25)," \
+        #       " quant smallint," \
+        #       " CONSTRAINT pk_pessoas PRIMARY KEY(atendimento, item, pessoa)" \
+        #        ");"
+        # self.cur.execute(sql)
+        # self.con.commit()
 
         sql = " CREATE TABLE IF NOT EXISTS public.fontes ("\
               " atendimento integer," \

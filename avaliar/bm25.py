@@ -71,7 +71,7 @@ class Bm25(modelo.Base):
                 tmp = (qid, i[0], index, i[1])
                 score = i[1]
                 salt = i[0]
-                salt = 286478
+                #salt = 286478
                 item = 1
 
                 # print ('{:>1}\tQ0\t{:>4}\t{:>2}\t{:>12}\tNH-BM25'.format(*tmp))

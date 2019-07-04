@@ -4,6 +4,7 @@ from avaliar.bagofwords import BagOfWords
 from avaliar.doc2vec import Doc2Vec
 from avaliar.cosine_distance import CosineDistance
 from avaliar.bm25 import Bm25
+from avaliar.lsa import Lsa
 import importar
 import datetime
 import sys
@@ -26,6 +27,12 @@ def avaliar(salt):
     datahora()
 
     try:
+        lsa = Lsa()
+        relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, lsa.arquivo)
+        if relacionado == 0:
+            relacionado, relacionadoitem, score = lsa.avaliar(lsa, texto, atendimentos)
+        postgres.relacionar(postgres, atendimento, item, lsa.arquivo, relacionado, relacionadoitem, score)
+
         doc2vec = Doc2Vec()
         relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, doc2vec.arquivo)
         if relacionado == 0:

@@ -24,10 +24,10 @@ def home():
 @app.route('/salt/<salt>/<item>')
 def salt(salt, item):
     avaliar.executar(salt + '/' + item)
-    relacionados, severidades, tempos, pessoas = avaliar.portal(salt + '/' + item)
+    relacionados, severidades, tempos, pessoas, texto = avaliar.portal(salt + '/' + item)
 
     return render_template('salt.html', salt=salt, item=item, relacionados=relacionados, severidades=severidades,
-                           tempos=tempos, pessoas=pessoas)
+                           tempos=tempos, pessoas=pessoas, texto=texto)
 
 @app.route('/like/<salt>/<item>/<algoritmo>/<relacionado>/<relacionadoitem>')
 def like(salt, item, algoritmo, relacionado, relacionadoitem):

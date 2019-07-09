@@ -83,6 +83,7 @@ def portal(salt):
     pesso = {}
 
     postgres = Postgres()
+    texto = postgres.atendimento(postgres, atendimento, item)[0][3]
     relacionados = postgres.resultados(postgres, atendimento, item)
     for relacionado in relacionados:
 
@@ -103,5 +104,5 @@ def portal(salt):
         pesso[i] = str(pessoa[1]) + " " + pessoa[0]
         i += 1
 
-    return relacionados, sever.items(), tempo.items(), pesso.items()
+    return relacionados, sever.items(), tempo.items(), pesso.items(), texto
 

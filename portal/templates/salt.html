@@ -7,6 +7,7 @@
 <body>
     SALT: <b>{{ salt }}</b>
     <br>
+    <pre>{{ texto }}</pre>
     <br>
     <b>Parecidas:</b><br>
     <table border = 1>
@@ -25,6 +26,7 @@
             <td> {{ relacionado[1] }} / {{ relacionado[2] }} </td>
             <td> {{ relacionado[3] }} </td>
             <td><i> {{ relacionado[0] }} </i></td>
+            <td><pre>{{ relacionado[6] }}</pre></td>
         </tr>
         {% endfor %}
     </table>

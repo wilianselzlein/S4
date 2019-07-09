@@ -58,7 +58,7 @@ class CosineDistance(modelo.Base):
                 continue
             vector2[all_words.index(w)] += 1
 
-        return 1 - cosine_distance(vector1, vector2)
+        return cosine_distance(vector1, vector2)
 
     def treinar(self, model, atendimentos):
         model.save(ARQUIVO)

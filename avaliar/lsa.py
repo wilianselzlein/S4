@@ -1,13 +1,15 @@
-import sklearn
+# import sklearn
 from sklearn.decomposition import TruncatedSVD
-from sklearn.feature_extraction.text import TfidfVectorizer
+# from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.preprocessing import Normalizer
-from sklearn import metrics
-from sklearn.cluster import KMeans, MiniBatchKMeans
+# from sklearn import metrics
+# from sklearn.cluster import KMeans, MiniBatchKMeans
 from nltk.corpus import stopwords
 import numpy as np
 import pandas as pd
+# from scipy.spatial.distance import cosine
+from sklearn.metrics.pairwise import cosine_similarity
 
 from avaliar import modelo
 
@@ -48,6 +50,8 @@ class Lsa(modelo.Base):
         dtm_lsa_exemplo = Normalizer(copy=False).fit_transform(dtm_lsa_exemplo)
 
         similarity = np.asarray(np.asmatrix(dtm_lsa) * np.asmatrix(dtm_lsa_exemplo).T)
+
+        # similarity = cosine_similarity(np.asmatrix(dtm_lsa), np.asmatrix(dtm_lsa_exemplo))
 
         res = pd.DataFrame(similarity, index=salts, columns=example2).sort_values(example2, ascending=False).head(1)
 

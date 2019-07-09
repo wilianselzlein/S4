@@ -90,4 +90,4 @@ class Bm25(modelo.Base):
         return ARQUIVO
 
     def __init__(self):
-        print(self.arquivo)
+        print('\t', self.arquivo)

@@ -67,4 +67,4 @@ class Lsa(modelo.Base):
         return ARQUIVO
 
     def __init__(self):
-        print(self.arquivo)
+        print('\t', self.arquivo)

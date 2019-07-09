@@ -40,7 +40,7 @@ class Postgres(PostgresBase.Base):
         sql += " values (" + str(atendimento) + ", " + str(item) + ", '" + algoritmo + "', "
         sql += str(relacionado) + ", " + str(relacionadoitem) + ", " + str(score) + " ) "
         sql += " ON CONFLICT (atendimento, item, algoritmo, relacionado, relacionadoitem) DO NOTHING; "
-        print(str(relacionado)+'/'+str(relacionadoitem),score)
+        print('\t', '\t', str(relacionado)+'/'+str(relacionadoitem), score)
         self.cur.execute(sql)
         self.con.commit()
 

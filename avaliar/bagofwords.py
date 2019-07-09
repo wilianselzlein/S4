@@ -202,4 +202,4 @@ class BagOfWords(modelo.Base):
         return ARQUIVO
 
     def __init__(self):
-        print(ARQUIVO)
+        print('\t', ARQUIVO)

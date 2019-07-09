@@ -32,31 +32,35 @@ def avaliar(salt):
         if relacionado == 0:
             relacionado, relacionadoitem, score = lsa.avaliar(lsa, texto, atendimentos)
         postgres.relacionar(postgres, atendimento, item, lsa.arquivo, relacionado, relacionadoitem, score)
+        datahora()
 
         doc2vec = Doc2Vec()
         relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, doc2vec.arquivo)
         if relacionado == 0:
             relacionado, relacionadoitem, score = doc2vec.avaliar(doc2vec, texto, atendimentos)
         postgres.relacionar(postgres, atendimento, item, doc2vec.arquivo, relacionado, relacionadoitem, score)
+        datahora()
 
-        # cosinedistance = CosineDistance()
-        # relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, cosinedistance.arquivo)
-        # if relacionado == 0:
-        #     relacionado, relacionadoitem, score = cosinedistance.avaliar(cosinedistance, texto, atendimentos)
-        # postgres.relacionar(postgres, atendimento, item, cosinedistance.arquivo, relacionado, relacionadoitem, score)
-        #
-        # bm25 = Bm25()
-        # relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bm25.arquivo)
-        # if relacionado == 0:
-        #     relacionado, relacionadoitem, score = bm25.avaliar(bm25, texto, atendimentos)
-        # postgres.relacionar(postgres, atendimento, item, bm25.arquivo, relacionado, relacionadoitem, score)
-        # datahora()
-        #
-        # bagofwords = BagOfWords()
-        # relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bagofwords.arquivo)
-        # if relacionado == 0:
-        #     relacionado, relacionadoitem, score = bagofwords.avaliar(bagofwords, texto, atendimentos)
-        # postgres.relacionar(postgres, atendimento, item, bagofwords.arquivo, relacionado, relacionadoitem, score)
+        cosinedistance = CosineDistance()
+        relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, cosinedistance.arquivo)
+        if relacionado == 0:
+            relacionado, relacionadoitem, score = cosinedistance.avaliar(cosinedistance, texto, atendimentos)
+        postgres.relacionar(postgres, atendimento, item, cosinedistance.arquivo, relacionado, relacionadoitem, score)
+        datahora()
+
+        bm25 = Bm25()
+        relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bm25.arquivo)
+        if relacionado == 0:
+            relacionado, relacionadoitem, score = bm25.avaliar(bm25, texto, atendimentos)
+        postgres.relacionar(postgres, atendimento, item, bm25.arquivo, relacionado, relacionadoitem, score)
+        datahora()
+
+        bagofwords = BagOfWords()
+        relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bagofwords.arquivo)
+        if relacionado == 0:
+            relacionado, relacionadoitem, score = bagofwords.avaliar(bagofwords, texto, atendimentos)
+        postgres.relacionar(postgres, atendimento, item, bagofwords.arquivo, relacionado, relacionadoitem, score)
+        datahora()
 
     except IOError as e:
          print("I/O error({0}): {1}".format(e.errno, e.strerror))

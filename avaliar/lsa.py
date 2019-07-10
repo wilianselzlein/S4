@@ -29,11 +29,11 @@ class Lsa(modelo.Base):
             example.append(atendimento[2])
             salts.append(str(atendimento[0]) + '/' + str(atendimento[1]))
 
-        vectorizer = CountVectorizer(min_df=13, stop_words=stopwords.words("portuguese"))
+        vectorizer = CountVectorizer(min_df=5, ngram_range=(1, 3), stop_words=stopwords.words("portuguese"))
 
         dtm = vectorizer.fit_transform(example)
 
-        lsa = TruncatedSVD(100, algorithm='arpack')
+        lsa = TruncatedSVD(150, algorithm='arpack')
 
         dtm = dtm.asfptype()
         dtm_model = lsa.fit(dtm)

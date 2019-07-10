@@ -4,31 +4,37 @@ import nltk
 
 from unicodedata import normalize
 
-FRASES = ['Data/Hora',
-    'Servidor APP',
-    'Versão da aplicação',
-    'Nome do usuário',
-    'Login do usuário',
-    'Data e hora da ocorrência',
-    'Descrição da SALT',
-    'Nome e Telefone do AnalistaLocal informado pelo cliente',
-    'Anexo após o envio do Portal',
-    'Local informado pelo cliente',
-    'Bom dia',
-    'Boa tarde'
-    'Boa noite']
+FRASES = ['data/hora',
+    'servidor app',
+    'versão da aplicação',
+    'nome do usuário',
+    'login do usuário',
+    'data e hora da ocorrência',
+    'descrição da salt',
+    'nome e telefone do analistalocal informado pelo cliente',
+    'anexo após o envio do portal',
+    'local informado pelo cliente',
+    'bom dia',
+    'boa tarde',
+    'boa noite',
+    'senhores',
+    'informamos',
+    'prezados',
+    'prezado',
+          ]
 
 class Texto(object):
 
     @staticmethod
     def tratar(self, s, stemming=False):
         s = self.minusculo(s)
+        s = self.RemoveURL(s)
+        s = self.RemoveEmail(s)
         s = self.RemoverFrasesPadrao(s)
         s = self.RemoverNumeros(s)
         s = self.Pontuacao(s)
         s = self.RemoveAcentos(s)
         s = self.RemoveStopWords(s)
-        s = self.RemoveURL(s)
         s = self.normalize_text(s)
         s = self.clear_text(s)
         if stemming:
@@ -44,8 +50,8 @@ class Texto(object):
         text = self.re_changehyphen.sub('-', text)
         text = self.re_remove_html.sub(' ', text)
         text = self.re_transform_numbers.sub('0', text)
-        text = self.re_transform_url.sub('URL', text)
-        text = self.re_transform_emails.sub('EMAIL', text)
+        text = self.re_transform_url.sub('url', text)
+        # text = self.re_transform_emails.sub('email', text)
         text = self.re_quotes_1.sub(r'\1"', text)
         text = self.re_quotes_2.sub(r'"\1', text)
         text = self.re_quotes_3.sub('"', text)
@@ -60,6 +66,9 @@ class Texto(object):
         text = self.re_doublequotes_1.sub('\"', text)
         text = self.re_doublequotes_2.sub('\'', text)
         text = self.re_trim.sub(' ', text)
+        text = re.sub(r'[x]+', 'x', text)
+        text = re.sub(r'[\-]+', '-', text)
+        text = re.sub(r'[\*]+', '*', text)
 
         text = re.sub(r'[-./?$@!,":;()=\']', ' ', text)
         text = normalize('NFKD', text).encode('ASCII', 'ignore').decode('ASCII')
@@ -112,8 +121,8 @@ class Texto(object):
         return re.sub(r'[\\_\+\*-./?!,":;()=#\<\>\'|]',' ',s)
 
     def RemoverNumeros(self, s):
-        return re.sub(r'[0123456789]',' ',s)
-
+        # return re.sub(r'[0123456789]',' ',s)
+        return re.sub(r'[\d]+[\d\,\.\-\(\) \/:ºª\%]*', ' __num__ ', s)
 
     def RemoveAcentos(self, s):
         return normalize('NFKD', s).encode('ASCII', 'ignore').decode('ASCII')
@@ -122,8 +131,14 @@ class Texto(object):
         # Código-Fonte utilizado para remoção de hashtags e URLs do corpus
         # Remove as hashtags do corpus pattern = re.compile(r'\#\w+') raw = pattern.sub('', raw)
         # Remove as URLs do corpus
-        pattern = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
-        return pattern.sub('', s)
+        # pattern = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
+        # return pattern.sub('', s)
+        return re.sub(r'(https?:\/\/(?:www\d?\.|(?!www\d?))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\d?\.'
+                      r'[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\d?\.|(?!www\d?))[a-zA-Z0-9]'
+                      r'+\.[^\s]{2,}|www\d?\.[a-zA-Z0-9]+\.[^\s]{2,})', ' __url__ ', s)
+
+    def RemoveEmail(self, s):
+        return re.sub(r'([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)', ' __email__ ', s)
 
     def __init__(self):
         punctuations = re.escape('!"#%\'()*+,./:;<=>?@[\\]^_`{|}~_')
@@ -133,7 +148,7 @@ class Texto(object):
         self.re_remove_brackets = re.compile(r'\[.*?\]')
         self.re_remove_html = re.compile(r'<(\/|\\)?.+?>', re.UNICODE)
         self.re_transform_numbers = re.compile(r'\d', re.UNICODE)
-        self.re_transform_emails = re.compile(r'[^\s]+@[^\s]+', re.UNICODE)
+        # self.re_transform_emails = re.compile(r'[^\s]+@[^\s]+', re.UNICODE)
         self.re_transform_url = re.compile(r'(http|https)://[^\s]+', re.UNICODE)
         #
         self.re_quotes_1 = re.compile(r"(?u)(^|\W)[‘’′`']", re.UNICODE)

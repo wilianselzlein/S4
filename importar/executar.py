@@ -1,10 +1,14 @@
-import ibm_db
+# import ibm_db
 import ibm_db_dbi as db
 import config
 from utils import Texto
 # from importar.cassandra import Cassandra
 from importar.postgres import Postgres
 import dateutil.parser
+import nltk
+from nltk import word_tokenize
+from nltk.util import ngrams
+from collections import Counter
 
 def executar(salt=None, item=None):
     atendimento(salt, item)
@@ -51,6 +55,31 @@ def atendimento(salt=None, item=None):
     rows.execute(sql)
     #stmt = ibm_db.exec_immediate(conn, sql)
     #row = ibm_db.fetch_assoc(stmt)
+
+    grams = ''
+    rows = list(rows)
+    for row in rows:
+        grams += ' ' + texto.tratar(texto, str(row[2]))
+
+    token = nltk.word_tokenize(grams)
+    trigrams = ngrams(token, 3)
+    trigrams = Counter(trigrams)
+    trimost = trigrams.most_common(500)
+    #print('tri', trimost)
+
+    for key, value in trimost:
+        palavra = ''
+        for n in range(len(key)):
+            palavra += key[n] + ' '
+        gram = palavra.replace(' ', '_')
+        grams = grams.replace(palavra, gram)
+
+    token = nltk.word_tokenize(grams)
+    bigrams = ngrams(token, 2)
+    bigrams = Counter(bigrams)
+    bimost = bigrams.most_common(500)
+    #print('bi', bimost)
+
     registro = ''
     i = 0
     total = 0
@@ -72,6 +101,21 @@ def atendimento(salt=None, item=None):
         i += 1
         original = str(row[2]).replace("\'", "").replace("\"", "")
         tratado = texto.tratar(texto, str(row[2]))
+
+        for key, value in trimost:
+            palavra = ''
+            for n in range(len(key)):
+                palavra += key[n] + ' '
+            gram = palavra.replace(' ', '_')
+            tratado = tratado.replace(palavra, gram)
+
+        for key, value in bimost:
+            palavra = ''
+            for n in range(len(key)):
+                palavra += key[n] + ' '
+            gram = palavra.replace(' ', '_')
+            tratado = tratado.replace(palavra, gram)
+
         stemming = texto.tratar(texto, str(row[2]), True)
         postgres.inserir(postgres, row[0], row[1],
                           original, tratado, stemming,

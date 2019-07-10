@@ -1,9 +1,5 @@
 from avaliar import modelo
-
-import os
 import nltk
-import re
-from unicodedata import normalize
 import numpy as np
 from sklearn.feature_extraction.text import TfidfTransformer
 

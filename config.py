@@ -1,4 +1,5 @@
 import os
+import logging
 
 ultima_importacao = '2017-01-01'
 data_avaliacao = '2017-01-01'
@@ -29,3 +30,5 @@ dsn = (
     "PROTOCOL=TCPIP;"
     "UID={3};"
     "PWD={4};").format(dsn_database, dsn_hostname, dsn_port, dsn_uid, dsn_pwd)
+
+DEBUG_LEVEL = logging.DEBUG

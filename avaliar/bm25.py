@@ -89,5 +89,5 @@ class Bm25(modelo.Base):
     def arquivo(self):
         return ARQUIVO
 
-    def __init__(self):
-        print('\t', self.arquivo)
+    # def __init__(self):
+    #     print('\t', self.arquivo)

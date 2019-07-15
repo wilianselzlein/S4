@@ -1,6 +1,9 @@
 import PostgresBase
 import config
+from utils import utils
 
+
+log = utils.get_logger('Avaliation')
 
 class Postgres(PostgresBase.Base):
 
@@ -24,11 +27,10 @@ class Postgres(PostgresBase.Base):
         sql += "  where r.atendimento = " + str(sac)
         sql += "  and r.item = " + str(item)
         sql += f" and r.util = {False})"
-        #print(sql)
         data = config.data_avaliacao
         if data != '':
             sql += " and s.data > '" + data + "'"
-            print("Avaliados a partir de", data)
+            log.error("Avaliados a partir de " + str(data))
 
         self.cur.execute(sql)
         return self.cur.fetchall()
@@ -40,7 +42,7 @@ class Postgres(PostgresBase.Base):
         sql += " values (" + str(atendimento) + ", " + str(item) + ", '" + algoritmo + "', "
         sql += str(relacionado) + ", " + str(relacionadoitem) + ", " + str(score) + " ) "
         sql += " ON CONFLICT (atendimento, item, algoritmo, relacionado, relacionadoitem) DO NOTHING; "
-        print('\t', '\t', str(relacionado)+'/'+str(relacionadoitem), score)
+        log.debug(algoritmo + ' ' + str(relacionado)+'/'+str(relacionadoitem) + str(score))
         self.cur.execute(sql)
         self.con.commit()
 
@@ -86,7 +88,6 @@ class Postgres(PostgresBase.Base):
         sql += " and r.algoritmo = '" + str(algoritmo) + "'"
         sql += f" and (r.util <> {False} or r.util is null)"
         sql += " order by r.algoritmo;"
-        #print(sql)
         self.cur.execute(sql)
 
         relacionado = 0

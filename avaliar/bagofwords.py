@@ -197,5 +197,5 @@ class BagOfWords(modelo.Base):
     def arquivo(self):
         return ARQUIVO
 
-    def __init__(self):
-        print('\t', ARQUIVO)
+    # def __init__(self):
+    #     print('\t', ARQUIVO)

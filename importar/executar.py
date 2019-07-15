@@ -6,9 +6,15 @@ from utils import Texto
 from importar.postgres import Postgres
 import dateutil.parser
 import nltk
-from nltk import word_tokenize
+# from nltk import word_tokenize
 from nltk.util import ngrams
 from collections import Counter
+import pickle
+import os
+from utils import utils
+
+
+log = utils.get_logger('Importer')
 
 def executar(salt=None, item=None):
     atendimento(salt, item)
@@ -46,6 +52,7 @@ def atendimento(salt=None, item=None):
         sql += " AND ia.NUATENDIMENTO = " + str(salt) + " AND ia.NUITEM = " + str(item)
     else:
         sql += " AND VARCHAR_FORMAT (ra.DTREGISTRO,'YYYY-MM-DD') > '" + config.ultima_importacao + "'"
+    sql += " AND VARCHAR_FORMAT (ra.DTREGISTRO,'YYYY-MM-DD') > '" + config.ultima_importacao + "'"
     sql += " ORDER BY ra.DTREGISTRO"
 
     texto = Texto()
@@ -53,32 +60,45 @@ def atendimento(salt=None, item=None):
 
     rows = conn.cursor()
     rows.execute(sql)
-    #stmt = ibm_db.exec_immediate(conn, sql)
-    #row = ibm_db.fetch_assoc(stmt)
+    # stmt = ibm_db.exec_immediate(conn, sql)
+    # row = ibm_db.fetch_assoc(stmt)
 
-    grams = ''
+    texto_salt = ''
     rows = list(rows)
-    for row in rows:
-        grams += ' ' + texto.tratar(texto, str(row[2]))
+    for row in rows: # enumerate com print /r end
+        texto_salt += ' ' + texto.tratar(texto, str(row[2]))
 
-    token = nltk.word_tokenize(grams)
-    trigrams = ngrams(token, 3)
-    trigrams = Counter(trigrams)
-    trimost = trigrams.most_common(500)
-    #print('tri', trimost)
+    if salt is None and item is None:
+        grams_pickle = open('grams.pickle', 'wb')
 
-    for key, value in trimost:
-        palavra = ''
-        for n in range(len(key)):
-            palavra += key[n] + ' '
-        gram = palavra.replace(' ', '_')
-        grams = grams.replace(palavra, gram)
+        token = nltk.word_tokenize(texto_salt)
+        trigrams = ngrams(token, 3)
+        trigrams = Counter(trigrams)
+        trimost = trigrams.most_common(500)
 
-    token = nltk.word_tokenize(grams)
-    bigrams = ngrams(token, 2)
-    bigrams = Counter(bigrams)
-    bimost = bigrams.most_common(500)
-    #print('bi', bimost)
+        dic = []
+        for key, value in trimost:
+            palavra = ''
+            for n in range(len(key)):
+                palavra += key[n] + ' '
+            palavra = palavra.strip()
+            gram = palavra.replace(' ', '_')
+            dic.append(palavra)
+            texto_salt = texto_salt.replace(palavra, gram)
+
+        token = nltk.word_tokenize(texto_salt)
+        bigrams = ngrams(token, 2)
+        bigrams = Counter(bigrams)
+        bimost = bigrams.most_common(500)
+
+        for key, value in bimost:
+            palavra = ''
+            for n in range(len(key)):
+                palavra += key[n] + ' '
+            palavra = palavra.strip()
+            dic.append(palavra.strip())
+
+        pickle.dump(dic, grams_pickle, protocol=pickle.HIGHEST_PROTOCOL)
 
     registro = ''
     i = 0
@@ -86,42 +106,35 @@ def atendimento(salt=None, item=None):
     for row in rows:
         total += 1
 
-        #NUATENDIMENTO  NUITEM  DEATENDIMENTO   NUORDEM     DTREGISTRO  QTHORASREAL
-        #0              1       2               3           4           5
+        # NUATENDIMENTO  NUITEM  DEATENDIMENTO   NUORDEM     DTREGISTRO  QTHORASREAL
+        # 0              1       2               3           4           5
 
-        linha = str(row[4]) #'DTREGISTRO'
+        linha = str(row[4]) # 'DTREGISTRO'
         linha = dateutil.parser.parse(linha).date()
 
         if registro != linha:
             registro = linha
             if salt is None:
-                print(registro, ' ', i) #errado
+                log.debug(str(registro) + ' ' + str(i))
             i = 0
 
         i += 1
         original = str(row[2]).replace("\'", "").replace("\"", "")
         tratado = texto.tratar(texto, str(row[2]))
 
-        for key, value in trimost:
-            palavra = ''
-            for n in range(len(key)):
-                palavra += key[n] + ' '
-            gram = palavra.replace(' ', '_')
-            tratado = tratado.replace(palavra, gram)
-
-        for key, value in bimost:
-            palavra = ''
-            for n in range(len(key)):
-                palavra += key[n] + ' '
-            gram = palavra.replace(' ', '_')
-            tratado = tratado.replace(palavra, gram)
+        if os.path.isfile('grams.pickle'):
+            grams_pickle = open('grams.pickle', 'rb')
+            grams = pickle.load(grams_pickle)
+            for palavras in grams:
+                tratado = tratado.replace(palavras, palavras.replace(' ', '_'))
 
         stemming = texto.tratar(texto, str(row[2]), True)
         postgres.inserir(postgres, row[0], row[1],
                           original, tratado, stemming,
                           row[3], row[5], row[4])
-        #row = ibm_db.fetch_assoc(stmt)
-    print('Registros importados:', total)
+
+        # row = ibm_db.fetch_assoc(stmt)
+    log.info('Registros importados:' + str(total))
 
 
 def pessoas(salt=None, item=None):

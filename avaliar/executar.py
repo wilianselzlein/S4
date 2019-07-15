@@ -8,6 +8,10 @@ from avaliar.lsa import Lsa
 import importar
 import datetime
 import sys
+from utils import utils
+
+
+log = utils.get_logger('Service loader')
 
 def executar(salt):
     avaliar(salt)
@@ -21,10 +25,8 @@ def avaliar(salt):
     texto = postgres.atendimento(postgres, atendimento, item)
 
     atendimentos = postgres.atendimentos(postgres, atendimento, item)
-    print(len(atendimentos), "atendimentos para avaliação")
+    log.critical(str(len(atendimentos)) + " atendimentos para avaliação")
     # copia = atendimentos
-
-    datahora()
 
     try:
         lsa = Lsa()
@@ -32,46 +34,35 @@ def avaliar(salt):
         if relacionado == 0:
             relacionado, relacionadoitem, score = lsa.avaliar(lsa, texto, atendimentos)
         postgres.relacionar(postgres, atendimento, item, lsa.arquivo, relacionado, relacionadoitem, score)
-        datahora()
 
         doc2vec = Doc2Vec()
         relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, doc2vec.arquivo)
         if relacionado == 0:
             relacionado, relacionadoitem, score = doc2vec.avaliar(doc2vec, texto, atendimentos)
         postgres.relacionar(postgres, atendimento, item, doc2vec.arquivo, relacionado, relacionadoitem, score)
-        datahora()
 
         cosinedistance = CosineDistance()
         relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, cosinedistance.arquivo)
         if relacionado == 0:
             relacionado, relacionadoitem, score = cosinedistance.avaliar(cosinedistance, texto, atendimentos)
         postgres.relacionar(postgres, atendimento, item, cosinedistance.arquivo, relacionado, relacionadoitem, score)
-        datahora()
 
         bm25 = Bm25()
         relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bm25.arquivo)
         if relacionado == 0:
             relacionado, relacionadoitem, score = bm25.avaliar(bm25, texto, atendimentos)
         postgres.relacionar(postgres, atendimento, item, bm25.arquivo, relacionado, relacionadoitem, score)
-        datahora()
 
-        bagofwords = BagOfWords()
-        relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bagofwords.arquivo)
-        if relacionado == 0:
-            relacionado, relacionadoitem, score = bagofwords.avaliar(bagofwords, texto, atendimentos)
-        postgres.relacionar(postgres, atendimento, item, bagofwords.arquivo, relacionado, relacionadoitem, score)
-        datahora()
+        # bagofwords = BagOfWords()
+        # relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bagofwords.arquivo)
+        # if relacionado == 0:
+        #     relacionado, relacionadoitem, score = bagofwords.avaliar(bagofwords, texto, atendimentos)
+        # postgres.relacionar(postgres, atendimento, item, bagofwords.arquivo, relacionado, relacionadoitem, score)
 
     except IOError as e:
-         print("I/O error({0}): {1}".format(e.errno, e.strerror))
+         log.error("I/O error({0}): {1}".format(e.errno, e.strerror))
     except:
-        print("Erro:", sys.exc_info()[0])
-        # raise
-
-
-def datahora():
-    now = datetime.datetime.now()
-    print(now)
+        log.error(sys.exc_info()[0])
 
 
 def portal(salt):

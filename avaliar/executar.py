@@ -1,6 +1,6 @@
 # from S4.avaliar.cassandra import Cassandra
 from avaliar.postgres import Postgres
-# from avaliar.bagofwords import BagOfWords
+from avaliar.bagofwords import BagOfWords
 from avaliar.doc2vec import Doc2Vec
 from avaliar.cosine_distance import CosineDistance
 from avaliar.bm25 import Bm25
@@ -9,8 +9,8 @@ import importar
 import sys
 from utils import utils
 
-
 log = utils.get_logger('Service loader')
+
 
 def executar(salt):
     avaliar(salt)
@@ -25,7 +25,6 @@ def avaliar(salt):
 
     atendimentos = postgres.atendimentos(postgres, atendimento, item)
     log.critical(str(len(atendimentos)) + " atendimentos para avaliação")
-    # copia = atendimentos
 
     try:
         lsa = Lsa()
@@ -52,11 +51,11 @@ def avaliar(salt):
             relacionado, relacionadoitem, score = bm25.avaliar(bm25, texto, atendimentos)
         postgres.relacionar(postgres, atendimento, item, bm25.arquivo, relacionado, relacionadoitem, score)
 
-        # bagofwords = BagOfWords()
-        # relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bagofwords.arquivo)
-        # if relacionado == 0:
-        #     relacionado, relacionadoitem, score = bagofwords.avaliar(bagofwords, texto, atendimentos)
-        # postgres.relacionar(postgres, atendimento, item, bagofwords.arquivo, relacionado, relacionadoitem, score)
+        bagofwords = BagOfWords()
+        relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bagofwords.arquivo)
+        if relacionado == 0:
+            relacionado, relacionadoitem, score = bagofwords.avaliar(bagofwords, texto, atendimentos)
+        postgres.relacionar(postgres, atendimento, item, bagofwords.arquivo, relacionado, relacionadoitem, score)
 
     except IOError as e:
          log.error("I/O error({0}): {1}".format(e.errno, e.strerror))

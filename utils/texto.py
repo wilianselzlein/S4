@@ -5,22 +5,31 @@ import nltk
 from unicodedata import normalize
 
 FRASES = ['data/hora',
-    'servidor app',
-    'versão da aplicação',
-    'nome do usuário',
-    'login do usuário',
-    'data e hora da ocorrência',
-    'descrição da salt',
-    'nome e telefone do analistalocal informado pelo cliente',
-    'anexo após o envio do portal',
-    'local informado pelo cliente',
-    'bom dia',
-    'boa tarde',
-    'boa noite',
-    'senhores',
-    'informamos',
-    'prezados',
-    'prezado',
+          'servidor app',
+          'versão da aplicação',
+          'nome do usuário',
+          'login do usuário',
+          'data e hora da ocorrência',
+          'descrição da salt',
+          'nome e telefone do analistalocal informado pelo cliente',
+          'anexo após o envio do portal',
+          'local informado pelo cliente',
+          'bom dia',
+          'boa tarde',
+          'boa noite',
+          'senhores',
+          'doutores',
+          'doutor',
+          'jpeg',
+          'jpg',
+          'png',
+          'zip',
+          'rar',
+          'pdf',
+          'informamos',
+          'prezados',
+          'prezado',
+
           ]
 
 class Texto(object):
@@ -31,6 +40,8 @@ class Texto(object):
         s = self.RemoveURL(s)
         s = self.RemoveEmail(s)
         s = self.RemoverFrasesPadrao(s)
+        s = self.RemoverUsuarios(s)
+        s = self.RemoverNomes(s)
         s = self.RemoverNumeros(s)
         s = self.Pontuacao(s)
         s = self.RemoveAcentos(s)
@@ -105,6 +116,18 @@ class Texto(object):
     def RemoverFrasesPadrao(self, s):
         for frase in FRASES:
             s = s.replace(frase.lower(), '')
+        return s
+
+    def RemoverUsuarios(self, s):
+        with open('CDUSUARIO.txt') as f:
+            for cdusuario in f:
+                s = s.replace(cdusuario.lower(), '__cdusuario__')
+        return s
+
+    def RemoverNomes(self, s):
+        with open('NMPESSOA.txt') as f:
+            for nmpessoa in f:
+                s = s.replace(nmpessoa.lower(), '__nome__')
         return s
 
     def minusculo(self, s):

@@ -104,6 +104,7 @@ def atendimento(salt=None, item=None):
     i = 0
     total = 0
     for row in rows:
+        print("\t" + str(total) + "/" + str(len(rows)), end="\r")
         total += 1
 
         # NUATENDIMENTO  NUITEM  DEATENDIMENTO   NUORDEM     DTREGISTRO  QTHORASREAL

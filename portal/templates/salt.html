@@ -5,12 +5,13 @@
     <title>S4</title>
 </head>
 <body>
-    SALT: <b>{{ salt }}</b>
+    Atendimento: <b>{{ salt }}</b>
     <br>
-    <pre>{{ texto }}</pre>
+    <textarea rows="10" cols="100">{{ texto }}</textarea>
+    <br>
     <br>
     <b>Parecidas:</b><br>
-    <table border = 1>
+    <table border = 0>
         {% for relacionado in relacionados %}
         <tr>
             <td>
@@ -26,13 +27,13 @@
             <td> {{ relacionado[1] }} / {{ relacionado[2] }} </td>
             <td> {{ relacionado[3] }} </td>
             <td><i> {{ relacionado[0] }} </i></td>
-            <td><pre>{{ relacionado[6] }}</pre></td>
+            <td><textarea rows="10" cols="100">{{ relacionado[6] }}</textarea></td>
         </tr>
         {% endfor %}
     </table>
     <br>
     <b>Severidade:</b>
-    <table border = 1>
+    <table border = 0>
         <tr>
             <td>Severidade</td>
             <td>Quantidade</td>
@@ -47,7 +48,7 @@
     <br>
     <b>Tempo m&eacute;dio:</b>
     <br>
-    <table border = 1>
+    <table border = 0>
         <tr>
             <td>Horas</td>
             <td>Quantidade</td>
@@ -61,7 +62,7 @@
     </table>
     <br><b>Pessoas:</b>
     <br>
-    <table border = 1>
+    <table border = 0>
         {% for key, value in pessoas %}
         <tr>
             <td> {{ value }} </td>

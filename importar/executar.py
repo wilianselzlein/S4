@@ -53,7 +53,7 @@ def atendimento(salt=None, item=None):
     else:
         sql += " AND VARCHAR_FORMAT (ra.DTREGISTRO,'YYYY-MM-DD') > '" + config.ultima_importacao + "'"
     sql += " AND VARCHAR_FORMAT (ra.DTREGISTRO,'YYYY-MM-DD') > '" + config.ultima_importacao + "'"
-    sql += " ORDER BY ra.DTREGISTRO"
+    sql += " ORDER BY ra.DTREGISTRO DESC"
 
     texto = Texto()
     postgres = Postgres()
@@ -65,7 +65,8 @@ def atendimento(salt=None, item=None):
 
     texto_salt = ''
     rows = list(rows)
-    for row in rows: # enumerate com print /r end
+    for index, row in enumerate(rows):
+        print("\t" + str(index) + "/" + str(len(rows)), end="\r")
         texto_salt += ' ' + texto.tratar(texto, str(row[2]))
 
     if salt is None and item is None:

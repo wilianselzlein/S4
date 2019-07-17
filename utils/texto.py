@@ -20,16 +20,15 @@ FRASES = ['data/hora',
           'senhores',
           'doutores',
           'doutor',
-          'jpeg',
-          'jpg',
-          'png',
-          'zip',
-          'rar',
-          'pdf',
+          '.jpeg',
+          '.jpg',
+          '.png',
+          '.zip',
+          '.rar',
+          '.pdf',
           'informamos',
           'prezados',
-          'prezado',
-
+          'prezado'
           ]
 
 class Texto(object):
@@ -127,7 +126,9 @@ class Texto(object):
     def RemoverNomes(self, s):
         with open('NMPESSOA.txt') as f:
             for nmpessoa in f:
-                s = s.replace(nmpessoa.lower(), '__nome__')
+                if ' ' + nmpessoa + ' ' in s:
+                    print('{:15s}'.format(nmpessoa.lower().strip()))
+                    s = s.replace(' ' + nmpessoa.lower().strip() + ' ', ' __nome__ ')
         return s
 
     def minusculo(self, s):

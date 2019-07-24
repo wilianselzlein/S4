@@ -1,5 +1,6 @@
 import gensim
 from avaliar import modelo
+import config
 import os.path
 
 ARQUIVO = "doc2vec"
@@ -17,7 +18,7 @@ class Doc2Vec(modelo.Base):
         test_corpus = list(self.read_corpus(texto, tokens_only=True, updateList=False))
 
         inferred_vector = model.infer_vector(test_corpus[0])
-        sims = model.docvecs.most_similar([inferred_vector], topn=3)
+        sims = model.docvecs.most_similar([inferred_vector], topn=config.quantidade)
 
         return sims
 

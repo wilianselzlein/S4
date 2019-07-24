@@ -4,28 +4,30 @@ import nltk
 
 from unicodedata import normalize
 
-FRASES = ['data/hora',
-          'servidor app',
-          'versão da aplicação',
-          'nome do usuário',
-          'login do usuário',
-          'data e hora da ocorrência',
-          'descrição da salt',
-          'nome e telefone do analistalocal informado pelo cliente',
-          'anexo após o envio do portal',
-          'local informado pelo cliente',
+FRASES = [
+          # 'data/hora',
+          # 'servidor app',
+          # 'versão da aplicação',
+          # 'nome do usuário',
+          # 'login do usuário',
+          # 'data e hora da ocorrência',
+          # 'descrição da salt',
+          # 'nome e telefone do analista',
+          # 'local informado pelo cliente',
+          # 'anexo após o envio do portal',
+          # 'local informado pelo cliente',
           'bom dia',
           'boa tarde',
           'boa noite',
           'senhores',
           'doutores',
           'doutor',
-          '.jpeg',
-          '.jpg',
-          '.png',
-          '.zip',
-          '.rar',
-          '.pdf',
+          # '.jpeg',
+          # '.jpg',
+          # '.png',
+          # '.zip',
+          # '.rar',
+          # '.pdf',
           'informamos',
           'prezados',
           'prezado'
@@ -34,19 +36,21 @@ FRASES = ['data/hora',
 class Texto(object):
 
     @staticmethod
-    def tratar(self, s, stemming=False):
+    def tratar(self, s, stemming=False, remove=False, users={}, nomes={}):
         s = self.minusculo(s)
         s = self.RemoveURL(s)
         s = self.RemoveEmail(s)
         s = self.RemoverFrasesPadrao(s)
-        s = self.RemoverUsuarios(s)
-        s = self.RemoverNomes(s)
         s = self.RemoverNumeros(s)
-        s = self.Pontuacao(s)
         s = self.RemoveAcentos(s)
         s = self.RemoveStopWords(s)
+        s = self.RemovePadroes(s)
+        s = self.Pontuacao(s)
         s = self.normalize_text(s)
         s = self.clear_text(s)
+        if remove:
+            s = self.RemoverUsuarios(s, users)
+            s = self.RemoverNomes(s, nomes)
         if stemming:
             s = self.Stemming(s)
         return s
@@ -109,7 +113,7 @@ class Texto(object):
         remove = ['\n', '\t', '\r', '\xa0', ':']
 
         for item in remove:
-            text = text.replace(item, '')
+            text = text.replace(item, ' ')
         return text.strip()
 
     def RemoverFrasesPadrao(self, s):
@@ -117,18 +121,26 @@ class Texto(object):
             s = s.replace(frase.lower(), '')
         return s
 
-    def RemoverUsuarios(self, s):
+    def RemoverUsuarios(self, s, palavras):
         with open('CDUSUARIO.txt') as f:
             for cdusuario in f:
-                s = s.replace(cdusuario.lower(), '__cdusuario__')
+                cdusuario = ' ' + cdusuario.lower().strip() + ' '
+                if cdusuario in s:
+                    palavras[cdusuario] = palavras.get(cdusuario, 0) + 1
+                    # print('{:30s}"'.format(cdusuario) + '"')
+                    s = s.replace(cdusuario, '__cdusuario__')
         return s
 
-    def RemoverNomes(self, s):
+    def RemoverNomes(self, s, palavras):
         with open('NMPESSOA.txt') as f:
-            for nmpessoa in f:
-                if ' ' + nmpessoa + ' ' in s:
-                    print('{:15s}'.format(nmpessoa.lower().strip()))
-                    s = s.replace(' ' + nmpessoa.lower().strip() + ' ', ' __nome__ ')
+            lines = enumerate(f)
+            for index, nmpessoa in lines:
+                nmpessoa = ' ' + nmpessoa.lower().strip() + ' '
+                # print(str(index) + '{:15s}'.format(nmpessoa), end="\r")
+                if nmpessoa in s:
+                    palavras[nmpessoa] = palavras.get(nmpessoa, 0) + 1
+                    # print('{:30s}'.format(nmpessoa))
+                    s = s.replace(nmpessoa, ' __nome__ ')
         return s
 
     def minusculo(self, s):
@@ -163,6 +175,13 @@ class Texto(object):
 
     def RemoveEmail(self, s):
         return re.sub(r'([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)', ' __email__ ', s)
+
+    def RemovePadroes(self, s):
+        t = s
+        t = re.sub(r'anexo apos envio portal.*', ' ', t)
+        t = re.sub(r'dados basico.*servidor*.*aplicacao.*usuario.*login.*contato', ' ', t)
+        t = re.sub(r'ambiente.*app.*servidor.*ip.*chefia.*data.*menu\/tela', ' ', t)
+        return t
 
     def __init__(self):
         punctuations = re.escape('!"#%\'()*+,./:;<=>?@[\\]^_`{|}~_')

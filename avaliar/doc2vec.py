@@ -9,8 +9,7 @@ class Doc2Vec(modelo.Base):
 
     @staticmethod
     def avaliar(self, texto, atendimentos):
-
-        model = gensim.models.doc2vec.Doc2Vec(vector_size=100, min_count=5, seed=1, max_vocab_size=20000, workers=1) #, epochs=40
+        model = gensim.models.doc2vec.Doc2Vec(vector_size=200, min_count=5, seed=1, max_vocab_size=20000, workers=1) #, epochs=40
         if os.path.isfile(ARQUIVO):
             model = gensim.models.doc2vec.Doc2Vec.load(ARQUIVO)
         else:
@@ -20,11 +19,7 @@ class Doc2Vec(modelo.Base):
         inferred_vector = model.infer_vector(test_corpus[0])
         sims = model.docvecs.most_similar([inferred_vector], topn=3)
 
-        similar = sims[0][0]
-        score = sims[0][1]
-        salt = atendimentos[similar][0]
-        item = atendimentos[similar][1]
-        return salt, item, score
+        return sims
 
     def treinar(self, model, atendimentos):
         self.train_corpus = list(self.read_corpus(atendimentos))
@@ -46,7 +41,8 @@ class Doc2Vec(modelo.Base):
                 yield gensim.utils.simple_preprocess(line)
             else:
                 # For training data, add tags
-                yield gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(line), [i])
+                # yield gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(line), [i])
+                yield gensim.models.doc2vec.TaggedDocument(line.split(), [str(atendimento[0]) + '/' + str(atendimento[1])])
 
     @property
     def arquivo(self):

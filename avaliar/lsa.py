@@ -53,15 +53,17 @@ class Lsa(modelo.Base):
 
         # similarity = cosine_similarity(np.asmatrix(dtm_lsa), np.asmatrix(dtm_lsa_exemplo))
 
-        res = pd.DataFrame(similarity, index=salts, columns=example2).sort_values(example2, ascending=False).head(1)
+        res = pd.DataFrame(similarity, index=salts, columns=example2).sort_values(example2, ascending=False).head(3)
 
-        salt = res.index.tolist()[0].split('/')[0]
+        sims = []
+        for sim in range(len(res.index.tolist())):
+            salt = res.index.tolist()[sim].split('/')[0]
+            item = res.index.tolist()[sim].split('/')[1]
+            score = res.values.tolist()[sim][0]
+            tuple_sim = (salt, item, score)
+            sims.append(tuple_sim)
 
-        item = res.index.tolist()[0].split('/')[1]
-
-        score = res.values.tolist()[0][0]
-
-        return salt, item, score
+        return sims
 
     def treinar(self, model, atendimentos):
         model.save(ARQUIVO)

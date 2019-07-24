@@ -30,14 +30,24 @@ def avaliar(salt):
         lsa = Lsa()
         relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, lsa.arquivo)
         if relacionado == 0:
-            relacionado, relacionadoitem, score = lsa.avaliar(lsa, texto, atendimentos)
-        postgres.relacionar(postgres, atendimento, item, lsa.arquivo, relacionado, relacionadoitem, score)
+            sims = lsa.avaliar(lsa, texto, atendimentos)
+            for sim in sims:
+                relacionado = sim[0]
+                relacionadoitem = sim[1]
+                score = sim[2]
+                if atendimento != relacionado or item != relacionadoitem:
+                    postgres.relacionar(postgres, atendimento, item, lsa.arquivo, relacionado, relacionadoitem, score)
 
         doc2vec = Doc2Vec()
         relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, doc2vec.arquivo)
         if relacionado == 0:
-            relacionado, relacionadoitem, score = doc2vec.avaliar(doc2vec, texto, atendimentos)
-        postgres.relacionar(postgres, atendimento, item, doc2vec.arquivo, relacionado, relacionadoitem, score)
+            sims = doc2vec.avaliar(doc2vec, texto, atendimentos)
+            for sim in sims:
+                relacionado = sim[0].split("/")[0]
+                relacionadoitem = sim[0].split("/")[1]
+                score = sim[1]
+                if atendimento != relacionado or item != relacionadoitem:
+                    postgres.relacionar(postgres, atendimento, item, doc2vec.arquivo, relacionado, relacionadoitem, score)
 
         cosinedistance = CosineDistance()
         relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, cosinedistance.arquivo)
@@ -51,11 +61,11 @@ def avaliar(salt):
             relacionado, relacionadoitem, score = bm25.avaliar(bm25, texto, atendimentos)
         postgres.relacionar(postgres, atendimento, item, bm25.arquivo, relacionado, relacionadoitem, score)
 
-        bagofwords = BagOfWords()
-        relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bagofwords.arquivo)
-        if relacionado == 0:
-            relacionado, relacionadoitem, score = bagofwords.avaliar(bagofwords, texto, atendimentos)
-        postgres.relacionar(postgres, atendimento, item, bagofwords.arquivo, relacionado, relacionadoitem, score)
+        # bagofwords = BagOfWords()
+        # relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bagofwords.arquivo)
+        # if relacionado == 0:
+        #     relacionado, relacionadoitem, score = bagofwords.avaliar(bagofwords, texto, atendimentos)
+        # postgres.relacionar(postgres, atendimento, item, bagofwords.arquivo, relacionado, relacionadoitem, score)
 
     except IOError as e:
          log.error("I/O error({0}): {1}".format(e.errno, e.strerror))

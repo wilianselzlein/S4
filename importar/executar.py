@@ -12,7 +12,7 @@ from collections import Counter
 import pickle
 import os
 from utils import utils
-
+import json
 
 log = utils.get_logger('Importer')
 
@@ -65,9 +65,18 @@ def atendimento(salt=None, item=None):
 
     texto_salt = ''
     rows = list(rows)
+
+    nomes = {}
+    users = {}
     for index, row in enumerate(rows):
-        print("\t" + str(index) + "/" + str(len(rows)), end="\r")
-        texto_salt += ' ' + texto.tratar(texto, str(row[2]))
+        if len(rows) > 10:
+            print(str(index) + "/" + str(len(rows)), end="\r")
+        texto_salt += ' ' + texto.tratar(texto, str(row[2]), remove=True)
+
+    texto_salt += texto.RemoverNomes(texto_salt, nomes)
+    texto_salt += texto.RemoverUsuarios(texto_salt, users)
+    # df['narrative'].apply(lambda x: (x.split(' '))).sum()
+    log.info('Total palavras: ' + str(len(texto_salt.split(' '))))
 
     if salt is None and item is None:
         grams_pickle = open('grams.pickle', 'wb')
@@ -104,8 +113,12 @@ def atendimento(salt=None, item=None):
     registro = ''
     i = 0
     total = 0
+    nomes = {}
+    users = {}
+
     for row in rows:
-        print("\t" + str(total) + "/" + str(len(rows)), end="\r")
+        if len(rows) > 10:
+            print("\t" + str(total) + "/" + str(len(rows)), end="\r")
         total += 1
 
         # NUATENDIMENTO  NUITEM  DEATENDIMENTO   NUORDEM     DTREGISTRO  QTHORASREAL
@@ -122,7 +135,7 @@ def atendimento(salt=None, item=None):
 
         i += 1
         original = str(row[2]).replace("\'", "").replace("\"", "")
-        tratado = texto.tratar(texto, str(row[2]))
+        tratado = texto.tratar(texto, str(row[2]), remove=True, users=users, nomes=nomes)
 
         if os.path.isfile('grams.pickle'):
             grams_pickle = open('grams.pickle', 'rb')
@@ -130,12 +143,15 @@ def atendimento(salt=None, item=None):
             for palavras in grams:
                 tratado = tratado.replace(palavras, palavras.replace(' ', '_'))
 
-        stemming = texto.tratar(texto, str(row[2]), True)
+        stemming = texto.tratar(texto, str(row[2]), stemming=True)
         postgres.inserir(postgres, row[0], row[1],
                           original, tratado, stemming,
                           row[3], row[5], row[4])
 
-        # row = ibm_db.fetch_assoc(stmt)
+    print(json.dumps(dict(sorted(nomes.items(), key=lambda x: x[1], reverse=True)), indent=4))
+    print(json.dumps(dict(sorted(users.items(), key=lambda x: x[1], reverse=True)), indent=4))
+
+    # row = ibm_db.fetch_assoc(stmt)
     log.info('Registros importados:' + str(total))
 
 

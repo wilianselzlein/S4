@@ -13,6 +13,8 @@ import pickle
 import os
 from utils import utils
 import json
+from datetime import datetime
+from elasticsearch import Elasticsearch
 
 log = utils.get_logger('Importer')
 
@@ -57,6 +59,7 @@ def atendimento(salt=None, item=None):
 
     texto = Texto()
     postgres = Postgres()
+    es = Elasticsearch([config.elasticsearch])
 
     rows = conn.cursor()
     rows.execute(sql)
@@ -144,6 +147,18 @@ def atendimento(salt=None, item=None):
                 tratado = tratado.replace(palavras, palavras.replace(' ', '_'))
 
         stemming = texto.tratar(texto, str(row[2]), stemming=True)
+
+        doc = {
+            'atendimento': row[0],
+            'item': row[1],
+            'original': original,
+            'texto': tratado,
+            'data': row[4],
+            'timestamp': row[4] #datetime.now(),
+        }
+        es_id = str(row[0]) + '/' + str(row[1])
+        res = es.index(index="s4", id=es_id, body=doc) #doc_type='_doc',
+
         postgres.inserir(postgres, row[0], row[1],
                           original, tratado, stemming,
                           row[3], row[5], row[4])
@@ -152,6 +167,7 @@ def atendimento(salt=None, item=None):
     print(json.dumps(dict(sorted(users.items(), key=lambda x: x[1], reverse=True)), indent=4))
 
     # row = ibm_db.fetch_assoc(stmt)
+    es.indices.refresh(index="s4")
     log.info('Registros importados:' + str(total))
 
 

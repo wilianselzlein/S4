@@ -32,15 +32,15 @@ class BagOfWords(modelo.Base):
         # print("Montando vetores...")
         vetores, vetorVocab = self.montaVetores(listaResumo, vocab)
 
-        # print("Vetor de vocabulario:")
-        # print(vetorVocab.shape)
-        # print("Vetor de documentos:")
-        # print(len(vetores))
+        print("Vetor de vocabulario:")
+        print(vetorVocab.shape)
+        print("Vetor de documentos:")
+        print(len(vetores))
 
         todasaspalavras = str(texto)
         listatodasaspalavras = todasaspalavras.split()
-        # print("Total de palavras:")
-        # print(len(listatodasaspalavras))
+        print("Total de palavras:")
+        print(len(listatodasaspalavras))
 
         todasaspalavrasResumo = str(listaResumo)
         listatodasaspalavrasResumo = todasaspalavrasResumo.split()
@@ -50,13 +50,16 @@ class BagOfWords(modelo.Base):
         # print("Media de palavras por linha (Colecao de documentos):")
         # print(len(listatodasaspalavrasResumo) / len(listaResumo))
 
-        # print("Numero de documentos da colecao:")
-        # print(len(vetores))
+        print("Numero de documentos da colecao:")
+        print(len(vetores))
 
-        # print("Estatisticas das ocorrencias das palavras no vocabulario:")
-        # print("Media {}, minimo {}, maximo {}".format(vetorVocab.mean(), vetorVocab.min(), vetorVocab.max()))
-
+        print("Estatisticas das ocorrencias das palavras no vocabulario:")
+        print("Media {}, minimo {}, maximo {}".format(vetorVocab.mean(), vetorVocab.min(), vetorVocab.max()))
+        print(type(vetores))
+        print(type(vetores.values()))
+        print(vetores['315731/1  '])
         transformer = TfidfTransformer()
+
         matrizVetores = np.asarray(list(vetores.values()), dtype=np.int16)
         tfidf = transformer.fit_transform(matrizVetores)
         matriz_tfidf = tfidf.toarray()

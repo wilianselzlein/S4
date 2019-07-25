@@ -1,12 +1,14 @@
 import os
 import logging
 
-ultima_importacao = '2017-01-01'
+ultima_importacao = '2019-07-01'
 data_avaliacao = '2017-01-01'
 quantidade = 3
 
 cassandra_host = '127.0.0.1'
 cassandra_KEYSPACE = 'keyspaceS4'
+
+elasticsearch = 'http://localhost:9200'
 
 postgres_host = os.environ.get("POSTGRE_URI", '127.0.0.1')
 postgres_db = 's4'

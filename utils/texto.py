@@ -183,6 +183,19 @@ class Texto(object):
         t = re.sub(r'ambiente.*app.*servidor.*ip.*chefia.*data.*menu\/tela', ' ', t)
         return t
 
+    def RemoveQuotes(self, s):
+        text = s
+        text = self.re_quotes_1.sub(r'\1"', text)
+        text = self.re_quotes_2.sub(r'"\1', text)
+        text = self.re_quotes_3.sub('"', text)
+        text = self.re_doublequotes_1.sub('\"', text)
+        text = self.re_doublequotes_2.sub('\'', text)
+        text = re.sub('"', '', text)
+        text = re.sub('\'', '', text)
+        text = text.replace('\'', '')
+        text = text.replace('"', '')
+        return text
+
     def __init__(self):
         punctuations = re.escape('!"#%\'()*+,./:;<=>?@[\\]^_`{|}~_')
         #stop_words = [unidecode(x) for x in get_stop_words('pt')]

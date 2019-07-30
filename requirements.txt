@@ -11,3 +11,4 @@ flask
 psycopg2
 peewee
 coloredlogs==7.3
+elasticsearch

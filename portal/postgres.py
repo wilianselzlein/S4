@@ -13,7 +13,7 @@ class Postgres(PostgresBase.Base):
         sql += " and relacionado = " + str(relacionado)
         sql += " and relacionadoitem = " + str(relacionadoitem)
 
-        print(str(atendimento)+'/'+str(item),algoritmo, valor)
+        # print(str(atendimento)+'/'+str(item),algoritmo, valor)
         self.cur.execute(sql)
         self.con.commit()
 

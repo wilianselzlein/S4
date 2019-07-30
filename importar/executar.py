@@ -39,7 +39,7 @@ def atendimento(salt=None, item=None):
     coalesce((SELECT sum(aa.QTHORASREAL) FROM sac.ESACATIVIDADE AA
         WHERE AA.CDPROJETO = IA.CDPROJETO
         AND AA.NUATENDIMENTO = IA.NUATENDIMENTO
-        AND AA.NUITEM = IA.NUITEM),0) as QTHORASREAL 
+        AND AA.NUITEM = IA.NUITEM),0) as QTHORASREAL, COALESCE(ia.DESOLUCAO, '') AS DESOLUCAO
       FROM sac.ESACREGISTROATEND ra
       JOIN sac.ESACITEMATEND ia
         ON ia.cdProjeto = ia.CDPROJETO
@@ -161,7 +161,7 @@ def atendimento(salt=None, item=None):
 
         postgres.inserir(postgres, row[0], row[1],
                           original, tratado, stemming,
-                          row[3], row[5], row[4])
+                          row[3], row[5], row[4], texto.RemoveQuotes(row[6]))
 
     print(json.dumps(dict(sorted(nomes.items(), key=lambda x: x[1], reverse=True)), indent=4))
     print(json.dumps(dict(sorted(users.items(), key=lambda x: x[1], reverse=True)), indent=4))

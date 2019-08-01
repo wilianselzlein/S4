@@ -1,7 +1,7 @@
 import os
 import logging
 
-ultima_importacao = '2019-07-25'
+ultima_importacao = '2016-01-01'
 data_avaliacao = '2016-01-01'
 quantidade = 3
 

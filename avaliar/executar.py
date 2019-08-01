@@ -53,13 +53,13 @@ def avaliar(salt):
         relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, cosinedistance.arquivo)
         if relacionado == 0:
             relacionado, relacionadoitem, score = cosinedistance.avaliar(cosinedistance, texto, atendimentos)
-        postgres.relacionar(postgres, atendimento, item, cosinedistance.arquivo, relacionado, relacionadoitem, score)
+            postgres.relacionar(postgres, atendimento, item, cosinedistance.arquivo, relacionado, relacionadoitem, score)
 
         bm25 = Bm25()
         relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bm25.arquivo)
         if relacionado == 0:
             relacionado, relacionadoitem, score = bm25.avaliar(bm25, texto, atendimentos)
-        postgres.relacionar(postgres, atendimento, item, bm25.arquivo, relacionado, relacionadoitem, score)
+            postgres.relacionar(postgres, atendimento, item, bm25.arquivo, relacionado, relacionadoitem, score)
 
         # bagofwords = BagOfWords()
         # relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bagofwords.arquivo)

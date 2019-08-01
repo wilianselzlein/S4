@@ -31,12 +31,14 @@ def redirect():
 @app.route('/like/<salt>/<item>/<algoritmo>/<relacionado>/<relacionadoitem>')
 def like(salt, item, algoritmo, relacionado, relacionadoitem):
     avaliacao(salt, item, algoritmo, relacionado, relacionadoitem, LIKE)
-    return redirect(url_for('salt', salt=salt, item=item))
+    # return redirect(url_for('salt', salt=salt, item=item))
+    return avaliar_render(salt, item)
 
 @app.route('/dislike/<salt>/<item>/<algoritmo>/<relacionado>/<relacionadoitem>')
 def dislike(salt, item, algoritmo, relacionado, relacionadoitem):
     avaliacao(salt, item, algoritmo, relacionado, relacionadoitem, DISLIKE)
-    return redirect(url_for('salt', salt=salt, item=item))
+    #return redirect(url_for('salt', salt=salt, item=item))
+    return avaliar_render(salt, item)
 
 def avaliacao(salt, item, algoritmo, relacionado, relacionadoitem, valor):
     postgres = Postgres()

@@ -3,17 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CDUSUARIO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CDUSUARIO.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NMPESSOA.txt" beforeDir="false" afterPath="$PROJECT_DIR$/NMPESSOA.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/avaliar/postgres.py" beforeDir="false" afterPath="$PROJECT_DIR$/avaliar/postgres.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/avaliar/bm25.py" beforeDir="false" afterPath="$PROJECT_DIR$/avaliar/bm25.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/avaliar/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/avaliar/executar.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/importar/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/executar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/importar/postgres.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/postgres.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jupyter/LSA.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/jupyter/LSA.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jupyter/Texto.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/jupyter/Texto.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/executar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/postgres.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/postgres.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/salt.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/salt.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/texto.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/texto.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +44,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.__main__ --importar">
+  <component name="RunManager" selected="Python.__main__ --portal">
     <configuration name="__main__ --importar" type="PythonConfigurationType" factoryName="Python">
       <module name="S4" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -62,6 +59,27 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/__main__.py" />
       <option name="PARAMETERS" value="--importar" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="__main__ --portal" type="PythonConfigurationType" factoryName="Python">
+      <module name="S4" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/__main__.py" />
+      <option name="PARAMETERS" value="--portal" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -113,6 +131,7 @@
     </configuration>
     <list>
       <item itemvalue="Python.__main__ --importar" />
+      <item itemvalue="Python.__main__ --portal" />
       <item itemvalue="Python.__main__ --salt 314713" />
     </list>
     <recent_temporary>
@@ -181,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564083559516</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Elastic">
+      <created>1564451285592</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1564451285592</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -238,6 +264,16 @@
           <url>file://$PROJECT_DIR$/importar/postgres.py</url>
           <line>17</line>
           <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/avaliar/executar.py</url>
+          <line>29</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/avaliar/executar.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="57" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

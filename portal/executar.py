@@ -49,4 +49,4 @@ def avaliar_render(salt, item):
     relacionados, severidades, tempos, pessoas, texto = avaliar.portal(salt + '/' + item)
 
     return render_template('salt.html', salt=salt, item=item, relacionados=relacionados, severidades=severidades,
-                           tempos=tempos, pessoas=pessoas, texto=texto)
+                           tempos=tempos, pessoas=pessoas, texto=texto, avaliacao=True)

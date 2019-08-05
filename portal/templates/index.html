@@ -1,17 +1,34 @@
 <!DOCTYPE html>
-<html>
-<body>
-	<div align="center">
-		<h1>S4</h1>
-		<p>Sugestão de Solução de Salts na Sustentação</p>
+<html lang="pt-br">
+   {% include 'head.html' %}
+   <body class="text-center">
+      {% include 'header.html' %}
+      <main role="main">
+         <div class="jumbotron">
+         	<br>
+         <div class="container">
+            <div class="card-deck mb-3 text-center">
+               <div class="card mb-4 shadow-sm">
+                  <div class="card-header">
+                     <h4 class="my-0 font-weight-normal">Avaliar</h4>
+                  </div>
+                  <div align="center">
+                  	<br>
+			  		<form action="/redirect">
+						Atendimento:<br>
+						<input type="text" name="salt" value="000000"><br>
+						Item:<br>
+						<input type="text" name="item" value="0"><br><br>
+						<button class="btn btn-lg btn-primary" type="submit">Avaliar</button>
+					</form> 
+					<br>
+                  </div>
+               </div>
+            </div>
+         </div>
 
-		<form action="/redirect">
-			Atendimento:<br>
-			<input type="text" name="salt" value="000000"><br>
-			Item:<br>
-			<input type="text" name="item" value="0"><br><br>
-			<input type="submit" value="Avaliar">
-		</form> 
-	</div>
-</body>
+      </main>
+      {% include 'footer.html' %}
+   </body>
 </html>
+

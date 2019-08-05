@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CDUSUARIO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CDUSUARIO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NMPESSOA.txt" beforeDir="false" afterPath="$PROJECT_DIR$/NMPESSOA.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/avaliar/bm25.py" beforeDir="false" afterPath="$PROJECT_DIR$/avaliar/bm25.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/avaliar/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/avaliar/executar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jupyter/LSA.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/jupyter/LSA.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jupyter/Texto.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/jupyter/Texto.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/executar.py" afterDir="false" />
-    </list>
+    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564451285592</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Correcao BM25">
+      <created>1564687003748</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1564687003748</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -240,7 +237,8 @@
     <MESSAGE value="Correcoes Doc2Vec" />
     <MESSAGE value="Limite de resultados." />
     <MESSAGE value="Elastic" />
-    <option name="LAST_COMMIT_MESSAGE" value="Elastic" />
+    <MESSAGE value="Correcao BM25" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correcao BM25" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

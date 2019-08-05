@@ -1,76 +1,195 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>S4-{{ salt }}/{{ item }}</title>
-</head>
-<body>
-    <div align="center">
-    Atendimento: <b>{{ salt }}/{{ item }}</b>
-    <br>
-    <textarea rows="10" cols="100">{{ texto }}</textarea>
-    <br>
-    <br>
-    <b>Parecidas:</b><br>
-    <table border = 0>
-        {% for relacionado in relacionados %}
-        <tr>
-            <td> {{ relacionado[1] }} / {{ relacionado[2] }} </td>
-            <td><textarea rows="10" cols="100">{{ relacionado[6] }}</textarea></td>
-            <td><textarea rows="10" cols="50">{{ relacionado[7] }}</textarea></td>
-            <td>
-                <a href="{{ url_for('like', salt=salt, item=item, algoritmo=relacionado[0], relacionado=relacionado[1], relacionadoitem=relacionado[2])}}">
-                    <img src="{{url_for('static', filename='like.jpg')}}" alt="Ajudou" height="24" width="24"/>
-                </a>
-            <br>
-            <br>
-                <a href="{{ url_for('dislike', salt=salt, item=item, algoritmo=relacionado[0], relacionado=relacionado[1], relacionadoitem=relacionado[2])}}">
-                    <img src="{{url_for('static', filename='dislike.jpg')}}" alt="Errado" height="24" width="24"/>
-                </a>
-            </td>
-            <td> {{ relacionado[3] }} </td>
-            <td><i> {{ relacionado[0] }} </i></td>
-        </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <b>Severidade:</b>
-    <table border = 0>
-        <tr>
-            <td>Severidade</td>
-            <td>Quantidade</td>
-        </tr>
-        {% for key, value in severidades %}
-        <tr>
-            <td> {{ key }} </td>
-            <td> {{ value }} </td>
-        </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <b>Tempo m&eacute;dio:</b>
-    <br>
-    <table border = 0>
-        <tr>
-            <td>Horas</td>
-            <td>Quantidade</td>
-        </tr>
-        {% for key, value in tempos %}
-        <tr>
-            <td> {{ key }} </td>
-            <td> {{ value }} </td>
-        </tr>
-        {% endfor %}
-    </table>
-    <br><b>Pessoas:</b>
-    <br>
-    <table border = 0>
-        {% for key, value in pessoas %}
-        <tr>
-            <td> {{ value }} </td>
-        </tr>
-        {% endfor %}
-    </table>
-</div>
-</body>
+<html lang="pt-br">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="Wilian Ivo Selzlein">
+      <meta name="generator" content="Jekyll v3.8.5">
+      <title>S4-{{ salt }}/{{ item }}</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <style> 
+         #overflowTest {
+         padding: 15px;
+         width: 100%;
+         height: 200px;
+         overflow: scroll;
+         }
+      </style>
+   </head>
+   <body class="text-center">
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <header>
+         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">S4</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+               <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                     <a class="nav-link disabled" href="#">Sugestão de Solução de Salts na Sustentação</a>
+                  </li>
+               </ul>
+               <form class="form-inline mt-2 mt-md-0">
+                  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+               </form>
+            </div>
+         </nav>
+      </header>
+      <main role="main">
+         <div class="jumbotron">
+         <div class="container">
+            <div class="card-deck mb-3 text-center">
+               <div class="card mb-4 shadow-sm">
+                  <div class="card-header">
+                     <h4 class="my-0 font-weight-normal">Atendimento {{ salt }}/{{ item }}</h4>
+                  </div>
+                  <div align="left">
+                     <div id="overflowTest">
+                        <p class="card-text mb-auto">
+                        <pre>{{ texto }}</pre>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <hr>
+         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+               {% for relacionado in relacionados %}
+                  {% if loop.index0 == 0 %}
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                  {% else %}
+                  <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}"></li>
+                  {% endif %}
+               {% endfor %}
+            </ol>
+            <div class="carousel-inner">
+               {% for relacionado in relacionados %}
+               {% if loop.index0 == 0 %}
+               <div class="carousel-item active">
+                  {% else %}
+                  <div class="carousel-item ">
+                     {% endif %}
+                     <div class="container">
+                        <div class="card-deck mb-3 text-center">
+                           <div class="card mb-4 shadow-sm">
+                              <div class="card-header">
+                                 <h4 class="my-0 font-weight-normal">Sugestão {{ relacionado[1] }}/{{ relacionado[2] }}</h4>
+                              </div>
+                              <div align="left">
+                                 <div id="overflowTest">
+                                    <p class="card-text mb-auto">
+                                    <pre>{{ relacionado[6] }}</pre>
+                                    </p>
+                                 </div>
+                                 <!--<a href="#" class="stretched-link">Continue reading</a>-->
+                                 <div class="collapse" id="collapseExample">
+                                    <hr>
+                                    <div id="overflowTest">
+                                       <div class="mb-1 text-muted">
+                                          <pre>{{ relacionado[7] }}</pre>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="d-flex justify-content-between align-items-center">
+                                 <div class="btn-group">
+                                    <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Encerramento </button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                       Ajudou
+                                       <!-- <a href="{{ url_for('like', salt=salt, item=item, algoritmo=relacionado[0], relacionado=relacionado[1], relacionadoitem=relacionado[2])}}">
+                                          <img src="{{url_for('static', filename='like.jpg')}}" alt="Ajudou" height="24" width="24"/>
+                                          </a> -->
+                                    </button>
+                                    <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit
+                                       <a href="{{ url_for('dislike', salt=salt, item=item, algoritmo=relacionado[0], relacionado=relacionado[1], relacionadoitem=relacionado[2])}}">
+                                       <img src="{{url_for('static', filename='dislike.jpg')}}" alt="Errado" height="24" width="24"/>
+                                       </a>
+                                       </button> -->
+                                 </div>
+                                 <small class="text-muted">{{ relacionado[3] }} {{ relacionado[0] }} 
+                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="score e algoritmo utilizado para a avaliação">
+                                 <button class="btn btn-primary btn-sm" style="pointer-events: none;" type="button" disabled>?</button>
+                                 </span>
+                                 </small>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  {% endfor %}
+                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                  </a>
+               </div>
+            </div>
+            <hr>
+            <div class="container">
+               <div class="card-deck mb-3 text-center">
+                  <div class="card mb-4 shadow-sm">
+                     <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Severidade</h4>
+                     </div>
+                     <div class="card-body">
+                        <ul class="list-unstyled mt-3 mb-4">
+                           {% for key, value in severidades %}
+                           <li>{{ key }} aparece em <span class="badge badge-light">{{ value }}</span> atendimento(s).</li>
+                           {% endfor %}
+                        </ul>
+                        <!--<button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>-->
+                     </div>
+                  </div>
+                  <div class="card mb-4 shadow-sm">
+                     <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Pessoas</h4>
+                     </div>
+                     <div class="card-body">
+                        <ul class="list-unstyled mt-3 mb-4">
+                           {% for key, value in pessoas %}
+                           <li>{{ value }}</li>
+                           {% endfor %}
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="card mb-4 shadow-sm">
+                     <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Tempo m&eacute;dio</h4>
+                     </div>
+                     <div class="card-body">
+                        <ul class="list-unstyled mt-3 mb-4">
+                           {% for key, value in tempos %}
+                           <li><span class="badge badge-light">{{ value }}</span> levou/levaram {{ key }} hora(s).</li>
+                           {% endfor %}
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </main>
+      <footer class="text-muted">
+         <div class="container">
+            <!--<p class="float-right">
+               <a href="#">Back to top</a>
+               </p>-->
+            <p>S4 &copy; <a href="http://www.softplan.com.br/">Softplan</a>.</p>
+         </div>
+      </footer>
+      <script>
+         $(function () {
+           $('[data-toggle="tooltip"]').tooltip();
+         })         
+      </script>
+   </body>
 </html>

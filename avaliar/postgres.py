@@ -73,7 +73,7 @@ class Postgres(PostgresBase.Base):
             sql += str(relacionado[1]) + "||'-'||" + str(relacionado[2])
         sql += " )"
         sql += " group by pessoa"
-        sql += " order by quant desc;"
+        sql += " order by quant desc LIMIT 6;"
 
         self.cur.execute(sql)
         return self.cur.fetchall()

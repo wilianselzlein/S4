@@ -1,6 +1,7 @@
 import avaliar
-from flask import Flask, render_template, redirect, request, flash
+from flask import Flask, render_template, request, flash
 from portal.postgres import Postgres
+import urllib.parse
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = 'you-will-never-guess'
@@ -58,3 +59,13 @@ def avaliar_render(salt, item):
         else:
             return render_template('salt.html', salt=salt, item=item, relacionados=relacionados, severidades=severidades,
                                tempos=tempos, pessoas=pessoas, texto=texto, avaliacao=True)
+
+@app.route('/kibana', methods=['GET'])
+def kibana():
+    search = request.args.get('search')
+    search = urllib.parse.quote_plus(search)
+    url = "http://" + request.remote_addr + ":5601/app/kibana#/discover?_g=(refreshInterval:(pause:!t,value:0)," \
+          "time:(from:now-5y,to:now))&_a=(columns:!(_source),index:'84c9b230-af0c-11e9-9a9a-eb64683ee0d2'," \
+          "interval:auto,query:(language:kuery,query:'" + search + "'),sort:!(data,desc))"
+
+    return render_template('kibana.html', url=url)

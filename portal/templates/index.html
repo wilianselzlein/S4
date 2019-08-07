@@ -15,21 +15,34 @@
                   <div align="center">
                   	 <br>
                         {% include 'messages.html' %}
-      			  		<form action="/redirect">
-      						Atendimento:<br>
-      						<input type="text" name="salt" value="000000"><br>
-      						Item:<br>
-      						<input type="text" name="item" value="0"><br><br>
-      						<button class="btn btn-lg btn-primary" type="submit">Avaliar</button>
-      					</form> 
-      					<br>
+         			  		<form action="/redirect">
+         						Atendimento:<br>
+         						<input type="text" name="salt" value="000000"><br>
+         						Item:<br>
+         						<input type="text" name="item" value="0"><br><br>
+         						<button class="btn btn-lg btn-primary" type="submit" onclick="ShowSpinner()">Avaliar</button>
+                           <div id="spinner" class="text-center" style="display: none">
+                              <div class="spinner-border" role="status">
+                               <span class="sr-only">Loading...</span>
+                              </div>
+                           </div>
+         					</form> 
+         					<br>
                   </div>
                </div>
             </div>
          </div>
-
+         <script>
+            function ShowSpinner() {
+              var x = document.getElementById("spinner");
+              if (x.style.display === "none") {
+                x.style.display = "block";
+              } else {
+                x.style.display = "none";
+              }
+            }
+         </script>
       </main>
       {% include 'footer.html' %}
    </body>
 </html>
-

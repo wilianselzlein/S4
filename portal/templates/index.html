@@ -13,15 +13,16 @@
                      <h4 class="my-0 font-weight-normal">Avaliar</h4>
                   </div>
                   <div align="center">
-                  	<br>
-			  		<form action="/redirect">
-						Atendimento:<br>
-						<input type="text" name="salt" value="000000"><br>
-						Item:<br>
-						<input type="text" name="item" value="0"><br><br>
-						<button class="btn btn-lg btn-primary" type="submit">Avaliar</button>
-					</form> 
-					<br>
+                  	 <br>
+                        {% include 'messages.html' %}
+      			  		<form action="/redirect">
+      						Atendimento:<br>
+      						<input type="text" name="salt" value="000000"><br>
+      						Item:<br>
+      						<input type="text" name="item" value="0"><br><br>
+      						<button class="btn btn-lg btn-primary" type="submit">Avaliar</button>
+      					</form> 
+      					<br>
                   </div>
                </div>
             </div>

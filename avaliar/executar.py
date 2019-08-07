@@ -20,9 +20,12 @@ def avaliar(salt):
     postgres = Postgres()
     atendimento = str(salt).split('/')[0]
     item = str(salt).split('/')[1]
-    importar.executar(atendimento, item)
+
+    # importar.executar(atendimento, item)
     texto = postgres.atendimento(postgres, atendimento, item)
 
+    if len(texto) == 0:
+        return
     atendimentos = postgres.atendimentos(postgres, atendimento, item)
     log.critical(str(len(atendimentos)) + " atendimentos para avaliação")
 
@@ -68,9 +71,9 @@ def avaliar(salt):
         # postgres.relacionar(postgres, atendimento, item, bagofwords.arquivo, relacionado, relacionadoitem, score)
 
     except IOError as e:
-         log.error("I/O error({0}): {1}".format(e.errno, e.strerror))
+         log.error(str(salt) + ' ' + "I/O error({0}): {1}".format(e.errno, e.strerror))
     except:
-        log.error(sys.exc_info()[0])
+        log.error(str(salt) + ' ' + sys.exc_info()[0])
 
 
 def portal(salt):
@@ -82,7 +85,11 @@ def portal(salt):
     pesso = {}
 
     postgres = Postgres()
-    texto = postgres.atendimento(postgres, atendimento, item)[0][3]
+    texto = postgres.atendimento(postgres, atendimento, item)
+    if len(texto) == 0:
+        return [], {}, {}, {}, texto
+
+    texto = texto[0][3]
     relacionados = postgres.resultados(postgres, atendimento, item)
     for relacionado in relacionados:
 

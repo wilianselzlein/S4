@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/portal/templates/kibana.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/executar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/templates/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/head.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/templates/salt.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/salt.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -231,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565188720587</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Includes layout">
+      <created>1565200145697</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1565200145697</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">

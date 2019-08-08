@@ -69,3 +69,8 @@ def kibana():
           "interval:auto,query:(language:kuery,query:'" + search + "'),sort:!(data,desc))"
 
     return render_template('kibana.html', url=url)
+
+@app.route('/curtir', methods=['POST'])
+def curtir():   
+    avaliacao(request.form['salt'], request.form['item'], request.form['algoritmo'], request.form['relacionado'], request.form['relacionadoitem'], LIKE)
+    return str(LIKE)

@@ -49,7 +49,7 @@ class Postgres(PostgresBase.Base):
     @staticmethod
     def resultados(self, sac, item):
         sql = "  select r.algoritmo, r.relacionado, r.relacionadoitem, r.score, s.severidade, s.tempo, s.original, " \
-              "  s.encerramento "
+              "  s.encerramento, r.util "
         sql += " from resultados r"
         sql += " join sac s"
         sql += " on r.relacionado = s.atendimento and r.relacionadoitem = s.item"

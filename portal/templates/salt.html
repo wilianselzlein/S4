@@ -68,14 +68,27 @@
                                     <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                      <i class="fas fa-eye"></i>&nbsp;Encerramento
                                     </button>
-                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Marcar como uma ótima avaliação/ajuda">
-                                       <button type="button" class="btn btn-sm btn-outline-secondary">
-                                          <i class="fas fa-thumbs-up"></i>
-                                          <!-- <a href="{{ url_for('like', salt=salt, item=item, algoritmo=relacionado[0], relacionado=relacionado[1], relacionadoitem=relacionado[2])}}">
-                                             <img src="{{url_for('static', filename='like.jpg')}}" alt="Ajudou" height="24" width="24"/>
-                                             </a> -->
-                                       </button>
-                                    </span>
+                                    {% if relacionado[8] == True %}
+                                       &nbsp;
+                                       <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Marcado como uma ótima avaliação/ajuda">
+                                       <i class="fas fa-star fa-2x" id="starA{{ relacionado[1] }}{{ relacionado[2] }}"></i>
+                                       </span>
+                                    {% else %}
+                                       <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Marcar como uma ótima avaliação/ajuda">
+                                          <button id="curtir{{ relacionado[1] }}{{ relacionado[2] }}" type="button" class="btn btn-sm btn-outline-secondary"
+                                                onclick="javascript:curtir('#curtir{{ relacionado[1] }}{{ relacionado[2] }}','#star{{ relacionado[1] }}{{ relacionado[2] }}',
+                                                '{{ salt }}', '{{ item }}', '{{ relacionado[0] }}',
+                                                '{{ relacionado[1] }}','{{ relacionado[2] }}');">
+                                             <i class="fas fa-thumbs-up"></i>
+                                             <!-- <a href="{{ url_for('like', salt=salt, item=item, algoritmo=relacionado[0], relacionado=relacionado[1], relacionadoitem=relacionado[2])}}">
+                                                <img src="{{url_for('static', filename='like.jpg')}}" alt="Ajudou" height="24" width="24"/>
+                                                </a> -->
+                                          </button>
+                                       </span>
+                                       <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Marcado como uma ótima avaliação/ajuda">
+                                       <i class="fas fa-star fa-2x" id="star{{ relacionado[1] }}{{ relacionado[2] }}"  style="display: none"></i>
+                                       </span>
+                                    {% endif %}
                                     <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit
                                        <a href="{{ url_for('dislike', salt=salt, item=item, algoritmo=relacionado[0], relacionado=relacionado[1], relacionadoitem=relacionado[2])}}">
                                        <img src="{{url_for('static', filename='dislike.jpg')}}" alt="Errado" height="24" width="24"/>
@@ -148,6 +161,27 @@
                </div>
             </div>
          </div>
+          <script>
+              function curtir(element, star, _atendimento, _item, _algoritmo, _relacionado, _relacionadoitem) {
+                  $(element).html('<img src="{{ url_for('static', filename='loading.gif') }}">');
+                  // alert($(sourceElem).text());
+                  $.post('/curtir', {
+                      // text: $(sourceElem).text()
+                      salt: _atendimento,
+                      item: _item,
+                      algoritmo: _algoritmo,
+                      relacionado: _relacionado,
+                      relacionadoitem: _relacionadoitem
+                  }).done(function(response) {
+                      // $(element).text(response);
+                      // $(element).html('<i class="fas fa-star"></i>');
+                      $(element).hide();
+                      $(star).show();
+                  }).fail(function() {
+                      $(element).text("Erro");
+                  });
+              }
+          </script>
       </main>
       {% include 'footer.html' %}
       

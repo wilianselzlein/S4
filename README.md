@@ -4,8 +4,11 @@ Ferramenta que orienta o colaborador sobre os passos mais eficazes para a resolu
 
 ## Tecnologias 
 
-- Python 3
+- Python3
+- PostgreSQL
 - Docker
+- Kibana
+- ElasticSearch
 
 ## Inteligência Computacional
 -  O  foi desenvolvida para realizar classificação do atendimentos a partir dos dados do processo e do texto extraído de outros atendimentos. 
@@ -45,6 +48,14 @@ pip3 install psycopg2
 $ make install
 ```
 A base de dados o própio app cria, bastando apenas ter um postgreSQL instalado.
+
+Para execução:
+
+```bash
+export FLASK_DEBUG=1
+ssh -R s4.serveo.net:80:localhost:5000 serveo.net
+~/S4$  python3 __main__.py --portal
+```
 
 ## Estilo de Código
 

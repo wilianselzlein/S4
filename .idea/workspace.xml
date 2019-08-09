@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="" />
+    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="Ajax">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/importar/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/executar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/templates/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/templates/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/head.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/templates/jumbotron.css" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565266310751</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Ajax">
+      <created>1565281654343</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1565281654343</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -276,7 +289,8 @@
     <MESSAGE value="Melhorias layout" />
     <MESSAGE value="Includes layout" />
     <MESSAGE value="FontAwesome" />
-    <option name="LAST_COMMIT_MESSAGE" value="FontAwesome" />
+    <MESSAGE value="Ajax" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajax" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -310,11 +324,6 @@
           <url>file://$PROJECT_DIR$/avaliar/executar.py</url>
           <line>79</line>
           <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/portal/executar.py</url>
-          <line>49</line>
-          <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/avaliar/executar.py</url>

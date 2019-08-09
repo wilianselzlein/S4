@@ -81,6 +81,10 @@ def atendimento(salt=None, item=None):
     # df['narrative'].apply(lambda x: (x.split(' '))).sum()
     log.info('Total palavras: ' + str(len(texto_salt.split(' '))))
 
+    text_file = open("palavras.txt", "w")
+    text_file.write(texto_salt)
+    text_file.close()
+
     if salt is None and item is None:
         grams_pickle = open('grams.pickle', 'wb')
 

@@ -64,6 +64,7 @@ def avaliar_render(salt, item):
 def kibana():
     search = request.args.get('search')
     search = urllib.parse.quote_plus(search)
+    #ip = 172.23.136.140
     url = "http://" + request.remote_addr + ":5601/app/kibana#/discover?_g=(refreshInterval:(pause:!t,value:0)," \
           "time:(from:now-5y,to:now))&_a=(columns:!(_source),index:'84c9b230-af0c-11e9-9a9a-eb64683ee0d2'," \
           "interval:auto,query:(language:kuery,query:'" + search + "'),sort:!(data,desc))"

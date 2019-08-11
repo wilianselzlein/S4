@@ -49,6 +49,7 @@ def atendimento(salt=None, item=None):
      WHERE ra.cdProjeto = 3
        AND ia.CDPROJETO = 3
        AND ra.CDSISTEMA IN (31,93)
+       AND length(RTRIM(ia.DEATENDIMENTO)) >= 30 
     """
     if salt is not None and item is not None:
         sql += " AND ia.NUATENDIMENTO = " + str(salt) + " AND ia.NUITEM = " + str(item)

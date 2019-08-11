@@ -2,21 +2,23 @@
 import ibm_db_dbi as db
 import config
 from utils import Texto
-# from importar.cassandra import Cassandra
 from importar.postgres import Postgres
 import dateutil.parser
 import nltk
-# from nltk import word_tokenize
 from nltk.util import ngrams
 from collections import Counter
 import pickle
 import os
 from utils import utils
 import json
-from datetime import datetime
+from importar import sql_sac
 from elasticsearch import Elasticsearch
 
+MOST_COMMON = 500
+
 log = utils.get_logger('Importer')
+file_grams_pickle = 'grams.pickle'
+
 
 def executar(salt=None, item=None):
     atendimento(salt, item)
@@ -28,39 +30,18 @@ def executar(salt=None, item=None):
 
 
 def atendimento(salt=None, item=None):
-    # conn = ibm_db.connect(config.dsn_database, config.dsn_uid, config.dsn_pwd)
-    conn = db.connect("DATABASE=" + config.dsn_database + ";HOSTNAME=" + config.dsn_hostname + ";PORT=" + config.dsn_port +
-                      ";UID=" + config.dsn_uid + ";PWD=" + config.dsn_pwd + ";",
-                      "/home/ivo/Downloads/jdbc_sqlj/db2_db2driver_for_jdbc_sqlj/db2jcc.jar", "")
+    conn = connect_db2_linux()
 
-    #schema = ibm_db.exec_immediate(conn, "SET SCHEMA SAC")
-    sql = """
-    SELECT ia.NUATENDIMENTO, ia.NUITEM, ia.DEATENDIMENTO, pr.NUORDEM, ra.DTREGISTRO, 
-    coalesce((SELECT sum(aa.QTHORASREAL) FROM sac.ESACATIVIDADE AA
-        WHERE AA.CDPROJETO = IA.CDPROJETO
-        AND AA.NUATENDIMENTO = IA.NUATENDIMENTO
-        AND AA.NUITEM = IA.NUITEM),0) as QTHORASREAL, COALESCE(ia.DESOLUCAO, '') AS DESOLUCAO
-      FROM sac.ESACREGISTROATEND ra
-      JOIN sac.ESACITEMATEND ia
-        ON ia.cdProjeto = ia.CDPROJETO
-       AND ia.NUATENDIMENTO = ra.NUATENDIMENTO  
-      JOIN sac.ESACPRIORIDADE pr
-        ON pr.cdPrioridade = ia.cdPrioridade
-     WHERE ra.cdProjeto = 3
-       AND ia.CDPROJETO = 3
-       AND ra.CDSISTEMA IN (31,93)
-       AND length(RTRIM(ia.DEATENDIMENTO)) >= 30 
-    """
-    if salt is not None and item is not None:
-        sql += " AND ia.NUATENDIMENTO = " + str(salt) + " AND ia.NUITEM = " + str(item)
-    else:
-        sql += " AND VARCHAR_FORMAT (ra.DTREGISTRO,'YYYY-MM-DD') > '" + config.ultima_importacao + "'"
-    sql += " AND VARCHAR_FORMAT (ra.DTREGISTRO,'YYYY-MM-DD') > '" + config.ultima_importacao + "'"
-    sql += " ORDER BY ra.DTREGISTRO DESC"
+    # schema = ibm_db.exec_immediate(conn, "SET SCHEMA SAC")
+    sql = sql_sac.atendimentos
+    sql = sql_fiters(item, salt, sql)
+    sql += sql_sac.atendimentos_order
 
     texto = Texto()
     postgres = Postgres()
     es = Elasticsearch([config.elasticsearch])
+    nomes = {}
+    users = {}
 
     rows = conn.cursor()
     rows.execute(sql)
@@ -70,8 +51,6 @@ def atendimento(salt=None, item=None):
     texto_salt = ''
     rows = list(rows)
 
-    nomes = {}
-    users = {}
     for index, row in enumerate(rows):
         if len(rows) > 10:
             print(str(index) + "/" + str(len(rows)), end="\r")
@@ -79,50 +58,25 @@ def atendimento(salt=None, item=None):
 
     texto_salt += texto.RemoverNomes(texto_salt, nomes)
     texto_salt += texto.RemoverUsuarios(texto_salt, users)
-    # df['narrative'].apply(lambda x: (x.split(' '))).sum()
+
     log.info('Total palavras: ' + str(len(texto_salt.split(' '))))
 
-    text_file = open("palavras.txt", "w")
-    text_file.write(texto_salt)
-    text_file.close()
+    save_words(texto_salt, "palavras_todas.txt")
 
     if salt is None and item is None:
-        grams_pickle = open('grams.pickle', 'wb')
-
-        token = nltk.word_tokenize(texto_salt)
-        trigrams = ngrams(token, 3)
-        trigrams = Counter(trigrams)
-        trimost = trigrams.most_common(500)
+        grams_pickle = open(file_grams_pickle, 'wb')
 
         dic = []
-        for key, value in trimost:
-            palavra = ''
-            for n in range(len(key)):
-                palavra += key[n] + ' '
-            palavra = palavra.strip()
-            gram = palavra.replace(' ', '_')
-            dic.append(palavra)
-            texto_salt = texto_salt.replace(palavra, gram)
 
-        token = nltk.word_tokenize(texto_salt)
-        bigrams = ngrams(token, 2)
-        bigrams = Counter(bigrams)
-        bimost = bigrams.most_common(500)
+        texto_salt = counter_grams(3, dic, texto_salt)
+        texto_salt = counter_grams(2, dic, texto_salt)
 
-        for key, value in bimost:
-            palavra = ''
-            for n in range(len(key)):
-                palavra += key[n] + ' '
-            palavra = palavra.strip()
-            dic.append(palavra.strip())
-
+        save_words(texto_salt, "palavras_grams.txt")
         pickle.dump(dic, grams_pickle, protocol=pickle.HIGHEST_PROTOCOL)
 
     registro = ''
     i = 0
     total = 0
-    nomes = {}
-    users = {}
 
     for row in rows:
         if len(rows) > 10:
@@ -132,7 +86,7 @@ def atendimento(salt=None, item=None):
         # NUATENDIMENTO  NUITEM  DEATENDIMENTO   NUORDEM     DTREGISTRO  QTHORASREAL
         # 0              1       2               3           4           5
 
-        linha = str(row[4]) # 'DTREGISTRO'
+        linha = str(row[4])
         linha = dateutil.parser.parse(linha).date()
 
         if registro != linha:
@@ -144,12 +98,7 @@ def atendimento(salt=None, item=None):
         i += 1
         original = str(row[2]).replace("\'", "").replace("\"", "")
         tratado = texto.tratar(texto, str(row[2]), remove=True, users=users, nomes=nomes)
-
-        if os.path.isfile('grams.pickle'):
-            grams_pickle = open('grams.pickle', 'rb')
-            grams = pickle.load(grams_pickle)
-            for palavras in grams:
-                tratado = tratado.replace(palavras, palavras.replace(' ', '_'))
+        tratado = replace_grams_pickle(tratado)
 
         stemming = texto.tratar(texto, str(row[2]), stemming=True)
 
@@ -162,7 +111,7 @@ def atendimento(salt=None, item=None):
             'timestamp': row[4] #datetime.now(),
         }
         es_id = str(row[0]) + '/' + str(row[1])
-        res = es.index(index="s4", id=es_id, body=doc) #doc_type='_doc',
+        es.index(index="s4", id=es_id, body=doc)
 
         postgres.inserir(postgres, row[0], row[1],
                           original, tratado, stemming,
@@ -172,38 +121,64 @@ def atendimento(salt=None, item=None):
     print(json.dumps(dict(sorted(users.items(), key=lambda x: x[1], reverse=True)), indent=4))
 
     # row = ibm_db.fetch_assoc(stmt)
-    es.indices.refresh(index="s4")
+    es.indices.refresh(index=config.elasticsearch_db)
     log.info('Registros importados:' + str(total))
 
 
-def pessoas(salt=None, item=None):
+def connect_db2_linux():
     # conn = ibm_db.connect(config.dsn_database, config.dsn_uid, config.dsn_pwd)
-    conn = db.connect("DATABASE=" + config.dsn_database + ";HOSTNAME=" + config.dsn_hostname + ";PORT=" + config.dsn_port +
-                      ";UID=" + config.dsn_uid + ";PWD=" + config.dsn_pwd + ";",
-                      "/home/ivo/Downloads/jdbc_sqlj/db2_db2driver_for_jdbc_sqlj/db2jcc.jar", "")
+    conn = db.connect(
+        "DATABASE=" + config.dsn_database + ";HOSTNAME=" + config.dsn_hostname + ";PORT=" + config.dsn_port +
+        ";UID=" + config.dsn_uid + ";PWD=" + config.dsn_pwd + ";", config.db2jcc, "")
 
-    # schema = ibm_db.exec_immediate(conn, "SET SCHEMA SAC")
-    sql = """
-        SELECT ia.NUATENDIMENTO, ia.NUITEM, aa.CDUSUARIO, count(1) AS QUANT
-          FROM sac.ESACREGISTROATEND ra
-          JOIN sac.ESACITEMATEND ia
-            ON ia.cdProjeto = ia.CDPROJETO
-           AND ia.NUATENDIMENTO = ra.NUATENDIMENTO  
-          JOIN sac.ESACPRIORIDADE pr
-            ON pr.cdPrioridade = ia.cdPrioridade
-          JOIN sac.ESACATIVIDADE AA
-            ON AA.CDPROJETO = IA.CDPROJETO
-           AND AA.NUATENDIMENTO = IA.NUATENDIMENTO
-           AND AA.NUITEM = IA.NUITEM
-         WHERE ra.cdProjeto = 3
-           AND ia.CDPROJETO = 3
-           AND ra.CDSISTEMA IN (31,93)
-           AND aa.CDUSUARIO NOT IN ('PORTALCLIENTE', 'AUTOMATIZACAO_PORTAL')
-        """
+    return conn
+
+
+def sql_fiters(item, salt, sql):
     if salt is not None and item is not None:
-        sql += " AND ia.NUATENDIMENTO = " + str(salt) + " AND ia.NUITEM = " + str(item)
-    sql += " AND VARCHAR_FORMAT (ra.DTREGISTRO,'YYYY-MM-DD') > '" + config.ultima_importacao + "' " \
-        "GROUP BY ia.NUATENDIMENTO, ia.NUITEM, aa.CDUSUARIO"
+        sql += sql_sac.atendimentos_filtro.format(str(salt), str(item))
+    else:
+        sql += sql_sac.atendimentos_data.format(config.ultima_importacao)
+    return sql
+
+
+def counter_grams(ngram, dic, texto_salt):
+    token = nltk.word_tokenize(texto_salt)
+    grams = ngrams(token, ngram)
+    grams = Counter(grams)
+    most = grams.most_common(MOST_COMMON)
+    for key, value in most:
+        palavra = ''
+        for n in range(len(key)):
+            palavra += key[n] + ' '
+        palavra = palavra.strip()
+        gram = palavra.replace(' ', '_')
+        dic.append(palavra)
+        texto_salt = texto_salt.replace(palavra, gram)
+    return texto_salt
+
+
+def replace_grams_pickle(text):
+    if os.path.isfile(file_grams_pickle):
+        grams_pickle = open(file_grams_pickle, 'rb')
+        grams = pickle.load(grams_pickle)
+        for gram in grams:
+            text = text.replace(gram, gram.replace(' ', '_'))
+    return text
+
+
+def save_words(words, file_name):
+    text_file = open(file_name, "w")
+    text_file.write(words)
+    text_file.close()
+
+
+def pessoas(salt=None, item=None):
+    conn = connect_db2_linux()
+    # schema = ibm_db.exec_immediate(conn, "SET SCHEMA SAC")
+    sql = sql_sac.pessoas
+    sql = sql_fiters(item, salt, sql)
+    sql += sql_sac.pessoas_group
 
     # texto = Texto()
     postgres = Postgres()

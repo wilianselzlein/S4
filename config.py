@@ -9,6 +9,7 @@ cassandra_host = '127.0.0.1'
 cassandra_KEYSPACE = 'keyspaceS4'
 
 elasticsearch = 'http://localhost:9200'
+elasticsearch_db = 's4'
 
 postgres_host = os.environ.get("POSTGRE_URI", '127.0.0.1')
 postgres_db = 's4'
@@ -24,6 +25,7 @@ dsn_port = "50100"                # e.g. "50000"
 dsn_protocol = "TCPIP"            # i.e. "TCPIP"
 dsn_uid = "UNJ_BI_PROCURADORIAS"        # e.g. "dash104434"
 dsn_pwd = "3z@kthAzb"       # e.g. "7dBZ3jWt9xN6$o0JiX!m"
+db2jcc = "/home/ivo/Downloads/jdbc_sqlj/db2_db2driver_for_jdbc_sqlj/db2jcc.jar"
 
 dsn = (
     "DRIVER={{IBM DB2 ODBC DRIVER}};"

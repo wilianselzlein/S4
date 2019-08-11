@@ -6,7 +6,7 @@
       <main role="main">
          <div class="jumbotron">
          <div class="container">
-            <div class="card-deck mb-3 text-center">
+            <div class="card-deck mb-3 text-center"  data-step="3" data-intro="Esse é a descrição do seu atendimento.">
                <div class="card mb-4 shadow-sm">
                   <div class="card-header">
                      <h4 class="my-0 font-weight-normal"><i class="fas fa-newspaper"></i>&nbsp;Atendimento {{ salt }}/{{ item }}</h4>
@@ -22,7 +22,7 @@
             </div>
          </div>
          <hr>
-         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-step="4" data-intro="Aqui são as sugestões que foram sugeridas através de algoritmos de inteligência artificial e aprendizado de máquina. <br> Você pode verificar o encerramento dos atendimentos e curti-lo para uma futura consulta.">
             <ol class="carousel-indicators">
                {% for relacionado in relacionados %}
                   {% if loop.index0 == 0 %}
@@ -121,7 +121,7 @@
             <hr>
             <div class="container">
                <div class="card-deck mb-3 text-center">
-                  <div class="card mb-4 shadow-sm">
+                  <div class="card mb-4 shadow-sm" data-step="5" data-intro="Aqui está um resumo da severidade dos atendimentos sugeridos.">
                      <div class="card-header">
                         <h4 class="my-0 font-weight-normal"><i class="fas fa-exclamation-triangle"></i>&nbsp;Severidade</h4>
                      </div>
@@ -134,7 +134,7 @@
                         <!--<button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>-->
                      </div>
                   </div>
-                  <div class="card mb-4 shadow-sm">
+                  <div class="card mb-4 shadow-sm" data-step="6" data-intro="Aqui está um resumo de pessoas dos atendimentos sugeridos com quem você pode entrar em contato para esclarecer dúvidas. ">
                      <div class="card-header">
                         <h4 class="my-0 font-weight-normal"><i class="fas fa-user-clock"></i>&nbsp;Pessoas</h4>
                      </div>
@@ -146,7 +146,7 @@
                         </ul>
                      </div>
                   </div>
-                  <div class="card mb-4 shadow-sm">
+                  <div class="card mb-4 shadow-sm" data-step="7" data-intro="Aqui um breve resumo do tempo que foi utilizado nos atendimentos sugeridos.">
                      <div class="card-header">
                         <h4 class="my-0 font-weight-normal"><i class="fas fa-business-time"></i>&nbsp;Tempo m&eacute;dio</h4>
                      </div>

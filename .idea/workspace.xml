@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CDUSUARIO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CDUSUARIO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NMPESSOA.txt" beforeDir="false" afterPath="$PROJECT_DIR$/NMPESSOA.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/executar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/head.html" afterDir="false" />
-    </list>
+    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565357443519</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="sh">
+      <created>1565532525322</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1565532525322</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -299,7 +299,8 @@
     <MESSAGE value="FontAwesome" />
     <MESSAGE value="Ajax" />
     <MESSAGE value="CSS" />
-    <option name="LAST_COMMIT_MESSAGE" value="CSS" />
+    <MESSAGE value="sh" />
+    <option name="LAST_COMMIT_MESSAGE" value="sh" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/importar/sql_sac.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NMPESSOA.txt" beforeDir="false" afterPath="$PROJECT_DIR$/NMPESSOA.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/importar/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/executar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/templates/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/header.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +40,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.__main__ --portal">
+  <component name="RunManager" selected="Python.__main__ --importar">
     <configuration name="__main__ --importar" type="PythonConfigurationType" factoryName="Python">
       <module name="S4" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -272,7 +273,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565546471438</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="refactor importer sql sac">
+      <created>1565557366467</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1565557366467</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -313,7 +321,8 @@
     <MESSAGE value="CSS" />
     <MESSAGE value="sh" />
     <MESSAGE value="intro js" />
-    <option name="LAST_COMMIT_MESSAGE" value="intro js" />
+    <MESSAGE value="refactor importer sql sac" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor importer sql sac" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -362,6 +371,16 @@
           <url>file://$PROJECT_DIR$/avaliar/executar.py</url>
           <line>28</line>
           <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>32</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="72" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

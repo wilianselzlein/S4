@@ -6,7 +6,9 @@
     <p data-step="8" data-intro="Por fim, você pode entrar em contato para tirar dúvidas. Bom proveito!">S⁴ &copy; 2017-2019&nbsp;<i class="fas fa-at"></i>&nbsp;<a href="mailto:wilian.ivo@softplan.com.br">Ivo</a>&nbsp;<i class="fas fa-home"></i>&nbsp;<a href="http://www.softplan.com.br/">Softplan</a>. </p>
  </div>
 </footer>
-<script type="text/javascript" src="{{ url_for('static', filename='introjs/intro.js') }}"></script>
+{% if avaliacao %}
+	<script type="text/javascript" src="{{ url_for('static', filename='introjs/intro.js') }}"></script>
+{% endif %}
 <script>
  $(function () {
    $('[data-toggle="tooltip"]').tooltip();

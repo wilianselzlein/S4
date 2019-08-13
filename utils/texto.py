@@ -55,6 +55,13 @@ class Texto(object):
             s = self.Stemming(s)
         return s
 
+    @staticmethod
+    def kibana(self, search):
+        search = self.minusculo(search)
+        search = self.RemoveAcentos(search)
+        search = self.normalize_text(search)
+        return search
+
     def clear_text(self, text):
         text = text.lower()
 

@@ -118,7 +118,7 @@ def atendimento(salt=None, item=None):
             'timestamp': row[4] #datetime.now(),
         }
         es_id = str(row[0]) + '/' + str(row[1])
-        es.index(index="s4", id=es_id, body=doc)
+        es.index(index=config.elasticsearch_db, id=es_id, body=doc)
 
         rabbit_public.basic_publish(exchange='', routing_key=config.rabbitmq_import, body=es_id)
         rabbit_public.basic_publish(exchange='', routing_key=config.rabbitmq_validate, body=es_id)

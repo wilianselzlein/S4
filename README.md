@@ -9,6 +9,7 @@ Ferramenta que orienta o colaborador sobre os passos mais eficazes para a resolu
 - Docker
 - Kibana
 - ElasticSearch
+- Rabbit
 
 ## Inteligência Computacional
 -  O  foi desenvolvida para realizar classificação do atendimentos a partir dos dados do processo e do texto extraído de outros atendimentos. 

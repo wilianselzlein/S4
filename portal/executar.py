@@ -2,6 +2,9 @@ import avaliar
 from flask import Flask, render_template, request, flash
 from portal.postgres import Postgres
 import urllib.parse
+from elasticsearch import Elasticsearch
+import config
+from utils import Texto
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = 'you-will-never-guess'
@@ -62,14 +65,27 @@ def avaliar_render(salt, item):
 
 @app.route('/kibana', methods=['GET'])
 def kibana():
+    texto = Texto()
     search = request.args.get('search')
+    search = texto.kibana(texto, search)
     search = urllib.parse.quote_plus(search)
-    #ip = 172.23.136.140
-    url = "http://" + request.remote_addr + ":5601/app/kibana#/discover?_g=(refreshInterval:(pause:!t,value:0)," \
-          "time:(from:now-5y,to:now))&_a=(columns:!(_source),index:'84c9b230-af0c-11e9-9a9a-eb64683ee0d2'," \
-          "interval:auto,query:(language:kuery,query:'" + search + "'),sort:!(data,desc))"
+    
+    # url = "http://" + request.remote_addr + ":5601/app/kibana#/discover?_g=(refreshInterval:(pause:!t,value:0)," \
+    #       "time:(from:now-5y,to:now))&_a=(columns:!(_source),index:'84c9b230-af0c-11e9-9a9a-eb64683ee0d2'," \
+    #       "interval:auto,query:(language:kuery,query:'" + search + "'),sort:!(data,desc))"
 
-    return render_template('kibana.html', url=url)
+    limit = config.elasticsearch_limit
+    es = Elasticsearch([config.elasticsearch])
+    results = es.search(index=config.elasticsearch_db, body={"size": limit, "sort": [{"data": {"order": "desc"}}], "_source" : ["atendimento", "item", "data", "original"], "query": {"bool": {"filter": [{"multi_match": {"type": "phrase", "query": search, "lenient": "true"}}]}}})
+
+    cards = []
+    # results['hits']['hits'][0]['_source']
+    for result in results['hits']['hits']:
+        cards.append({'atendimento': int(result['_source']['atendimento']),
+                      'item': int(result['_source']['item']),
+                      'original': result['_source']['original']})
+
+    return render_template('kibana.html', search=search, cards=cards, limit=limit)
 
 @app.route('/curtir', methods=['POST'])
 def curtir():   

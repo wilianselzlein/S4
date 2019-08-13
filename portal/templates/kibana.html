@@ -1,11 +1,44 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
-   <!-- HTML meta refresh URL redirection -->
    <meta http-equiv="refresh" content="0; url={{ url }}">
 </head>
 <body>
    <p>The page has moved to:
    <a href="{{ url }}">this page</a></p>
 </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="pt-br">
+   {% include 'head.html' %}
+   <body class="text-center">
+      {% include 'header.html' %}
+      <main role="main">
+         <div class="jumbotron">
+			<div class="card">
+			  <div class="card-header">
+			  	<div align="left">
+			    	<i class="fas fa-search"></i> {{ search }}<small>&nbsp;<i>Limite {{ limit }} itens.</i></small>
+				</div>
+			  </div>
+			    <div class="card-body">
+				  <ul class="list-group list-group-flush">
+			          {% if cards %}
+			             {% for card in cards %}
+			                <li class="list-group-item">
+			                	<div align="left">
+				                	<footer class="blockquote-footer">{{ card['atendimento'] }}/{{ card['item'] }}
+				                	</footer>
+									<small>{{ card['original'] }}</small>
+								</div>
+			                </li>
+			             {% endfor %}
+			          {% endif %}
+				  </ul>
+  				</div>
+			</div>
+         </div>
+      </main>
+      {% include 'footer.html' %}
+   </body>
 </html>

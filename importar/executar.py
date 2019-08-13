@@ -180,7 +180,7 @@ def replace_grams_pickle(text):
 
 
 def save_words(words, file_name):
-    text_file = open(file_name, "w")
+    text_file = open('txt/' + file_name, "w")
     text_file.write(words)
     text_file.close()
 

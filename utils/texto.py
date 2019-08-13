@@ -129,7 +129,7 @@ class Texto(object):
         return s
 
     def RemoverUsuarios(self, s, palavras):
-        with open('CDUSUARIO.txt') as f:
+        with open('txt/CDUSUARIO.txt') as f:
             for cdusuario in f:
                 cdusuario = ' ' + cdusuario.lower().strip() + ' '
                 if cdusuario in s:
@@ -139,7 +139,7 @@ class Texto(object):
         return s
 
     def RemoverNomes(self, s, palavras):
-        with open('NMPESSOA.txt') as f:
+        with open('txt/NMPESSOA.txt') as f:
             lines = enumerate(f)
             for index, nmpessoa in lines:
                 nmpessoa = ' ' + nmpessoa.lower().strip() + ' '

@@ -1,13 +1,15 @@
 # from S4.avaliar.cassandra import Cassandra
 from avaliar.postgres import Postgres
-from avaliar.bagofwords import BagOfWords
+# from avaliar.bagofwords import BagOfWords
 from avaliar.doc2vec import Doc2Vec
 from avaliar.cosine_distance import CosineDistance
 from avaliar.bm25 import Bm25
 from avaliar.lsa import Lsa
-import importar
+# import importar
 import sys
 from utils import utils
+import pika
+import config
 
 log = utils.get_logger('Service loader')
 
@@ -112,3 +114,17 @@ def portal(salt):
 
     return relacionados, sever.items(), tempo.items(), pesso.items(), texto
 
+
+def fila():
+    rabbit_conn = pika.BlockingConnection(pika.ConnectionParameters(config.rabbitmq))
+    rabbit_public = rabbit_conn.channel()
+    rabbit_public.queue_declare(queue=config.rabbitmq_validate)
+
+    rabbit_public.basic_consume(queue=config.rabbitmq_validate, on_message_callback=callback, auto_ack=True)
+
+    print(' [*] Waiting for messages. To exit press CTRL+C')
+    rabbit_public.start_consuming()
+
+
+def callback(ch, method, properties, body):
+    executar(body)

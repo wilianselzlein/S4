@@ -1,7 +1,7 @@
 import os
 import logging
 
-ultima_importacao = '2016-01-01'
+ultima_importacao = '2019-08-01'
 data_avaliacao = '2016-01-01'
 quantidade = 3
 
@@ -10,6 +10,10 @@ cassandra_KEYSPACE = 'keyspaceS4'
 
 elasticsearch = 'http://localhost:9200'
 elasticsearch_db = 's4'
+
+rabbitmq = 'localhost'
+rabbitmq_import = 's4_import'
+rabbitmq_validate = 's4_validate'
 
 postgres_host = os.environ.get("POSTGRE_URI", '127.0.0.1')
 postgres_db = 's4'

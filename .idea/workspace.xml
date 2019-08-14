@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/executar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/kibana.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/kibana.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal/templates/salt.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/salt.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -362,7 +362,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565722200215</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Elastic">
+      <created>1565792795268</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1565792795268</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -394,7 +401,6 @@
     <MESSAGE value="Melhoria texto" />
     <MESSAGE value="Correcoes Doc2Vec" />
     <MESSAGE value="Limite de resultados." />
-    <MESSAGE value="Elastic" />
     <MESSAGE value="Correcao BM25" />
     <MESSAGE value="Melhorias layout" />
     <MESSAGE value="Includes layout" />
@@ -407,7 +413,8 @@
     <MESSAGE value="S⁴" />
     <MESSAGE value="Rabbit" />
     <MESSAGE value="Movs TXTs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Movs TXTs" />
+    <MESSAGE value="Elastic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Elastic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

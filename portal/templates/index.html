@@ -10,7 +10,7 @@
             <div class="card-deck mb-3 text-center">
                <div class="card mb-4 shadow-sm">
                   <div class="card-header">
-                     <h4 class="my-0 font-weight-normal">Avaliar</h4>
+                     <h4 class="my-0 font-weight-normal"><i class="fab fa-searchengin"></i>&nbsp;Avaliar</h4>
                   </div>
                   <div align="center">
                   	 <br>
@@ -21,16 +21,22 @@
          						Item:<br>
          						<input type="text" name="item" value="0"><br><br>
          						<button class="btn btn-lg btn-primary" type="submit" onclick="ShowSpinner()"><i class="fas fa-robot"></i></button>
-                           <div id="spinner" class="text-center" style="display: none">
-                              <div class="spinner-border" role="status">
-                               <span class="sr-only">Loading...</span>
-                              </div>
-                           </div>
+                    <br>
+                    <br>
+                     <div id="spinner" class="text-center" style="display: none">
+                        <div class="spinner-border" role="status">
+                         <span class="sr-only">Loading...</span>
+                        </div>
+                     </div>
          					</form> 
          					<br>
                   </div>
                </div>
             </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><h6>+ <span class="badge badge-secondary">35000</span> atendimentos</h6></li>
+              <li class="list-group-item"><h6>Tempo médio <span class="badge badge-secondary">1~2</span> minutos</h6></li>
+            </ul>
          </div>
          <script>
             function ShowSpinner() {

@@ -29,7 +29,7 @@
 			                	<div align="left">
 				                	<footer class="blockquote-footer">{{ card['atendimento'] }}/{{ card['item'] }}
 				                	</footer>
-									<small>{{ card['original'] }}</small>
+									<small>{{ card['original'] | safe }}</small>
 								</div>
 			                </li>
 			             {% endfor %}

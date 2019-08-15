@@ -68,6 +68,9 @@ def avaliar_render(salt, item):
 
 @app.route('/kibana', methods=['GET'])
 def kibana():
+    if request.headers.get("Referer") is None:
+        flash('Você deve avaliar o atendimento antes da consulta!')
+        return render_template('index.html', host=_host()) 
     texto = Texto()
     search = request.args.get('search')
     # search = texto.kibana(texto, search)

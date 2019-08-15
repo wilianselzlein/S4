@@ -20,7 +20,9 @@
          						<input type="text" name="salt" value="000000"><br>
          						Item:<br>
          						<input type="text" name="item" value="0"><br><br>
-         						<button class="btn btn-lg btn-primary" type="submit" onclick="ShowSpinner()"><i class="fas fa-robot"></i></button>
+         						<button class="btn btn-lg btn-primary" type="submit" onclick="ShowSpinner('spinner')">
+                      <i class="fas fa-robot"></i>
+                    </button>
                     <br>
                     <br>
                      <div id="spinner" class="text-center" style="display: none">
@@ -38,16 +40,6 @@
               <li class="list-group-item"><h6>Tempo médio <span class="badge badge-secondary">1~2</span> minutos</h6></li>
             </ul>
          </div>
-         <script>
-            function ShowSpinner() {
-              var x = document.getElementById("spinner");
-              if (x.style.display === "none") {
-                x.style.display = "block";
-              } else {
-                x.style.display = "none";
-              }
-            }
-         </script>
       </main>
       {% include 'footer.html' %}
    </body>

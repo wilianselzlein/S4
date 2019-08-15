@@ -10,6 +10,16 @@
 	<script type="text/javascript" src="{{ url_for('static', filename='introjs/intro.js') }}"></script>
 {% endif %}
 <script>
+function ShowSpinner(element) {
+  var x = document.getElementById(element);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<script>
  $(function () {
    $('[data-toggle="tooltip"]').tooltip();
    introJs().start();

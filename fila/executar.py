@@ -25,5 +25,6 @@ def executar(fila):
         rabbit_public.queue_declare(queue=config.rabbitmq_validate)
         rabbit_public.basic_consume(queue=config.rabbitmq_validate, on_message_callback=avaliar_queue, auto_ack=True)
 
+    rabbit_public.basic_qos(prefetch_count=1)
     rabbit_public.start_consuming()
 

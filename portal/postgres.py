@@ -18,5 +18,18 @@ class Postgres(PostgresBase.Base):
         self.con.commit()
 
 
+    @staticmethod
+    def metricas(self, campo):
+        sql = "  select " + str(campo)
+        sql += " from resultados;"
+        self.cur.execute(sql)
+
+        conta = 0
+        registros = self.cur.fetchall()
+        for registro in registros:
+            conta = registro[0]
+            
+        return conta
+        
     def __init__(self):
         super().__init__()

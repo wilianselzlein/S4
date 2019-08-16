@@ -14,6 +14,12 @@
                   </li>
                </ul>
                {% if avaliacao %}
+                  <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Avaliar outro atendimento">
+                  <button class="btn btn-primary my-2 my-sm-0" type="button" onclick="ShowSpinner('formAval')">
+                     <i class="fas fa-robot"></i>
+                  </button>
+                  </span>
+                  &nbsp;
                   <form class="form-inline mt-2 mt-md-0" action="/kibana" data-step="2" data-intro="Aqui você pode localizar em todos os atendimentos de forma rápida textos da descrição dos atendimentos e atividades dos atendimentos.">
                      <input class="form-control mr-sm-2" type="text" placeholder="busca de atendimentos" name="search" aria-label="Search" value="{{ search }}">
                      <button class="btn btn-primary my-2 my-sm-0" type="submit">
@@ -21,7 +27,7 @@
                      </button>
                      &nbsp;
                      <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
-                           title="Localize atendimentos por qualquer parte de texto.">
+                           title="Localize atendimentos por qualquer parte do texto.">
                      <button class="btn btn-primary" style="pointer-events: none;" type="button" disabled>
                         <i class="fas fa-question"></i>
                      </button>
@@ -31,6 +37,14 @@
                         <i class="fas fa-info"></i>
                      </button>
                   </form>
+               {% endif %}
+               {% if search %}
+                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Voltar">
+                     <button class="btn btn-primary my-2 my-sm-0" type="button" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i>
+                     </button>
+                     </span>
+                     &nbsp;
                {% endif %}
             </div>
          </nav>

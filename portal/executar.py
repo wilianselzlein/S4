@@ -24,7 +24,10 @@ def _host():
 @app.route('/')
 def home():
     # return "S4"
-    return render_template('index.html', host=_host())
+    postgres = Postgres()
+    sugeridos = postgres.metricas(postgres, "count(relacionado)")
+    avaliados = postgres.metricas(postgres, "count(distinct atendimento)")
+    return render_template('index.html', host=_host(), avaliados=avaliados, sugeridos=sugeridos)
 
 @app.route('/salt/<salt>/<item>')
 def salt(salt, item):

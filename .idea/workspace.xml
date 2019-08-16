@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fila/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/fila/executar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/kibana.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/kibana.html" afterDir="false" />
-    </list>
+    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -378,7 +371,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565801676833</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Melhorias pesquisa">
+      <created>1565888692578</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1565888692578</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -424,7 +424,8 @@
     <MESSAGE value="Movs TXTs" />
     <MESSAGE value="Elastic" />
     <MESSAGE value="Host" />
-    <option name="LAST_COMMIT_MESSAGE" value="Host" />
+    <MESSAGE value="Melhorias pesquisa" />
+    <option name="LAST_COMMIT_MESSAGE" value="Melhorias pesquisa" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

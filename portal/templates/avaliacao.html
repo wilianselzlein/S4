@@ -1,0 +1,32 @@
+<div id="formAval" class="card-deck mb-3 text-center"
+{% if avaliacao %}
+ style="display: none"
+{% endif %}
+>
+	<div class="card mb-4 shadow-sm">
+	  <div class="card-header">
+	     <h4 class="my-0 font-weight-normal"><i class="fab fa-searchengin"></i>&nbsp;Avaliar</h4>
+	  </div>
+	  <div align="center">
+	  	<br>
+	    {% include 'messages.html' %}
+	  		<form action="/redirect">
+				Atendimento:<br>
+				<input type="text" name="salt" value="000000"><br>
+				Item:<br>
+				<input type="text" name="item" value="0"><br><br>
+				<button class="btn btn-lg btn-primary" type="submit" onclick="ShowSpinner('spinner')">
+			        <i class="fas fa-robot"></i>
+			      </button>
+			      <br>
+			      <br>
+			       <div id="spinner" class="text-center" style="display: none">
+			          <div class="spinner-border" role="status">
+			           <span class="sr-only">Loading...</span>
+			          </div>
+			       </div>
+			  </form> 
+			  <br>
+	  </div>
+	</div>
+</div>

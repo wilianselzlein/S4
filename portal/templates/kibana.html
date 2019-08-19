@@ -59,6 +59,27 @@
 				  </ul>
   				</div>
 			</div>
+			<br>
+			<div class="card">
+			  <div class="card-header">
+			  	<div align="left">
+			    	<i class="fas fa-search"></i><small>&nbsp;Últimas buscas realizadas:</small>
+				</div>
+			  </div>
+			    <div class="card-body">
+				  <ul class="list-group list-group-flush">
+	                <li class="list-group-item">
+	                	<div align="left">
+			          {% if buscas %}
+			             {% for busca in buscas %}
+							<small><kbd>{{ busca | safe }}</kbd></small>
+			             {% endfor %}
+			          {% endif %}
+			          	</div>
+	   	            </li>
+				  </ul>
+  				</div>
+			</div>
          </div>
       </main>
       {% include 'footer.html' %}

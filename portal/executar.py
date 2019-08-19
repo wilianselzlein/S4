@@ -5,6 +5,7 @@ import urllib.parse
 from elasticsearch import Elasticsearch
 import config
 from utils import Texto
+from datetime import datetime
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = 'you-will-never-guess-s4'
@@ -87,6 +88,13 @@ def kibana():
 
     limit = config.elasticsearch_limit
     es = Elasticsearch([config.elasticsearch])
+    doc = {
+        'search': search,
+        'timestamp': datetime.now()
+    }
+    es.index(index=config.elasticsearch_search, body=doc)
+    es.indices.refresh(index=config.elasticsearch_search)
+
     results = es.search(index=config.elasticsearch_db, 
                         body={
                               "version": True,
@@ -178,7 +186,32 @@ def kibana():
 
     search = search.replace("\"", "")
 
-    return render_template('kibana.html', host=_host(), search=search, cards=cards, limit=limit)
+    ultimas = []
+    ultimas = es.search(index=config.elasticsearch_search, 
+                        body={
+                                "size": 10,
+                                "sort": [
+                                  {
+                                    "timestamp": {
+                                      "order": "desc",
+                                      "unmapped_type": "boolean"
+                                    }
+                                  }
+                                ],
+                                "query" : {
+                                  "match_all" : { 
+                                  }
+                                }
+                              }
+                      )
+
+    buscas = []
+    # results['hits']['hits'][0]['_source']
+    for ultima in ultimas['hits']['hits']:
+        buscas.append(ultima['_source']['search'].replace("\"", ""))
+
+    buscas = set(buscas)
+    return render_template('kibana.html', host=_host(), search=search, cards=cards, limit=limit, buscas=buscas)
 
 @app.route('/curtir', methods=['POST'])
 def curtir():   

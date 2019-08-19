@@ -10,11 +10,13 @@ cassandra_KEYSPACE = 'keyspaceS4'
 
 elasticsearch = 'http://localhost:9200'
 elasticsearch_db = 's4'
+elasticsearch_search = 's4_search'
 elasticsearch_limit = 100
 
 rabbitmq = 'localhost'
 rabbitmq_import = 's4_import'
 rabbitmq_validate = 's4_validate'
+rabbitmq_limit = 100
 
 postgres_host = os.environ.get("POSTGRE_URI", '127.0.0.1')
 postgres_db = 's4'

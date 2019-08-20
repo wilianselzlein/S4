@@ -62,7 +62,7 @@ ssh -R s4.serveo.net:80:localhost:5000 serveo.net
 
 Para garantir um estilo de código padronizado, usamos o formatador [black](https://github.com/python/black). Se o seu código não estiver formatado corretamente, a pipeline do Git CI não será finalizada, impedindo o **merge** das alterações.
 
-Se você quiser formatar automaticamente seu código em cada commit, você pode usar [pré-commit](https://pre-commit.com/). Basta instalá-lo via **pip install pre-commit** executar pre-commit installna pasta raiz. Isso adicionará um gancho ao repositório, que reformata os arquivos em cada confirmação.
+Se você quiser formatar automaticamente seu código em cada commit, você pode usar [pré-commit](https://pre-commit.com/). Basta instalá-lo via **pip install pre-commit** executar pre-commit install na pasta raiz. Isso adicionará um gancho ao repositório, que reformata os arquivos em cada confirmação.
 
 Se você quiser configurá-lo manualmente, instale via **pip install black**. Para reformatar arquivos, execute
 

@@ -68,18 +68,20 @@ def atendimento(salt=None, item=None):
 
     log.info('Total palavras: ' + str(len(texto_salt.split(' '))))
 
-    save_words(texto_salt, "palavras_todas.txt")
+    if texto_salt != '':
+        save_words(texto_salt, "palavras_todas.txt")
 
     if salt is None and item is None:
         grams_pickle = open(file_grams_pickle, 'wb')
 
         dic = []
 
-        texto_salt = counter_grams(3, dic, texto_salt)
-        texto_salt = counter_grams(2, dic, texto_salt)
+        if texto_salt != '':
+            texto_salt = counter_grams(3, dic, texto_salt)
+            texto_salt = counter_grams(2, dic, texto_salt)
 
-        save_words(texto_salt, "palavras_grams.txt")
-        pickle.dump(dic, grams_pickle, protocol=pickle.HIGHEST_PROTOCOL)
+            save_words(texto_salt, "palavras_grams.txt")
+            pickle.dump(dic, grams_pickle, protocol=pickle.HIGHEST_PROTOCOL)
 
     registro = ''
     i = 0
@@ -113,15 +115,16 @@ def atendimento(salt=None, item=None):
             'atendimento': row[0],
             'item': row[1],
             'original': original,
-            'texto': tratado,
+            'texconnect_db2_linuxto': tratado,
             'data': row[4],
             'timestamp': row[4] #datetime.now(),
         }
         es_id = str(row[0]) + '/' + str(row[1])
         es.index(index=config.elasticsearch_db, id=es_id, body=doc)
 
-        rabbit_public.basic_publish(exchange='', routing_key=config.rabbitmq_import, body=es_id)
-        rabbit_public.basic_publish(exchange='', routing_key=config.rabbitmq_validate, body=es_id)
+        # if rabbit_conn.is_open:
+        #     rabbit_public.basic_publish(exchange='', routing_key=config.rabbitmq_import, body=es_id)
+        #     rabbit_public.basic_publish(exchange='', routing_key=config.rabbitmq_validate, body=es_id)
 
         postgres.inserir(postgres, row[0], row[1],
                           original, tratado, stemming,
@@ -132,7 +135,7 @@ def atendimento(salt=None, item=None):
 
     # row = ibm_db.fetch_assoc(stmt)
     es.indices.refresh(index=config.elasticsearch_db)
-    rabbit_conn.close()
+    # rabbit_conn.close()
 
     log.info('Registros importados:' + str(total))
 
@@ -180,9 +183,11 @@ def replace_grams_pickle(text):
 
 
 def save_words(words, file_name):
-    text_file = open('txt/' + file_name, "w")
-    text_file.write(words)
-    text_file.close()
+    file = 'txt/' + file_name
+    if not os.path.isfile(file):
+        text_file = open(file, "w")
+        text_file.write(words)
+        text_file.close()
 
 
 def pessoas(salt=None, item=None):
@@ -206,4 +211,38 @@ def pessoas(salt=None, item=None):
         # postgres.pessoa(postgres, row['NUATENDIMENTO'], row['NUITEM'], row['CDUSUARIO'], row['QUANT'])
         # row = ibm_db.fetch_assoc(stmt)
 
+
+def atividades(salt=None, item=None):
+    conn = connect_db2_linux()
+    sql = sql_sac.atividades
+    sql = sql_fiters(item, salt, sql)
+
+    rows = conn.cursor()
+    rows.execute(sql)
+
+    es = Elasticsearch([config.elasticsearch])
+    texto = Texto()
+
+    for row in rows:
+        print("\t" + str(row[3]) + ' - ' + str(row[0]) + "/" + str(row[1]) + "/" + str(row[2]), end="\r")
+        # print(str(row[3]) + ' - ' + str(row[1]) + "/" + str(row[2]))
+        original = str('Descrição da Atividade: ' + str(row[4]) + ' Descrição da resposta: ' + str(row[5])).replace("\'", "").replace("\"", "")
+        users = {}
+        nomes = {}
+        tratado = texto.tratar(texto, original, remove=True, users=users, nomes=nomes)
+        tratado = replace_grams_pickle(tratado)
+
+        doc = {
+                'atendimento': row[0],
+                'item': str(row[1]) + '/' + str(row[2]),
+                'original': original,
+                'texto': tratado,
+                'data': row[3],
+                'timestamp': row[3]
+        }
+
+        es_id = str(row[0]) + '/' + str(row[1]) + '/' + str(row[2])
+        es.index(index=config.elasticsearch_db, id=es_id, body=doc)        
+
+    es.indices.refresh(index=config.elasticsearch_db)
 

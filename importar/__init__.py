@@ -1,3 +1,3 @@
-from importar.executar import executar
+from importar.executar import executar, atividades
 
-__all__ = ['executar']
+__all__ = ['executar', 'atividades']

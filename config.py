@@ -16,7 +16,7 @@ elasticsearch_limit = 100
 rabbitmq = 'localhost'
 rabbitmq_import = 's4_import'
 rabbitmq_validate = 's4_validate'
-rabbitmq_limit = 100
+rabbitmq_limit = 100000
 
 postgres_host = os.environ.get("POSTGRE_URI", '127.0.0.1')
 postgres_db = 's4'

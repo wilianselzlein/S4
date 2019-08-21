@@ -30,15 +30,15 @@
 			                	
 									<div class="container-fluid">
 									  <div class="row">
-									    <div class="col-1">
-									    	<a class="navbar-brand" href="{{ host }}salt/{{ card['atendimento'] }}/{{ card['item'] }}" onclick="ShowSpinner('spinner{{ card['atendimento'] }}/{{ card['item'] }}')">
-					                			{{ card['atendimento'] }}/{{ card['item'] }}
+									    <div class="col-2">
+									    	<a class="navbar-brand" href="{{ host }}salt/{{ card['atendimento'] }}/{{ card['item'] }}" onclick="ShowSpinner('spinner{{ card['label'] }}')">
+					                			{{ card['label'] }}
 					                			<i class="fab fa-searchengin"></i>
 					                		</a>
 										</div>
 									    <div class="mr-auto">
 									    	<span class="align-middle">
-									    	<div id="spinner{{ card['atendimento'] }}/{{ card['item'] }}" class="text-left" style="display: none">
+									    	<div id="spinner{{ card['label'] }}" class="text-left" style="display: none">
 						                        <div class="spinner-border spinner-border-sm" role="status">
 						                         <span class="sr-only align-middle">Loading...</span>
 						                        </div>

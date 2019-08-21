@@ -41,3 +41,22 @@ pessoas = """
         """
 
 pessoas_group = " GROUP BY ia.NUATENDIMENTO, ia.NUITEM, aa.CDUSUARIO"
+
+atividades = """
+        SELECT ia.NUATENDIMENTO, ia.NUITEM, aa.NUATIVIDADE, aa.DTCADASTRO, aa.DEATIVIDADE, aa.DERESPOSTA 
+          FROM sac.ESACREGISTROATEND ra
+          JOIN sac.ESACITEMATEND ia
+            ON ia.cdProjeto = ia.CDPROJETO
+           AND ia.NUATENDIMENTO = ra.NUATENDIMENTO  
+          JOIN sac.ESACPRIORIDADE pr
+            ON pr.cdPrioridade = ia.cdPrioridade
+          JOIN sac.ESACATIVIDADE AA
+            ON AA.CDPROJETO = IA.CDPROJETO
+           AND AA.NUATENDIMENTO = IA.NUATENDIMENTO
+           AND AA.NUITEM = IA.NUITEM
+         WHERE ra.cdProjeto = 3
+           AND ia.CDPROJETO = 3
+           AND ra.CDSISTEMA IN (31,93)
+           AND aa.CDUSUARIO NOT IN ('PORTALCLIENTE', 'AUTOMATIZACAO_PORTAL')
+           AND (aa.DEATIVIDADE IS NOT NULL or aa.DERESPOSTA IS NOT NULL)
+        """

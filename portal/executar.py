@@ -176,7 +176,13 @@ def kibana():
     for result in results['hits']['hits']:
         card = {}
         card['atendimento'] = int(result['_source']['atendimento'])
-        card['item'] = int(result['_source']['item'])
+        try:
+            card['item'] = int(result['_source']['item'])
+            card['label'] = str(int(result['_source']['atendimento'])) + '/' + str(int(card['item']))
+        except:
+            card['item'] = int(result['_source']['item'].split('/')[0])
+            card['label'] = str(int(result['_source']['atendimento'])) + '/' + str(result['_source']['item'])
+       
         if 'highlight' in result:
             card['original'] = result['highlight']['original'][0]
         else:
@@ -189,7 +195,7 @@ def kibana():
     ultimas = []
     ultimas = es.search(index=config.elasticsearch_search, 
                         body={
-                                "size": 10,
+                                "size": 100,
                                 "sort": [
                                   {
                                     "timestamp": {

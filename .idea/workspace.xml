@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="Ultimas buscas + fila avaliacao">
+    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__main__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fila/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/fila/executar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fila/postgres.py" beforeDir="false" afterPath="$PROJECT_DIR$/fila/postgres.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/importar/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/importar/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/executar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/importar/sql_sac.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/sql_sac.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/executar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/kibana.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/kibana.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/txt/NMPESSOA.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/NMPESSOA.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -404,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566244288928</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Importar atividades">
+      <created>1566409128059</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1566409128060</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -453,7 +451,8 @@
     <MESSAGE value="Melhorias pesquisa" />
     <MESSAGE value="Metricas" />
     <MESSAGE value="Ultimas buscas + fila avaliacao" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ultimas buscas + fila avaliacao" />
+    <MESSAGE value="Importar atividades" />
+    <option name="LAST_COMMIT_MESSAGE" value="Importar atividades" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

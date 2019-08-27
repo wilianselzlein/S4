@@ -10,9 +10,8 @@ atendimentos = """
        AND ia.NUATENDIMENTO = ra.NUATENDIMENTO  
       JOIN sac.ESACPRIORIDADE pr
         ON pr.cdPrioridade = ia.cdPrioridade
-     WHERE ra.cdProjeto = 3
-       AND ia.CDPROJETO = 3
-       AND ra.CDSISTEMA IN (31,93)
+--     WHERE ra.cdProjeto = 3 AND ia.CDPROJETO = 3 AND ra.CDSISTEMA IN (31,93)
+       WHERE ra.CDCLIENTE IN (173,174,197,198,199,200,201,202,203,207,383,884,941,957,1003,1625,3563,3666,5017)
        AND length(RTRIM(ia.DEATENDIMENTO)) >= 30 
     """
 
@@ -34,9 +33,8 @@ pessoas = """
             ON AA.CDPROJETO = IA.CDPROJETO
            AND AA.NUATENDIMENTO = IA.NUATENDIMENTO
            AND AA.NUITEM = IA.NUITEM
-         WHERE ra.cdProjeto = 3
-           AND ia.CDPROJETO = 3
-           AND ra.CDSISTEMA IN (31,93)
+--     WHERE ra.cdProjeto = 3 AND ia.CDPROJETO = 3 AND ra.CDSISTEMA IN (31,93)
+       WHERE ra.CDCLIENTE IN (173,174,197,198,199,200,201,202,203,207,383,884,941,957,1003,1625,3563,3666,5017)
            AND aa.CDUSUARIO NOT IN ('PORTALCLIENTE', 'AUTOMATIZACAO_PORTAL')
         """
 
@@ -54,9 +52,8 @@ atividades = """
             ON AA.CDPROJETO = IA.CDPROJETO
            AND AA.NUATENDIMENTO = IA.NUATENDIMENTO
            AND AA.NUITEM = IA.NUITEM
-         WHERE ra.cdProjeto = 3
-           AND ia.CDPROJETO = 3
-           AND ra.CDSISTEMA IN (31,93)
+--     WHERE ra.cdProjeto = 3 AND ia.CDPROJETO = 3 AND ra.CDSISTEMA IN (31,93)
+       WHERE ra.CDCLIENTE IN (173,174,197,198,199,200,201,202,203,207,383,884,941,957,1003,1625,3563,3666,5017)
            AND aa.CDUSUARIO NOT IN ('PORTALCLIENTE', 'AUTOMATIZACAO_PORTAL')
            AND (aa.DEATIVIDADE IS NOT NULL or aa.DERESPOSTA IS NOT NULL)
         """

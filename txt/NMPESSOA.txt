@@ -27314,11 +27314,8 @@ brijeiro
 brijida
 briker
 briles
-brilha
 brilhador
 brilhadori
-brilhante
-brilhantina
 brilharina
 brilho
 brilhografico
@@ -44953,9 +44950,6 @@ combusti
 combustive
 combustiveis
 combustiveisepp
-combustivel
-combustíveis
-combustível
 comceicao
 comceição
 comclima
@@ -46073,9 +46067,7 @@ contin
 contina
 contine
 continelli
-continental
 continentale
-continente
 continguiba
 continho
 contini
@@ -49207,7 +49199,6 @@ cummins
 cumonhon
 cumpian
 cumplido
-cumpri
 cunacia
 cunado
 cunali
@@ -56798,7 +56789,6 @@ dispilaria
 displasa
 displaza
 dispore
-dispositivos
 disposito
 disposti
 dispro
@@ -56840,7 +56830,6 @@ distrb
 distrbuidora
 distrde
 distretti
-distrito
 distrubuidora
 distruidora
 distrutti
@@ -61222,17 +61211,9 @@ educac
 educaca
 educaci
 educacio
-educaciona
-educacionai
-educacionais
-educacional
-educandario
-educar
 educare
 educat
 educateca
-educativa
-educativo
 educativos
 educaçao
 educação
@@ -64810,7 +64791,6 @@ equiptos
 equipts
 equiria
 equiteria
-equivalencia
 equizeto
 equizetto
 equpamentos
@@ -70349,7 +70329,6 @@ favorato
 favoratti
 favoratto
 favore
-favorecido
 favoret
 favoreti
 favoreto
@@ -72885,7 +72864,6 @@ flexas
 flexbeta
 flexdata
 flexima
-flexiveis
 flexmassa
 flexografica
 flexomega
@@ -74182,7 +74160,6 @@ fracalo
 fracalosse
 fracalossi
 fracalozzi
-fracao
 fracareli
 fracari
 fracaro
@@ -114293,7 +114270,6 @@ limousin
 limpadora
 limpajato
 limparelli
-limpas
 limpenha
 limpes
 limpesa
@@ -115429,11 +115405,7 @@ lobrito
 locaca
 locachevic
 locaco
-locacoes
-locado
 locadoera
-locador
-locadora
 locadra
 locaforca
 locailha
@@ -121987,9 +121959,7 @@ manufatureira
 manuli
 manuluva
 manunta
-manuntencao
 manupa
-manuseio
 manuss
 manussadjian
 manussakis
@@ -148377,7 +148347,6 @@ partian
 partic
 particelli
 particp
-partida
 partik
 partika
 partilha
@@ -150937,7 +150906,6 @@ perbonmi
 percapio
 percapta
 percario
-percebo
 percebon
 percebão
 percecepe
@@ -151163,11 +151131,8 @@ perezza
 perezzani
 perfec
 perfecson
-perfect
 perfecta
 perfeira
-perfeita
-perfeito
 perfekta
 perfektta
 perfeta
@@ -156272,7 +156237,6 @@ poulmann
 poulo
 poulous
 poulsen
-poupanca
 pourchet
 pourel
 pourrat
@@ -157496,14 +157460,8 @@ profissio
 profission
 profissiona
 profissionai
-profissionais
-profissional
 profissionaliz
-profissionalizados
-profissionalizante
-profissionalizantes
 profissiori
-profissões
 profita
 profito
 profitt

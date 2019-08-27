@@ -3,7 +3,7 @@ from avaliar import modelo
 import config
 import os.path
 
-ARQUIVO = "doc2vec"
+ARQUIVO = "doc2vec_" + config.cli
 
 
 class Doc2Vec(modelo.Base):

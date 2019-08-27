@@ -45,6 +45,9 @@
 --sobrinho
 --solidaria
 --teste
+--usuarionet
+--validador
+--suportesaj
 aaacosta
 aaalmeida
 aabarbosa
@@ -7678,7 +7681,6 @@ stwlossak
 subgcj
 subgctf
 suelen
-suportesaj
 supprec
 svagradin
 svdomingues
@@ -8003,7 +8005,6 @@ tzaramella
 tzpinto
 uasantos
 uribeiro
-usuarionet
 uteixeira
 uvisual
 vacamargo
@@ -8019,7 +8020,6 @@ valakake
 valberto
 valcresebarbosa
 valeite
-validador
 valterfarid
 valves
 vamachado

@@ -18,7 +18,7 @@ import pika
 MOST_COMMON = 500
 
 log = utils.get_logger('Importer')
-file_grams_pickle = 'grams.pickle'
+file_grams_pickle = 'grams.pickle_' + config.cli
 
 
 def executar(salt=None, item=None):
@@ -43,9 +43,9 @@ def atendimento(salt=None, item=None):
     es = Elasticsearch([config.elasticsearch])
 
     rabbit_conn = pika.BlockingConnection(pika.ConnectionParameters(config.rabbitmq))
-    rabbit_public = rabbit_conn.channel()
-    rabbit_public.queue_declare(queue=config.rabbitmq_import)
-    rabbit_public.queue_declare(queue=config.rabbitmq_validate)
+    # rabbit_public = rabbit_conn.channel()
+    # rabbit_public.queue_declare(queue=config.rabbitmq_import)
+    # rabbit_public.queue_declare(queue=config.rabbitmq_validate)
 
     nomes = {}
     users = {}
@@ -115,7 +115,7 @@ def atendimento(salt=None, item=None):
             'atendimento': row[0],
             'item': row[1],
             'original': original,
-            'texconnect_db2_linuxto': tratado,
+            'texto': tratado,
             'data': row[4],
             'timestamp': row[4] #datetime.now(),
         }
@@ -183,7 +183,7 @@ def replace_grams_pickle(text):
 
 
 def save_words(words, file_name):
-    file = 'txt/' + file_name
+    file = 'txt/' + config.cli + '_' + file_name
     if not os.path.isfile(file):
         text_file = open(file, "w")
         text_file.write(words)

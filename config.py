@@ -1,25 +1,27 @@
 import os
 import logging
 
-ultima_importacao = '2016-01-01'
-data_avaliacao = '2016-01-01'
+cli = "tj"
+
+ultima_importacao = '2017-01-01'
+data_avaliacao = '2017-01-01'
 quantidade = 3
 
 cassandra_host = '127.0.0.1'
 cassandra_KEYSPACE = 'keyspaceS4'
 
 elasticsearch = 'http://localhost:9200'
-elasticsearch_db = 's4'
-elasticsearch_search = 's4_search'
+elasticsearch_db = 's4' + cli
+elasticsearch_search = 's4_search' + cli
 elasticsearch_limit = 100
 
 rabbitmq = 'localhost'
-rabbitmq_import = 's4_import'
-rabbitmq_validate = 's4_validate'
+rabbitmq_import = 's4_import' + cli
+rabbitmq_validate = 's4_validate' + cli
 rabbitmq_limit = 100000
 
 postgres_host = os.environ.get("POSTGRE_URI", '127.0.0.1')
-postgres_db = 's4'
+postgres_db = 's4' + cli
 postgres_dbpostgres = 'postgres'
 postgres_user = 'postgres'
 postgres_pass = 'root'

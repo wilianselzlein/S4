@@ -1,51 +1,60 @@
-      <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-      <header>
-         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="{{ host }}">S⁴</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="{{ host }}">S⁴</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-               <ul class="navbar-nav mr-auto">
-                  <li class="nav-item">
-                     <a class="nav-link disabled" href="{{ host }}">Sugestão de Solução de Salts na Sustentação (beta)</a>
-                  </li>
-               </ul>
-               {% if avaliacao %}
-                  <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Avaliar outro atendimento">
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="{{ host }}">Sugestão de Solução de Salts na Sustentação (beta) -
+                        "{{ cli }}"</a>
+                </li>
+            </ul>
+            {% if avaliacao %}
+            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Avaliar outro atendimento">
                   <button class="btn btn-primary my-2 my-sm-0" type="button" onclick="ShowSpinner('formAval')">
                      <i class="fas fa-robot"></i>
                   </button>
                   </span>
-                  &nbsp;
-                  <form class="form-inline mt-2 mt-md-0" action="/kibana" data-step="2" data-intro="Aqui você pode localizar em todos os atendimentos de forma rápida textos da descrição dos atendimentos e atividades dos atendimentos.">
-                     <input class="form-control mr-sm-2" type="text" placeholder="busca de atendimentos" name="search" aria-label="Search" value="{{ search }}">
-                     <button class="btn btn-primary my-2 my-sm-0" type="submit">
-                        <i class="fas fa-search"></i>
-                     </button>
-                     &nbsp;
-                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
-                           title="Localize atendimentos por qualquer parte do texto.">
+            &nbsp;
+            <form class="form-inline mt-2 mt-md-0" action="/kibana" data-step="2"
+                  data-intro="Aqui você pode localizar em todos os atendimentos de forma rápida textos da descrição dos atendimentos e atividades dos atendimentos.">
+                <input class="form-control mr-sm-2" type="text" placeholder="busca de atendimentos" name="search"
+                       aria-label="Search" value="{{ search }}">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+                &nbsp;
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
+                      title="Localize atendimentos por qualquer parte do texto.">
                      <button class="btn btn-primary" style="pointer-events: none;" type="button" disabled>
                         <i class="fas fa-question"></i>
                      </button>
                      </span>
-                     &nbsp;
-                     <button class="btn btn-primary" type="button" onclick="javascript:introJs().start();" data-step="1" data-intro="Bem vindo ao S⁴! <br> Veja como utiliza-lo nos passos seguintes.">
-                        <i class="fas fa-info"></i>
-                     </button>
-                  </form>
-               {% endif %}
-               {% if search %}
-                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Voltar">
+                &nbsp;
+                <button class="btn btn-primary" type="button" onclick="javascript:introJs().start();" data-step="1"
+                        data-intro="Bem vindo ao S⁴! <br> Veja como utiliza-lo nos passos seguintes.">
+                    <i class="fas fa-info"></i>
+                </button>
+            </form>
+            {% endif %}
+            {% if search %}
+            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Voltar">
                      <button class="btn btn-primary my-2 my-sm-0" type="button" onclick="goBack()">
                         <i class="fas fa-arrow-left"></i>
                      </button>
                      </span>
-                     &nbsp;
-               {% endif %}
-            </div>
-         </nav>
-      </header>
+            &nbsp;
+            {% endif %}
+        </div>
+    </nav>
+</header>

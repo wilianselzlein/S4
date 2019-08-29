@@ -1,7 +1,7 @@
 import os
 import logging
 
-cli = "tj"
+cli = "pj"
 
 ultima_importacao = '2017-01-01'
 data_avaliacao = '2017-01-01'

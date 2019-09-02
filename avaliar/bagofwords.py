@@ -2,6 +2,7 @@ from avaliar import modelo
 import nltk
 import numpy as np
 from sklearn.feature_extraction.text import TfidfTransformer
+import config
 
 ARQUIVO = "BagOfWords"
 
@@ -57,7 +58,7 @@ class BagOfWords(modelo.Base):
         print("Media {}, minimo {}, maximo {}".format(vetorVocab.mean(), vetorVocab.min(), vetorVocab.max()))
         print(type(vetores))
         print(type(vetores.values()))
-        print(vetores['315731/1  '])
+        print(vetores['315731/1'])
         transformer = TfidfTransformer()
 
         matrizVetores = np.asarray(list(vetores.values()), dtype=np.int16)
@@ -74,7 +75,7 @@ class BagOfWords(modelo.Base):
         score = 0
 
         if len(texto) > 0:
-            matrizPontos, explica = self.pontuaVetores_tfidf(texto[0][2], vocab, vetores, vetorVocab)
+            matrizPontos, explica = self.pontuaVetores_tfidf(texto[0][config.campo], vocab, vetores, vetorVocab)
             # print(explica)
             ind = 1
             if (ind > matrizPontos.shape[1]):
@@ -102,7 +103,7 @@ class BagOfWords(modelo.Base):
         listaresumo = []
         for atendimento in atendimentos:
             codigo = str(atendimento[0]) + '/' + str(atendimento[1])
-            descricao = str(atendimento[2])
+            descricao = str(atendimento[config.campo])
             listaresumo.append(" ".join([codigo, " ", descricao]))
 
         return listaresumo

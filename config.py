@@ -5,7 +5,8 @@ cli = "pj"
 
 ultima_importacao = '2017-01-01'
 data_avaliacao = '2017-01-01'
-quantidade = 3
+quantidade = 3 # Retorno de atendimentos por modelo
+campo = 3 # 2 texto tratado 3 stemming
 
 cassandra_host = '127.0.0.1'
 cassandra_KEYSPACE = 'keyspaceS4'

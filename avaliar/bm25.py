@@ -1,7 +1,7 @@
 from avaliar.bm25class.parse import *
 from avaliar.bm25class.query import QueryProcessor
 import operator
-
+import config
 from avaliar import modelo
 
 # import os.path
@@ -16,7 +16,7 @@ class Bm25(modelo.Base):
         # qp = QueryParser(filename='E:\\OneDrive\\OneDrive - Softplan\\Python\\BM25-master\\text\\queries.txt')
         # qp.parse()
         # queries = qp.get_queries()
-        queries = [texto[0][2].split()]
+        queries = [texto[0][config.campo].split()]
         # print(queries)
 
         #cp = CorpusParser(filename='E:\\OneDrive\\OneDrive - Softplan\\Python\\BM25-master\\text\\corpus.txt')
@@ -31,7 +31,7 @@ class Bm25(modelo.Base):
         for atendimento in atendimentos:
             codigo = str(atendimento[0]) + '/' + str(atendimento[1])
             #print(codigo)
-            descricao = str(atendimento[2]).split()
+            descricao = str(atendimento[config.campo]).split()
             #print(descricao)
             #print("--------")
             corpus[codigo] = descricao

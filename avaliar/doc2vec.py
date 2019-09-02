@@ -2,8 +2,9 @@ import gensim
 from avaliar import modelo
 import config
 import os.path
+import config
 
-ARQUIVO = "doc2vec_" + config.cli
+ARQUIVO = "doc2vec_" + config.cli + "_" + str(config.campo)
 
 
 class Doc2Vec(modelo.Base):
@@ -37,7 +38,7 @@ class Doc2Vec(modelo.Base):
         for atendimento in atendimentos:
             # print('\r', '\t', i, len(atendimentos), end='')
             i += 1
-            line = atendimento[2]
+            line = atendimento[config.campo]
             if tokens_only:
                 yield gensim.utils.simple_preprocess(line)
             else:

@@ -1,6 +1,6 @@
 from nltk.corpus import brown, stopwords
 from nltk.cluster.util import cosine_distance
-
+import config
 from avaliar import modelo
 
 # import os.path
@@ -17,8 +17,8 @@ class CosineDistance(modelo.Base):
         r = 0
         for atendimento in atendimentos:
             codigo = str(atendimento[0]) + '/' + str(atendimento[1])
-            descricao = str(atendimento[2])
-            dic[codigo] = self.sentence_similarity(texto[0][2].split(), descricao.split())
+            descricao = str(atendimento[config.campo])
+            dic[codigo] = self.sentence_similarity(texto[0][config.campo].split(), descricao.split())
 
         score = 0
         salt = 0

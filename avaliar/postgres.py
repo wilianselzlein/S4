@@ -9,7 +9,7 @@ class Postgres(PostgresBase.Base):
 
     @staticmethod
     def atendimento(self, sac, item):
-        sql = "  select atendimento, item, texto, original "
+        sql = "  select atendimento, item, texto, stemming, original "
         sql += " from sac "
         sql += " where atendimento = " + str(sac)
         sql += " and item = " + str(item) + ";"
@@ -18,7 +18,7 @@ class Postgres(PostgresBase.Base):
 
     @staticmethod
     def atendimentos(self, sac, item):
-        sql = "  select s.atendimento, s.item, s.texto "
+        sql = "  select s.atendimento, s.item, s.texto, s.stemming "
         sql += " from sac s"
         sql += " where s.atendimento||'-'||s.item <> '" + str(sac) + "-" + str(item) + "'"
         sql += " and s.atendimento||'-'||s.item not in ("

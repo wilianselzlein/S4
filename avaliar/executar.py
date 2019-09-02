@@ -91,7 +91,7 @@ def portal(salt):
     if len(texto) == 0:
         return [], {}, {}, {}, texto
 
-    texto = texto[0][3]
+    texto = texto[0][4]
     relacionados = postgres.resultados(postgres, atendimento, item)
     for relacionado in relacionados:
 

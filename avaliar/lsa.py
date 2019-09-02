@@ -27,7 +27,7 @@ class Lsa(modelo.Base):
         example = []
         salts = []
         for atendimento in atendimentos:
-            example.append(atendimento[2])
+            example.append(atendimento[config.campo])
             salts.append(str(atendimento[0]) + '/' + str(atendimento[1]))
 
         vectorizer = CountVectorizer(min_df=5, ngram_range=(1, 3), stop_words=stopwords.words("portuguese"))
@@ -42,7 +42,7 @@ class Lsa(modelo.Base):
 
         dtm_lsa = Normalizer(copy=False).fit_transform(dtm_lsa)
 
-        example2 = [texto[0][2]]
+        example2 = [texto[0][config.campo]]
 
         dtm = vectorizer.transform(example2)
 

@@ -1,7 +1,7 @@
 import argparse
 import time
 import config
-import importar, avaliar, portal, fila
+import importar, avaliar, portal, fila, server
 from utils import utils
 # import warnings
 
@@ -13,6 +13,7 @@ parser.add_argument('--importar', help='Importar dados SAC DB2 - ' + config.ulti
 parser.add_argument('--salt', help='Salt para avaliar no formato 000000/0', default='', type=str)
 parser.add_argument('--portal', help='Ativa portal Ex: http://127.0.0.1:5000/salt/000000/0', action='store_true')
 parser.add_argument('--fila', help='(I)mportar ou (A)valiar', default='', type=str)
+parser.add_argument('--server', help='Iniciar servidor', action='store_true')
 
 log = utils.get_logger('main')
 
@@ -31,5 +32,8 @@ if __name__ == '__main__':
 
     if args_.fila is not '':
         fila.executar(args_.fila)
+
+    if args_.server:
+        server.executar()
 
     time.sleep(1)

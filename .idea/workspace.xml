@@ -420,7 +420,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567441720196</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Remove results duplicates">
+      <created>1567442946338</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1567442946338</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -447,7 +454,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Remover usuarios e nomes dos usuarios" />
     <MESSAGE value="Melhoria texto" />
     <MESSAGE value="Correcoes Doc2Vec" />
     <MESSAGE value="Limite de resultados." />
@@ -472,7 +478,8 @@
     <MESSAGE value="Sigla Cliente" />
     <MESSAGE value="Sigla Cliente + Beauty" />
     <MESSAGE value="configuracao Stemming or Text" />
-    <option name="LAST_COMMIT_MESSAGE" value="configuracao Stemming or Text" />
+    <MESSAGE value="Remove results duplicates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove results duplicates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

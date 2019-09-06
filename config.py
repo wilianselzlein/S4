@@ -8,6 +8,9 @@ data_avaliacao = '2017-01-01'
 quantidade = 3 # Retorno de atendimentos por modelo
 campo = 3 # 2 texto tratado 3 stemming
 
+server_port = 8081
+server_host = '0.0.0.0'
+
 cassandra_host = '127.0.0.1'
 cassandra_KEYSPACE = 'keyspaceS4'
 

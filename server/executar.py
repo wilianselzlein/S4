@@ -77,6 +77,10 @@ async def health(request):
     return web.json_response({'status': 'ok'})
 
 
+async def start(request):
+    return web.Response(text='S⁴ Sugestão de Solução de Salts na Sustentação')
+
+
 async def index(request):
     log.info('Index')
     postgres = Postgres()
@@ -104,9 +108,10 @@ def executar():
 
     app.add_routes([
         web.get('/health', health),
+        web.get('/', start),
         web.get('/index', index), 
         web.post('/avaliar', avaliar)])
 
     for route in list(app.router.routes()):
         cors.add(route)
-    web.run_app(app)
+    web.run_app(app, host=config.server_host, port=config.server_port)

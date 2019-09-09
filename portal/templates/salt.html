@@ -81,8 +81,8 @@
                                        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Marcar como uma ótima avaliação/ajuda">
                                           <button id="curtir{{ relacionado[1] }}{{ relacionado[2] }}" type="button" class="btn btn-sm btn-outline-secondary"
                                                 onclick="javascript:curtir('#curtir{{ relacionado[1] }}{{ relacionado[2] }}','#star{{ relacionado[1] }}{{ relacionado[2] }}',
-                                                '{{ salt }}', '{{ item }}', '{{ relacionado[0] }}',
-                                                '{{ relacionado[1] }}','{{ relacionado[2] }}');">
+                                                '{{ salt }}', '{{ item }}', 
+                                                '{{ relacionado[1] }}', '{{ relacionado[2] }}');">
                                              <i class="far fa-star"></i>
                                              <!-- <a href="{{ url_for('like', salt=salt, item=item, algoritmo=relacionado[0], relacionado=relacionado[1], relacionadoitem=relacionado[2])}}">
                                                 <img src="{{url_for('static', filename='like.jpg')}}" alt="Ajudou" height="24" width="24"/>
@@ -169,14 +169,13 @@
             </div>
          </div>
           <script>
-              function curtir(element, star, _atendimento, _item, _algoritmo, _relacionado, _relacionadoitem) {
+              function curtir(element, star, _atendimento, _item, _relacionado, _relacionadoitem) {
                   $(element).html('<div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div>');
                   // alert($(sourceElem).text());
                   $.post('/curtir', {
                       // text: $(sourceElem).text()
                       salt: _atendimento,
                       item: _item,
-                      algoritmo: _algoritmo,
                       relacionado: _relacionado,
                       relacionadoitem: _relacionadoitem
                   }).done(function(response) {

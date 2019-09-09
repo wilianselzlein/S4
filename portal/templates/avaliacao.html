@@ -12,9 +12,9 @@
 	    {% include 'messages.html' %}
 	  		<form action="/redirect">
 				Atendimento:<br>
-				<input type="text" name="salt" value="000000"><br>
+				<input type="text" name="salt" value="000000" required><br>
 				Item:<br>
-				<input type="text" name="item" value="0"><br><br>
+				<input type="text" name="item" value="0" required><br><br>
 				<button class="btn btn-lg btn-primary" type="submit" onclick="ShowSpinner('spinner')">
 			        <i class="fas fa-robot"></i>
 			      </button>

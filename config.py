@@ -10,6 +10,7 @@ campo = 3 # 2 texto tratado 3 stemming
 
 server_port = 8081
 server_host = '0.0.0.0'
+server_url = 'http://' + server_host + ':' + str(server_port)
 
 cassandra_host = '127.0.0.1'
 cassandra_KEYSPACE = 'keyspaceS4'

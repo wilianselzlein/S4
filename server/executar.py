@@ -1,10 +1,11 @@
+# coding: latin-1
 import avaliar
 import config
 from utils import utils
 from aiohttp import web
 import aiohttp_cors
 import traceback
-from portal.postgres import Postgres
+from server.postgres import Postgres
 
 log = utils.get_logger('Server')
 
@@ -15,6 +16,11 @@ prefix = f'/api/v1.0'
 class APIException(Exception):
     pass
 
+def get_key(name, data):
+    if name in data:
+        return data[name]
+    else:
+        raise APIException(f'Campo "{name}" não fornecido.')
 
 async def wraps_exception(app, handler):
     async def middleware_handler(request):
@@ -34,18 +40,29 @@ async def wraps_exception(app, handler):
     return middleware_handler
 
 
+async def avaliacao(request):
+    log.info('avaliacao')
+    data = await request.json()
+    log.info(f'Request data: {data}')
+
+    atendimento = get_key('atendimento', data)
+    item = get_key('item', data)
+    # algoritmo = get_key('algoritmo', data)
+    relacionado = get_key('relacionado', data)
+    relacionadoitem = get_key('relacionadoitem', data)
+    valor = get_key('valor', data)
+
+    postgres = Postgres()
+    postgres.avaliacao(postgres, atendimento, item, relacionado, relacionadoitem, valor)
+    return web.json_response({'status': 'ok'})
+
+
 async def avaliar(request):
     data = await request.json()
     log.info(f'Request data: {data}')
 
-    def get_key(name):
-        if name in data:
-            return data[name]
-        else:
-            raise APIException(f'Campo "{name}" não fornecido.')
-
-    atendimento = get_key('atendimento')
-    item = get_key('item')
+    atendimento = get_key('atendimento', data)
+    item = get_key('item', data)
     
     # should_queries = [qb(s).json() for s in should]
 
@@ -82,7 +99,7 @@ async def start(request):
 
 
 async def index(request):
-    log.info('Index')
+    log.info('index')
     postgres = Postgres()
     sugeridos = postgres.metricas(postgres, "count(relacionado)")
     avaliados = postgres.metricas(postgres, "count(distinct atendimento)")
@@ -107,9 +124,10 @@ def executar():
     })
 
     app.add_routes([
-        web.get('/health', health),
-        web.get('/', start),
+        web.post('/health', health),
+        web.post('/', start),
         web.get('/index', index), 
+        web.post('/avaliacao', avaliacao), 
         web.post('/avaliar', avaliar)])
 
     for route in list(app.router.routes()):

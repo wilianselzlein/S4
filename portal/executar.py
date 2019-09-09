@@ -1,11 +1,14 @@
 import avaliar
 from flask import Flask, render_template, request, flash
-from portal.postgres import Postgres
 import urllib.parse
 from elasticsearch import Elasticsearch
 import config
 from utils import Texto
 from datetime import datetime
+import aiohttp
+import requests
+from requests.exceptions import HTTPError
+import json
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = 'you-will-never-guess-s4'
@@ -18,7 +21,7 @@ DISLIKE = False
 #     app.run()
 
 def executar():
-    app.run(host="0.0.0.0")
+    app.run(host=config.server_host)
 
 
 def _host():
@@ -29,12 +32,31 @@ def _cli():
     return config.cli.upper()
 
 
+def request_server(method, payload = {}):
+    url = config.server_url + "/" + method
+    try:
+        if payload == {}:
+            response = requests.get(url)
+        else:
+            response = requests.post(url, data=json.dumps(payload))
+    except HTTPError as http_err:
+        print(f'HTTP error occurred: {http_err}')  # Python 3.6
+    except Exception as err:
+        print(f'Other error occurred: {err}')  # Python 3.6
+
+    # print('response.status_code', response.status_code)
+    # print('response.text', response.text)
+    response = json.loads(response.text)
+    # print('response', response)
+    return response
+
+
 @app.route('/')
 def home():
-    # return "S4"
-    postgres = Postgres()
-    sugeridos = postgres.metricas(postgres, "count(relacionado)")
-    avaliados = postgres.metricas(postgres, "count(distinct atendimento)")
+    response = request_server('index')
+    sugeridos = response['sugeridos']
+    avaliados = response['avaliados']
+
     return render_template('index.html', host=_host(), avaliados=avaliados, sugeridos=sugeridos)
 
 
@@ -50,23 +72,29 @@ def redirect():
     return avaliar_render(salt, item)
 
 
-@app.route('/like/<salt>/<item>/<algoritmo>/<relacionado>/<relacionadoitem>')
-def like(salt, item, algoritmo, relacionado, relacionadoitem):
-    avaliacao(salt, item, algoritmo, relacionado, relacionadoitem, LIKE)
+@app.route('/like/<salt>/<item>/<relacionado>/<relacionadoitem>')
+def like(salt, item, relacionado, relacionadoitem):
+    avaliacao(salt, item, relacionado, relacionadoitem, LIKE)
     # return redirect(url_for('salt', salt=salt, item=item))
     return avaliar_render(salt, item)
 
 
-@app.route('/dislike/<salt>/<item>/<algoritmo>/<relacionado>/<relacionadoitem>')
-def dislike(salt, item, algoritmo, relacionado, relacionadoitem):
-    avaliacao(salt, item, algoritmo, relacionado, relacionadoitem, DISLIKE)
+@app.route('/dislike/<salt>/<item>/<relacionado>/<relacionadoitem>')
+def dislike(salt, item, relacionado, relacionadoitem):
+    avaliacao(salt, item, relacionado, relacionadoitem, DISLIKE)
     # return redirect(url_for('salt', salt=salt, item=item))
     return avaliar_render(salt, item)
 
 
-def avaliacao(salt, item, algoritmo, relacionado, relacionadoitem, valor):
-    postgres = Postgres()
-    postgres.avaliacao(postgres, salt, item, algoritmo, relacionado, relacionadoitem, valor)
+def avaliacao(atendimento, item, relacionado, relacionadoitem, valor):
+    payload = {}
+    payload["atendimento"] = atendimento
+    payload["item"] = item
+    payload["relacionado"] = relacionado
+    payload["relacionadoitem"] = relacionadoitem
+    payload["valor"] = valor    
+    
+    response = request_server('avaliacao', payload)
 
 
 def avaliar_render(salt, item):
@@ -238,6 +266,5 @@ def kibana():
 
 @app.route('/curtir', methods=['POST'])
 def curtir():
-    avaliacao(request.form['salt'], request.form['item'], request.form['algoritmo'], request.form['relacionado'],
-              request.form['relacionadoitem'], LIKE)
+    avaliacao(request.form['salt'], request.form['item'], request.form['relacionado'], request.form['relacionadoitem'], LIKE)
     return str(LIKE)

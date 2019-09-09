@@ -5,11 +5,11 @@ class Postgres(PostgresBase.Base):
 
 
     @staticmethod
-    def avaliacao(self, atendimento, item, algoritmo, relacionado, relacionadoitem, valor):
+    def avaliacao(self, atendimento, item, relacionado, relacionadoitem, valor):
         sql = f" update resultados set util = {valor}"
         sql += " where atendimento = " + str(atendimento)
         sql += " and item = " + str(item)
-        sql += " and algoritmo = '" + algoritmo + "'"
+        # sql += " and algoritmo = '" + algoritmo + "'"
         sql += " and relacionado = " + str(relacionado)
         sql += " and relacionadoitem = " + str(relacionadoitem)
 

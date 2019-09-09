@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="" />
+    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/executar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/postgres.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/postgres.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/templates/avaliacao.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/avaliacao.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/templates/salt.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/salt.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/executar.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.__main__ --fila I">
+  <component name="RunManager" selected="Python.__main__ --portal">
     <configuration name="__main__ --fila A" type="PythonConfigurationType" factoryName="Python">
       <module name="S4" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -151,6 +160,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="__main__ --server" type="PythonConfigurationType" factoryName="Python">
+      <module name="S4" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/__main__.py" />
+      <option name="PARAMETERS" value="--server" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="S4" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -174,6 +204,7 @@
     </configuration>
     <list>
       <item itemvalue="Python.__main__ --importar" />
+      <item itemvalue="Python.__main__ --server" />
       <item itemvalue="Python.__main__ --portal" />
       <item itemvalue="Python.__main__ --fila A" />
       <item itemvalue="Python.__main__ --fila I" />
@@ -434,7 +465,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567627745646</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="config server aiohttp">
+      <created>1567770370695</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1567770370695</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -461,7 +499,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Correcoes Doc2Vec" />
     <MESSAGE value="Limite de resultados." />
     <MESSAGE value="Correcao BM25" />
     <MESSAGE value="Melhorias layout" />
@@ -486,7 +523,8 @@
     <MESSAGE value="configuracao Stemming or Text" />
     <MESSAGE value="Remove results duplicates" />
     <MESSAGE value="aiohttp" />
-    <option name="LAST_COMMIT_MESSAGE" value="aiohttp" />
+    <MESSAGE value="config server aiohttp" />
+    <option name="LAST_COMMIT_MESSAGE" value="config server aiohttp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -528,7 +566,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/portal/executar.py</url>
-          <line>192</line>
+          <line>228</line>
           <option name="timeStamp" value="95" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -551,6 +589,16 @@
           <line>228</line>
           <option name="timeStamp" value="106" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/server/executar.py</url>
+          <line>43</line>
+          <option name="timeStamp" value="108" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/portal/executar.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="109" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -560,5 +608,10 @@
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="request" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

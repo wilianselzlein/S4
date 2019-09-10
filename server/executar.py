@@ -1,5 +1,5 @@
 # coding: latin-1
-import avaliar
+import avaliar as _avaliar
 import config
 from utils import utils
 from aiohttp import web
@@ -8,15 +8,25 @@ import traceback
 from server.postgres import Postgres
 from elasticsearch import Elasticsearch
 from datetime import datetime 
+import json
+from decimal import Decimal
+
 
 log = utils.get_logger('Server')
-
 
 prefix = f'/api/v1.0'
 
 
+class DecimalEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Decimal):
+            return float(obj)
+        return json.JSONEncoder.default(self, obj)
+
+
 class APIException(Exception):
     pass
+
 
 def get_key(name, data):
     if name in data:
@@ -63,9 +73,12 @@ async def avaliar(request):
     data = await request.json()
     log.info(f'Request data: {data}')
 
-    atendimento = get_key('atendimento', data)
-    item = get_key('item', data)
-    
+    atendimento = str(get_key('atendimento', data))
+    item = str(get_key('item', data))
+
+    _avaliar.executar(atendimento + '/' + item)
+    relacionados, severidades, tempos, pessoas, texto = _avaliar.portal(atendimento + '/' + item)
+
     # should_queries = [qb(s).json() for s in should]
 
     # log.info('Generating DSL query')
@@ -82,11 +95,11 @@ async def avaliar(request):
     #     "size": 10000
     # }
     dsl = {
-            "relacionados": [],
-            "sever": [],
-            "tempo": [],
-            "pessoas": [],
-            "texto": ""
+            "relacionados": json.dumps(list(relacionados), cls=DecimalEncoder),
+            "severidades": list(severidades),
+            "tempos": list(tempos),
+            "pessoas": list(pessoas), #json.dumps(
+            "texto": texto
     }
 
     return web.json_response(dsl)

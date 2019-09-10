@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="" />
+    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="Remove search elastic access by flask">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -470,7 +472,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568054046255</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Remove search elastic access by flask">
+      <created>1568082319865</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1568082319865</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -497,7 +506,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Correcao BM25" />
     <MESSAGE value="Melhorias layout" />
     <MESSAGE value="Includes layout" />
     <MESSAGE value="FontAwesome" />
@@ -522,7 +530,8 @@
     <MESSAGE value="aiohttp" />
     <MESSAGE value="config server aiohttp" />
     <MESSAGE value="Remove postgres access by flask" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove postgres access by flask" />
+    <MESSAGE value="Remove search elastic access by flask" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove search elastic access by flask" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -563,11 +572,6 @@
           <option name="timeStamp" value="94" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/portal/executar.py</url>
-          <line>228</line>
-          <option name="timeStamp" value="95" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fila/executar.py</url>
           <line>21</line>
           <option name="timeStamp" value="97" />
@@ -589,7 +593,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server/executar.py</url>
-          <line>43</line>
+          <line>45</line>
           <option name="timeStamp" value="108" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

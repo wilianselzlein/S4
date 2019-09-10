@@ -1,4 +1,3 @@
-import avaliar
 from flask import Flask, render_template, request, flash
 # import urllib.parse
 import config
@@ -99,8 +98,20 @@ def avaliar_render(salt, item):
         flash('Atendimento inválido.')
         return home() 
     else:
-        avaliar.executar(salt + '/' + item)
-        relacionados, severidades, tempos, pessoas, texto = avaliar.portal(salt + '/' + item)
+        # avaliar.executar(salt + '/' + item)
+        # relacionados, severidades, tempos, pessoas, texto = avaliar.portal(salt + '/' + item)
+        payload = {}
+        payload["atendimento"] = salt
+        payload["item"] = item
+        
+        response = request_server('avaliar', payload)
+
+        relacionados = json.loads(response['relacionados'])
+        severidades = response['severidades']
+        tempos = response['tempos']
+        pessoas = response['pessoas']
+        texto = response['texto']
+
         if len(relacionados) == 0:
             flash('Atendimento inválido ou ainda não importado.')
             return home() 
@@ -119,14 +130,13 @@ def kibana():
     # texto = Texto()
     search = request.args.get('search')
     # search = texto.kibana(texto, search)
-    search = search.replace("+", "" )
+    search = search.replace("+", " ")
     # search = urllib.parse.quote_plus(search)
     search = '"' + search + '"'
     payload = {}
     payload["search"] = search
 
     cards = request_server('searchs', payload)
-    # print ("cards", cards["search"])
 
     search = search.replace("\"", "")
     buscas = request_server('buscas')

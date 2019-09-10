@@ -6,6 +6,8 @@ from aiohttp import web
 import aiohttp_cors
 import traceback
 from server.postgres import Postgres
+from elasticsearch import Elasticsearch
+from datetime import datetime 
 
 log = utils.get_logger('Server')
 
@@ -112,6 +114,158 @@ async def index(request):
     return web.json_response(dsl)
 
 
+async def buscas(request):
+    log.info('buscas')
+
+    es = Elasticsearch([config.elasticsearch])
+    ultimas = []
+    ultimas = es.search(index=config.elasticsearch_search,
+                        body={
+                            "size": 100,
+                            "sort": [
+                                {
+                                    "timestamp": {
+                                        "order": "desc",
+                                        "unmapped_type": "boolean"
+                                    }
+                                }
+                            ],
+                            "query": {
+                                "match_all": {
+                                }
+                            }
+                        }
+                        )
+
+    results = []
+    # results['hits']['hits'][0]['_source']
+    for ultima in ultimas['hits']['hits']:
+        results.append(ultima['_source']['search'].replace("\"", ""))
+
+    results = set(results)
+    results = list(results)
+    result = {"buscas": results}
+
+    return web.json_response(results)
+
+
+async def searchs(request):
+    # url = "http://" + request.remote_addr + ":5601/app/kibana#/discover?_g=(refreshInterval:(pause:!t,value:0)," \
+    #       "time:(from:now-5y,to:now))&_a=(columns:!(_source),index:'84c9b230-af0c-11e9-9a9a-eb64683ee0d2'," \
+    #       "interval:auto,query:(language:kuery,query:'" + search + "'),sort:!(data,desc))"
+
+    data = await request.json()
+    log.info(f'Request data: {data}')
+    search = get_key('search', data)
+
+    es = Elasticsearch([config.elasticsearch])
+    doc = {
+        'search': search,
+        'timestamp': datetime.now()
+    }
+    es.index(index=config.elasticsearch_search, body=doc)
+    es.indices.refresh(index=config.elasticsearch_search)
+
+    results = es.search(index=config.elasticsearch_db,
+                        body={
+                            "version": True,
+                            "size": config.elasticsearch_limit,
+                            "sort": [
+                                {
+                                    "data": {
+                                        "order": "desc",
+                                        "unmapped_type": "boolean"
+                                    }
+                                }
+                            ],
+                            # "aggs": {
+                            #   "2": {
+                            #     "date_histogram": {
+                            #       "field": "data",
+                            #       "interval": "30d",
+                            #       "time_zone": "America/Sao_Paulo",
+                            #       "min_doc_count": 1
+                            #     }
+                            #   }
+                            # },
+                            # "stored_fields": [
+                            #   "*"
+                            # ],
+                            # "script_fields": {},
+                            # "docvalue_fields": [
+                            #   {
+                            #     "field": "data",
+                            #     "format": "date_time"
+                            #   },
+                            #   {
+                            #     "field": "timestamp",
+                            #     "format": "date_time"
+                            #   }
+                            # ],
+                            "query": {
+                                "bool": {
+                                    "must": [
+                                        {
+                                            "query_string": {
+                                                "query": search + '~4',
+                                                "analyze_wildcard": True,
+                                                "time_zone": "America/Sao_Paulo",
+                                                "fields": ["original"]
+                                            }
+                                        }
+                                        # {
+                                        #   "range": {
+                                        #     "data": {
+                                        #       "format": "strict_date_optional_time",
+                                        #       "gte": "2014-08-14T12:50:45.763Z",
+                                        #       "lte": "2019-08-14T12:50:45.763Z"
+                                        #     }
+                                        #   }
+                                        # }
+                                    ],
+                                    "filter": [],
+                                    "should": [],
+                                    "must_not": []
+                                }
+                            },
+                            "highlight": {
+                                "pre_tags": [
+                                    "<kbd>"
+                                ],
+                                "post_tags": [
+                                    "</kbd>"
+                                ],
+                                "fields": {
+                                    "original": {}
+                                },
+                                "fragment_size": 2147483647
+                            }
+                        })
+
+    cards = []
+    # results['hits']['hits'][0]['_source']
+    for result in results['hits']['hits']:
+        card = {}
+        card['atendimento'] = int(result['_source']['atendimento'])
+        try:
+            card['item'] = int(result['_source']['item'])
+            card['label'] = str(int(result['_source']['atendimento'])) + '/' + str(int(card['item']))
+        except:
+            card['item'] = int(result['_source']['item'].split('/')[0])
+            card['label'] = str(int(result['_source']['atendimento'])) + '/' + str(result['_source']['item'])
+
+        if 'highlight' in result:
+            card['original'] = result['highlight']['original'][0]
+        else:
+            card['original'] = result['_source']['original']
+
+        cards.append(card)
+
+    results = {"search": cards}
+
+    return web.json_response(results)
+
+
 def executar():
     app = web.Application(logger=log, middlewares=[wraps_exception])
 
@@ -124,9 +278,11 @@ def executar():
     })
 
     app.add_routes([
+        web.get('/index', index), 
+        web.get('/buscas', buscas), 
+        web.post('/searchs', searchs), 
         web.post('/health', health),
         web.post('/', start),
-        web.get('/index', index), 
         web.post('/avaliacao', avaliacao), 
         web.post('/avaliar', avaliar)])
 

@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/executar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/postgres.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/postgres.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/avaliacao.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/avaliacao.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/salt.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/salt.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/executar.py" afterDir="false" />
-    </list>
+    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -472,7 +463,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567770370695</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Remove postgres access by flask">
+      <created>1568054046255</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1568054046255</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -499,7 +497,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Limite de resultados." />
     <MESSAGE value="Correcao BM25" />
     <MESSAGE value="Melhorias layout" />
     <MESSAGE value="Includes layout" />
@@ -524,7 +521,8 @@
     <MESSAGE value="Remove results duplicates" />
     <MESSAGE value="aiohttp" />
     <MESSAGE value="config server aiohttp" />
-    <option name="LAST_COMMIT_MESSAGE" value="config server aiohttp" />
+    <MESSAGE value="Remove postgres access by flask" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove postgres access by flask" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

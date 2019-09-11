@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request, flash
-# import urllib.parse
 import config
-import aiohttp
 import requests
 from requests.exceptions import HTTPError
 import json

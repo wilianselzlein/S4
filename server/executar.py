@@ -3,6 +3,7 @@ import avaliar as _avaliar
 import config
 from utils import utils
 from aiohttp import web
+from aiohttp_swagger import *
 import aiohttp_cors
 import traceback
 from server.postgres import Postgres
@@ -70,6 +71,32 @@ async def avaliacao(request):
 
 
 async def avaliar(request):
+    """
+    ---
+    description: This end-point return result about avaliation of "issues"
+    tags:
+    - avaliar
+    produces:
+    - text/plain
+    parameters:
+    - in: query
+      description: number of atendimento
+      name: atendimento
+      required: true
+      type: integer
+      format: int32
+    - in: query
+      description: number of item of atendimento
+      name: item
+      required: true
+      type: integer
+      format: int32
+    responses:
+        "200":
+            description: successful operation. Return atendimentos parecidos.
+        "405":
+            description: invalid HTTP Method
+    """
     data = await request.json()
     log.info(f'Request data: {data}')
 
@@ -79,21 +106,6 @@ async def avaliar(request):
     _avaliar.executar(atendimento + '/' + item)
     relacionados, severidades, tempos, pessoas, texto = _avaliar.portal(atendimento + '/' + item)
 
-    # should_queries = [qb(s).json() for s in should]
-
-    # log.info('Generating DSL query')
-    # dsl = {
-    #     "from": 0,
-    #     "_source": "cnj",
-    #     "query": {
-    #         "bool": {
-    #             "must": must_queries,
-    #             "must_no": must_not_queries,
-    #             "should": should_queries
-    #         }
-    #     },
-    #     "size": 10000
-    # }
     dsl = {
             "relacionados": json.dumps(list(relacionados), cls=DecimalEncoder),
             "severidades": list(severidades),
@@ -105,15 +117,54 @@ async def avaliar(request):
     return web.json_response(dsl)
 
 async def health(request):
+    """
+    ---
+    description: This end-point allow to test that service is up.
+    tags:
+    - Health check
+    produces:
+    - text/plain
+    responses:
+        "200":
+            description: successful operation. Return "ok" text
+        "405":
+            description: invalid HTTP Method
+    """
     log.info('Health check')
     return web.json_response({'status': 'ok'})
 
 
 async def start(request):
+    """
+    ---
+    description: This end-point start service
+    tags:
+    - Start
+    produces:
+    - text/plain
+    responses:
+        "200":
+            description: successful operation. Return the aplicattion name
+        "405":
+            description: invalid HTTP Method
+    """
     return web.Response(text='S⁴ Sugestão de Solução de Salts na Sustentação')
 
 
 async def index(request):
+    """
+    ---
+    description: This end-point return informations about the service
+    tags:
+    - index
+    produces:
+    - text/plain
+    responses:
+        "200":
+            description: successful operation. Return "sugeridos" and number and "avaliados" and number
+        "405":
+            description: invalid HTTP Method
+    """
     log.info('index')
     postgres = Postgres()
     sugeridos = postgres.metricas(postgres, "count(relacionado)")
@@ -301,4 +352,7 @@ def executar():
 
     for route in list(app.router.routes()):
         cors.add(route)
+
+    setup_swagger(app, swagger_url="/api/v1/doc")
     web.run_app(app, host=config.server_host, port=config.server_port)
+

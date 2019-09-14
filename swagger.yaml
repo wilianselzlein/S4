@@ -1,0 +1,127 @@
+swagger: "2.0"
+info:
+  description: "This is a sample S⁴ server. Use a hashtag `#s4` in your e-tickes from SAC or SCCD."
+  version: "1.0.0"
+  title: "S⁴ - Sugestão de Solução de Salts na Sustentação"
+  contact:
+    email: "wilian.ivo@softplan.com.br"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "127.0.0.1:8081"
+basePath: "/v1"
+tags:
+- name: "server"
+  description: "Everything about server application"
+  externalDocs:
+    description: "Softplan"
+    url: "http://www.softplan.com.br"
+schemes:
+- "https"
+- "http"
+paths:
+  /server/avaliar:
+    post:
+      tags:
+      - "server"
+      summary: "Validate e-tickets"
+      description: "This end-point return result about avaliation of e-tickets"
+      operationId: "avaliar"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Number and item e-ticket "
+        required: true
+        schema:
+          type: "object"
+          properties:
+            atendimento:
+              type: "integer"
+              format: "int64"
+            item:
+              type: "string"
+              format: "int64"
+      responses:
+        405:
+          description: "Invalid input"
+        200:
+          description: "successful operation"
+  /server/health:
+    post:
+      tags:
+      - "server"
+      summary: "Check health"
+      description: "This end-point allow to test that service is up"
+      operationId: "health"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+  /server/start:
+    post:
+      tags:
+      - "server"
+      summary: "This end-point start service"
+      description: ""
+      operationId: "start"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+  /server/index:
+    post:
+      tags:
+      - "server"
+      summary: "This end-point index service"
+      description: ""
+      operationId: "index"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/index"
+
+definitions:
+  avaliar:
+    type: "object"
+    properties:
+      atendimento:
+        type: "integer"
+        format: "int64"
+      item:
+        type: "integer"
+        format: "int64"
+  health:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+  index:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+
+externalDocs:
+  description: "Softplan"
+  url: "http://www.softplan.com.br"

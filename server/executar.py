@@ -17,7 +17,6 @@ log = utils.get_logger('Server')
 
 prefix = f'/api/v1.0'
 
-
 class DecimalEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, Decimal):
@@ -71,32 +70,6 @@ async def avaliacao(request):
 
 
 async def avaliar(request):
-    """
-    ---
-    description: This end-point return result about avaliation of "issues"
-    tags:
-    - avaliar
-    produces:
-    - text/plain
-    parameters:
-    - in: query
-      description: number of atendimento
-      name: atendimento
-      required: true
-      type: integer
-      format: int32
-    - in: query
-      description: number of item of atendimento
-      name: item
-      required: true
-      type: integer
-      format: int32
-    responses:
-        "200":
-            description: successful operation. Return atendimentos parecidos.
-        "405":
-            description: invalid HTTP Method
-    """
     data = await request.json()
     log.info(f'Request data: {data}')
 
@@ -116,55 +89,17 @@ async def avaliar(request):
 
     return web.json_response(dsl)
 
+
 async def health(request):
-    """
-    ---
-    description: This end-point allow to test that service is up.
-    tags:
-    - Health check
-    produces:
-    - text/plain
-    responses:
-        "200":
-            description: successful operation. Return "ok" text
-        "405":
-            description: invalid HTTP Method
-    """
     log.info('Health check')
     return web.json_response({'status': 'ok'})
 
 
 async def start(request):
-    """
-    ---
-    description: This end-point start service
-    tags:
-    - Start
-    produces:
-    - text/plain
-    responses:
-        "200":
-            description: successful operation. Return the aplicattion name
-        "405":
-            description: invalid HTTP Method
-    """
     return web.Response(text='S⁴ Sugestão de Solução de Salts na Sustentação')
 
 
 async def index(request):
-    """
-    ---
-    description: This end-point return informations about the service
-    tags:
-    - index
-    produces:
-    - text/plain
-    responses:
-        "200":
-            description: successful operation. Return "sugeridos" and number and "avaliados" and number
-        "405":
-            description: invalid HTTP Method
-    """
     log.info('index')
     postgres = Postgres()
     sugeridos = postgres.metricas(postgres, "count(relacionado)")
@@ -346,13 +281,13 @@ def executar():
         web.get('/buscas', buscas), 
         web.post('/searchs', searchs), 
         web.post('/health', health),
-        web.post('/', start),
+        web.post('/v1/server/start', start),
         web.post('/avaliacao', avaliacao), 
         web.post('/avaliar', avaliar)])
 
     for route in list(app.router.routes()):
         cors.add(route)
 
-    setup_swagger(app, swagger_url="/api/v1/doc")
+    setup_swagger(app, swagger_url="/api/v1/doc", swagger_from_file="swagger.yaml")
     web.run_app(app, host=config.server_host, port=config.server_port)
 

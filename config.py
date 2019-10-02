@@ -3,7 +3,7 @@ import logging
 
 cli = "pj"
 
-ultima_importacao = '2017-01-01'
+ultima_importacao = '2019-09-01'
 data_avaliacao = '2017-01-01'
 quantidade = 3 # Retorno de atendimentos por modelo
 campo = 3 # 2 texto tratado 3 stemming
@@ -20,6 +20,7 @@ elasticsearch_db = 's4' + cli
 elasticsearch_search = 's4_search' + cli
 elasticsearch_limit = 100
 
+rabbitmq_use = False
 rabbitmq = 'localhost'
 rabbitmq_import = 's4_import' + cli
 rabbitmq_validate = 's4_validate' + cli
@@ -29,7 +30,7 @@ postgres_host = os.environ.get("POSTGRE_URI", '127.0.0.1')
 postgres_db = 's4' + cli
 postgres_dbpostgres = 'postgres'
 postgres_user = 'postgres'
-postgres_pass = 'root'
+postgres_pass = 'postgres'
 postgres_port = 5432
 
 dsn_driver = "IBM DB2 ODBC DRIVER"

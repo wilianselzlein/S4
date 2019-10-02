@@ -46,6 +46,14 @@ Após instalação e ativação de sua **env** execute o comando **make install*
 sudo apt-get install python-psycopg2
 sudo apt-get install libpq-dev
 pip3 install psycopg2
+
+sudo pip3 install --upgrade pip
+sudo pip3 install -U PyYAML OU sudo pip3 install --ignore-installed PyYAML
+
+python3 -m nltk.downloader stopwords
+python3 -m nltk.downloader punkt
+python3 -m nltk.downloader words
+
 $ make install
 ```
 A base de dados o própio app cria, bastando apenas ter um postgreSQL instalado.

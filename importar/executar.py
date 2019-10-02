@@ -42,10 +42,11 @@ def atendimento(salt=None, item=None):
     postgres = Postgres()
     es = Elasticsearch([config.elasticsearch])
 
-    rabbit_conn = pika.BlockingConnection(pika.ConnectionParameters(config.rabbitmq))
-    # rabbit_public = rabbit_conn.channel()
-    # rabbit_public.queue_declare(queue=config.rabbitmq_import)
-    # rabbit_public.queue_declare(queue=config.rabbitmq_validate)
+    if config.rabbitmq_use:
+        rabbit_conn = pika.BlockingConnection(pika.ConnectionParameters(config.rabbitmq))
+        # rabbit_public = rabbit_conn.channel()
+        # rabbit_public.queue_declare(queue=config.rabbitmq_import)
+        # rabbit_public.queue_declare(queue=config.rabbitmq_validate)
 
     nomes = {}
     users = {}
@@ -122,9 +123,10 @@ def atendimento(salt=None, item=None):
         es_id = str(row[0]) + '/' + str(row[1])
         es.index(index=config.elasticsearch_db, id=es_id, body=doc)
 
-        # if rabbit_conn.is_open:
-        #     rabbit_public.basic_publish(exchange='', routing_key=config.rabbitmq_import, body=es_id)
-        #     rabbit_public.basic_publish(exchange='', routing_key=config.rabbitmq_validate, body=es_id)
+        # if config.rabbitmq_use:
+            # if rabbit_conn.is_open:
+            #     rabbit_public.basic_publish(exchange='', routing_key=config.rabbitmq_import, body=es_id)
+            #     rabbit_public.basic_publish(exchange='', routing_key=config.rabbitmq_validate, body=es_id)
 
         postgres.inserir(postgres, row[0], row[1],
                           original, tratado, stemming,
@@ -135,7 +137,8 @@ def atendimento(salt=None, item=None):
 
     # row = ibm_db.fetch_assoc(stmt)
     es.indices.refresh(index=config.elasticsearch_db)
-    # rabbit_conn.close()
+    # if config.rabbitmq_use:
+        # rabbit_conn.close()
 
     log.info('Registros importados:' + str(total))
 

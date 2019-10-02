@@ -50,12 +50,16 @@ def atendimento(salt=None, item=None):
 
     nomes = {}
     users = {}
+    log.info('Iniciando consulta base')
 
+    print(sql)
     rows = conn.cursor()
     rows.execute(sql)
+
     # stmt = ibm_db.exec_immediate(conn, sql)
     # row = ibm_db.fetch_assoc(stmt)
 
+    log.info('Fim consulta base')
     texto_salt = ''
     rows = list(rows)
 

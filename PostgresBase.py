@@ -17,7 +17,7 @@ class BaseModel(Model):
 class Pessoas(BaseModel):
     atendimento = IntegerField()
     item = SmallIntegerField()
-    pessoa = CharField(max_length=25)
+    pessoa = CharField(max_length=50)
     quant = SmallIntegerField()
 
     class Meta:
@@ -58,6 +58,7 @@ class Base(object):
               " severidade smallint," \
               " tempo smallint," \
               " data date," \
+              " encerramento text," \
               " CONSTRAINT pk_sac PRIMARY KEY(atendimento, item)" \
                ");"
         self.cur.execute(sql)

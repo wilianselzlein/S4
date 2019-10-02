@@ -50,9 +50,10 @@ pip3 install psycopg2
 sudo pip3 install --upgrade pip
 sudo pip3 install -U PyYAML OU sudo pip3 install --ignore-installed PyYAML
 
-python3 -m nltk.downloader stopwords
-python3 -m nltk.downloader punkt
-python3 -m nltk.downloader words
+sudo python3 -m nltk.downloader punkt
+sudo python3 -m nltk.downloader stopwords
+sudo python3 -m nltk.downloader words
+sudo python3 -m spacy download pt
 
 $ make install
 ```

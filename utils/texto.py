@@ -135,7 +135,7 @@ class Texto(object):
                 if cdusuario in s:
                     palavras[cdusuario] = palavras.get(cdusuario, 0) + 1
                     # print('{:30s}"'.format(cdusuario) + '"')
-                    s = s.replace(cdusuario, '__cdusuario__')
+                    s = s.replace(cdusuario, ' __cdusuario__ ')
         return s
 
     def RemoverNomes(self, s, palavras):

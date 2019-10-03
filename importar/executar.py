@@ -114,7 +114,7 @@ def atendimento(salt=None, item=None):
         tratado = texto.tratar(texto, str(row[2]), remove=True, users=users, nomes=nomes)
         tratado = replace_grams_pickle(tratado)
 
-        stemming = texto.tratar(texto, str(row[2]), stemming=True)
+        stemming = texto.tratar(texto, str(row[2]), stemming=True, remove=True, users=users, nomes=nomes)
 
         doc = {
             'atendimento': row[0],
@@ -176,7 +176,8 @@ def counter_grams(ngram, dic, texto_salt):
         palavra = palavra.strip()
         gram = palavra.replace(' ', '_')
         dic.append(palavra)
-        texto_salt = texto_salt.replace(palavra, gram)
+        print(gram, value)
+        texto_salt = texto_salt.replace(palavra + ' ', gram)
     return texto_salt
 
 
@@ -185,7 +186,8 @@ def replace_grams_pickle(text):
         grams_pickle = open(file_grams_pickle, 'rb')
         grams = pickle.load(grams_pickle)
         for gram in grams:
-            text = text.replace(gram, gram.replace(' ', '_'))
+            if gram in text:
+                text = text.replace(gram, gram.replace(' ', '_'))
     return text
 
 

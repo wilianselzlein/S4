@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PostgresBase.py" beforeDir="false" afterPath="$PROJECT_DIR$/PostgresBase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/importar/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/executar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/importar/sql_sac.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/sql_sac.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/txt/NMPESSOA.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/NMPESSOA.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/texto.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/texto.py" afterDir="false" />
     </list>
@@ -53,7 +50,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.__main__ --portal">
+  <component name="RunManager" selected="Python.__main__ --importar">
     <configuration name="__main__ --fila A" type="PythonConfigurationType" factoryName="Python">
       <module name="S4" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -506,7 +503,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570022049935</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Start swagger">
+      <created>1570028664153</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1570028664153</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -589,16 +593,6 @@
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>54</line>
-          <option name="timeStamp" value="90" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>140</line>
-          <option name="timeStamp" value="94" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fila/executar.py</url>
           <line>21</line>
           <option name="timeStamp" value="97" />
@@ -610,12 +604,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>221</line>
+          <line>223</line>
           <option name="timeStamp" value="105" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>232</line>
+          <line>234</line>
           <option name="timeStamp" value="106" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -627,6 +621,36 @@
           <url>file://$PROJECT_DIR$/portal/executar.py</url>
           <line>34</line>
           <option name="timeStamp" value="109" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>142</line>
+          <option name="timeStamp" value="113" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>113</line>
+          <option name="timeStamp" value="117" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>167</line>
+          <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>189</line>
+          <option name="timeStamp" value="126" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>87</line>
+          <option name="timeStamp" value="127" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>85</line>
+          <option name="timeStamp" value="129" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

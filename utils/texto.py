@@ -22,6 +22,11 @@ FRASES = [
           'senhores',
           'doutores',
           'doutor',
+          'doutora',
+          ' dr ',
+          ' dra ',
+          ' ou ',
+          ' att ',
           # '.jpeg',
           # '.jpg',
           # '.png',
@@ -48,11 +53,16 @@ class Texto(object):
         s = self.Pontuacao(s)
         s = self.normalize_text(s)
         s = self.clear_text(s)
+
         if remove:
             s = self.RemoverUsuarios(s, users)
             s = self.RemoverNomes(s, nomes)
         if stemming:
             s = self.Stemming(s)
+
+        s = self.Menor(s, 1)
+        s = self.Pontuacao(s)
+        s = self.clear_text(s)
         return s
 
     @staticmethod
@@ -66,8 +76,8 @@ class Texto(object):
         text = text.lower()
 
         text = self.re_tree_dots.sub('...', text)
-        text = re.sub('\.\.\.', '', text)
-        text = self.re_remove_brackets.sub('', text)
+        text = re.sub('\.\.\.', ' ', text)
+        text = self.re_remove_brackets.sub(' ', text)
         text = self.re_changehyphen.sub('-', text)
         text = self.re_remove_html.sub(' ', text)
         text = self.re_transform_numbers.sub('0', text)
@@ -76,8 +86,8 @@ class Texto(object):
         text = self.re_quotes_1.sub(r'\1"', text)
         text = self.re_quotes_2.sub(r'"\1', text)
         text = self.re_quotes_3.sub('"', text)
-        text = re.sub('"', '', text)
-        text = re.sub('\*', '', text)
+        text = re.sub('"', ' ', text)
+        text = re.sub('\*', ' ', text)
         text = self.re_dots.sub('.', text)
         text = self.re_punctuation.sub(r'\1', text)
         text = self.re_hiphen.sub(' - ', text)
@@ -85,7 +95,7 @@ class Texto(object):
         text = self.re_punkts_b.sub(r'\1 \2 \3', text)
         text = self.re_punkts_c.sub(r'\1 \2', text)
         text = self.re_doublequotes_1.sub('\"', text)
-        text = self.re_doublequotes_2.sub('\'', text)
+        text = self.re_doublequotes_2.sub('\' ', text)
         text = self.re_trim.sub(' ', text)
         text = re.sub(r'[x]+', 'x', text)
         text = re.sub(r'[\-]+', '-', text)
@@ -94,7 +104,7 @@ class Texto(object):
         text = re.sub(r'[-./?$@!,":;()=\']', ' ', text)
         text = normalize('NFKD', text).encode('ASCII', 'ignore').decode('ASCII')
         self.pattern = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
-        text = self.pattern.sub('', text)
+        text = self.pattern.sub(' ', text)
 
         return text.strip()
 
@@ -125,7 +135,7 @@ class Texto(object):
 
     def RemoverFrasesPadrao(self, s):
         for frase in FRASES:
-            s = s.replace(frase.lower(), '')
+            s = s.replace(frase.lower(), ' ')
         return s
 
     def RemoverUsuarios(self, s, palavras):
@@ -197,11 +207,16 @@ class Texto(object):
         text = self.re_quotes_3.sub('"', text)
         text = self.re_doublequotes_1.sub('\"', text)
         text = self.re_doublequotes_2.sub('\'', text)
-        text = re.sub('"', '', text)
-        text = re.sub('\'', '', text)
-        text = text.replace('\'', '')
-        text = text.replace('"', '')
+        text = re.sub('"', ' ', text)
+        text = re.sub('\'', ' ', text)
+        text = text.replace('\'', ' ')
+        text = text.replace('"', ' ')
         return text
+
+    def Menor(self, s, num):
+        palavras = [i for i in s.split() if len(i) > num]
+        palavras = " ".join(palavras)
+        return palavras
 
     def __init__(self):
         punctuations = re.escape('!"#%\'()*+,./:;<=>?@[\\]^_`{|}~_')

@@ -9,13 +9,13 @@ quantidade = 3  # Retorno de atendimentos por modelo
 campo = 3  # 2 texto tratado 3 stemming
 
 server_port = 8081
-server_host = "0.0.0.0"
+server_host = os.environ.get("SERVER_URI", "0.0.0.0")
 server_url = "http://" + server_host + ":" + str(server_port)
 
 cassandra_host = "127.0.0.1"
 cassandra_KEYSPACE = "keyspaceS4"
 
-elasticsearch = "http://localhost:9200"
+elasticsearch = os.environ.get("ELASTIC_URI", "http://localhost:9200")
 elasticsearch_db = "s4" + cli
 elasticsearch_search = "s4_search" + cli
 elasticsearch_limit = 100
@@ -26,7 +26,7 @@ rabbitmq_import = "s4_import" + cli
 rabbitmq_validate = "s4_validate" + cli
 rabbitmq_limit = 100000
 
-postgres_host = os.environ.get("POSTGRE_URI", "127.0.0.1")
+postgres_host = os.environ.get("POSTGRES_URI", "127.0.0.1")
 postgres_db = "s4" + cli
 postgres_dbpostgres = "postgres"
 postgres_user = "postgres"

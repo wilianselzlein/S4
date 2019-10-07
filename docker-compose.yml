@@ -1,5 +1,6 @@
 version: '3'
 services:
+
   postgres:
     image: postgres:latest
 
@@ -7,14 +8,33 @@ services:
     image: elasticsearch:7.4.0
     ports:
       - "9200:9200"
+
   kibana:
     image: kibana:7.4.0
     ports:
       - "5601:5601"
     depends_on:
       - elasticsearch
-  portal_server:
+
+  server:
      build: .
+     image: s4
+     expose:
+        - "8081"
+     ports:
+        - "8081:8081"
+     environment:
+        - ELASTIC_URI=http://elasticsearch:9200/
+        - POSTGRES_URI=postgres
+
+     entrypoint: python ./__main__.py --server
+
+  portal:
+     image: s4
+     expose:
+        - "5000"
      ports:
         - "5000:5000"
-        - "8081:8081"
+     environment:
+        - SERVER_URI=server
+     entrypoint: python ./__main__.py --portal      

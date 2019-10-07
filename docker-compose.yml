@@ -1,28 +1,20 @@
 version: '3'
 services:
+  postgres:
+    image: postgres:latest
+
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
-    environment:
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+    image: elasticsearch:7.4.0
     ports:
       - "9200:9200"
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.4.0
+    image: kibana:7.4.0
     ports:
       - "5601:5601"
-  portal:
+    depends_on:
+      - elasticsearch
+  portal_server:
      build: .
      ports:
         - "5000:5000"
-     network_mode: host
-  server:
-     build: .
-     ports:
         - "8081:8081"
-     network_mode: host

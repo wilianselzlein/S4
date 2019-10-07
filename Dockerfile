@@ -15,10 +15,7 @@ RUN pip install -r ./requirements.txt
 
 RUN python3 -c "import nltk; nltk.download('stopwords'); nltk.download('rslp');"
 
-CMD python3 ./__main__.py --server
-CMD python3 ./__main__.py --portal
+CMD python3 ./__main__.py --server && python3 ./__main__.py --portal
 
 EXPOSE 5000
 EXPOSE 8081
-EXPOSE 5601
-EXPOSE 9200

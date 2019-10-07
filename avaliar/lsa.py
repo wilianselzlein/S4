@@ -1,13 +1,16 @@
 # import sklearn
 from sklearn.decomposition import TruncatedSVD
+
 # from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.preprocessing import Normalizer
+
 # from sklearn import metrics
 # from sklearn.cluster import KMeans, MiniBatchKMeans
 from nltk.corpus import stopwords
 import numpy as np
 import pandas as pd
+
 # from scipy.spatial.distance import cosine
 # from sklearn.metrics.pairwise import cosine_similarity
 import config
@@ -20,7 +23,6 @@ ARQUIVO = "lsa"
 
 
 class Lsa(modelo.Base):
-
     @staticmethod
     def avaliar(self, texto, atendimentos):
 
@@ -28,13 +30,15 @@ class Lsa(modelo.Base):
         salts = []
         for atendimento in atendimentos:
             example.append(atendimento[config.campo])
-            salts.append(str(atendimento[0]) + '/' + str(atendimento[1]))
+            salts.append(str(atendimento[0]) + "/" + str(atendimento[1]))
 
-        vectorizer = CountVectorizer(min_df=5, ngram_range=(1, 3), stop_words=stopwords.words("portuguese"))
+        vectorizer = CountVectorizer(
+            min_df=5, ngram_range=(1, 3), stop_words=stopwords.words("portuguese")
+        )
 
         dtm = vectorizer.fit_transform(example)
 
-        lsa = TruncatedSVD(150, algorithm='arpack')
+        lsa = TruncatedSVD(150, algorithm="arpack")
 
         dtm = dtm.asfptype()
         dtm_model = lsa.fit(dtm)
@@ -54,12 +58,16 @@ class Lsa(modelo.Base):
 
         # similarity = cosine_similarity(np.asmatrix(dtm_lsa), np.asmatrix(dtm_lsa_exemplo))
 
-        res = pd.DataFrame(similarity, index=salts, columns=example2).sort_values(example2, ascending=False).head(config.quantidade)
+        res = (
+            pd.DataFrame(similarity, index=salts, columns=example2)
+            .sort_values(example2, ascending=False)
+            .head(config.quantidade)
+        )
 
         sims = []
         for sim in range(len(res.index.tolist())):
-            salt = res.index.tolist()[sim].split('/')[0]
-            item = res.index.tolist()[sim].split('/')[1]
+            salt = res.index.tolist()[sim].split("/")[0]
+            item = res.index.tolist()[sim].split("/")[1]
             score = res.values.tolist()[sim][0]
             tuple_sim = (salt, item, score)
             sims.append(tuple_sim)

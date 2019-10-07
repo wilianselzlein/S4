@@ -3,10 +3,10 @@ import config
 from utils import utils
 
 
-log = utils.get_logger('Avaliation')
+log = utils.get_logger("Avaliation")
+
 
 class Postgres(PostgresBase.Base):
-
     @staticmethod
     def atendimento(self, sac, item):
         sql = "  select atendimento, item, texto, stemming, original "
@@ -20,7 +20,9 @@ class Postgres(PostgresBase.Base):
     def atendimentos(self, sac, item):
         sql = "  select s.atendimento, s.item, s.texto, s.stemming "
         sql += " from sac s"
-        sql += " where s.atendimento||'-'||s.item <> '" + str(sac) + "-" + str(item) + "'"
+        sql += (
+            " where s.atendimento||'-'||s.item <> '" + str(sac) + "-" + str(item) + "'"
+        )
         sql += " and s.atendimento||'-'||s.item not in ("
         sql += "  select r.relacionado||'-'||r.relacionadoitem "
         sql += "  from resultados r"
@@ -28,7 +30,7 @@ class Postgres(PostgresBase.Base):
         sql += "  and r.item = " + str(item)
         sql += f" and r.util = {False})"
         data = config.data_avaliacao
-        if data != '':
+        if data != "":
             sql += " and s.data > '" + data + "'"
             log.info("Avaliados a partir de " + str(data))
 
@@ -36,20 +38,46 @@ class Postgres(PostgresBase.Base):
         return self.cur.fetchall()
 
     @staticmethod
-    def relacionar(self, atendimento, item, algoritmo, relacionado, relacionadoitem, score):
+    def relacionar(
+        self, atendimento, item, algoritmo, relacionado, relacionadoitem, score
+    ):
         sql = " insert into resultados "
         sql += " (atendimento, item, algoritmo, relacionado, relacionadoitem, score) "
-        sql += " values (" + str(atendimento) + ", " + str(item) + ", '" + algoritmo + "', "
-        sql += str(relacionado) + ", " + str(relacionadoitem) + ", " + str(score) + " ) "
+        sql += (
+            " values ("
+            + str(atendimento)
+            + ", "
+            + str(item)
+            + ", '"
+            + algoritmo
+            + "', "
+        )
+        sql += (
+            str(relacionado) + ", " + str(relacionadoitem) + ", " + str(score) + " ) "
+        )
         sql += " ON CONFLICT (atendimento, item, algoritmo, relacionado, relacionadoitem) DO NOTHING; "
-        log.debug(str(atendimento) + '/' + str(item) + ' ' + algoritmo + ' ' + str(relacionado)+'/'+str(relacionadoitem) + ' ' + str(score))
+        log.debug(
+            str(atendimento)
+            + "/"
+            + str(item)
+            + " "
+            + algoritmo
+            + " "
+            + str(relacionado)
+            + "/"
+            + str(relacionadoitem)
+            + " "
+            + str(score)
+        )
         self.cur.execute(sql)
         self.con.commit()
 
     @staticmethod
     def resultados(self, sac, item):
-        sql = "  select distinct ' ' as algoritmo, r.relacionado, r.relacionadoitem, 0.00 as score, s.severidade, s.tempo, s.original, " \
-              "  s.encerramento, r.util "
+        sql = (
+            "  select distinct ' ' as algoritmo, r.relacionado, r.relacionadoitem, 0.00 as score, s.severidade, s.tempo, s.original, "
+            "  s.encerramento, r.util "
+        )
         sql += " from resultados r"
         sql += " join sac s"
         sql += " on r.relacionado = s.atendimento and r.relacionadoitem = s.item"

@@ -8,7 +8,6 @@ ARQUIVO = "BagOfWords"
 
 
 class BagOfWords(modelo.Base):
-
     @staticmethod
     def avaliar(self, texto, atendimentos):
 
@@ -55,10 +54,14 @@ class BagOfWords(modelo.Base):
         print(len(vetores))
 
         print("Estatisticas das ocorrencias das palavras no vocabulario:")
-        print("Media {}, minimo {}, maximo {}".format(vetorVocab.mean(), vetorVocab.min(), vetorVocab.max()))
+        print(
+            "Media {}, minimo {}, maximo {}".format(
+                vetorVocab.mean(), vetorVocab.min(), vetorVocab.max()
+            )
+        )
         print(type(vetores))
         print(type(vetores.values()))
-        print(vetores['315731/1'])
+        print(vetores["315731/1"])
         transformer = TfidfTransformer()
 
         matrizVetores = np.asarray(list(vetores.values()), dtype=np.int16)
@@ -75,17 +78,19 @@ class BagOfWords(modelo.Base):
         score = 0
 
         if len(texto) > 0:
-            matrizPontos, explica = self.pontuaVetores_tfidf(texto[0][config.campo], vocab, vetores, vetorVocab)
+            matrizPontos, explica = self.pontuaVetores_tfidf(
+                texto[0][config.campo], vocab, vetores, vetorVocab
+            )
             # print(explica)
             ind = 1
-            if (ind > matrizPontos.shape[1]):
+            if ind > matrizPontos.shape[1]:
                 ind = matrizPontos.shape[1]
                 # print("1 mais:")
 
-            for codigo in (matrizPontos[0, :ind]):
-                for linha in (listaResumo):
+            for codigo in matrizPontos[0, :ind]:
+                for linha in listaResumo:
                     codigo2 = linha[:10]
-                    if (codigo2 == codigo):
+                    if codigo2 == codigo:
                         score = matrizPontos[1, :ind][0]
                         # print(score)
                         salt = linha[:6]
@@ -102,20 +107,19 @@ class BagOfWords(modelo.Base):
     def montaresumo(self, atendimentos):
         listaresumo = []
         for atendimento in atendimentos:
-            codigo = str(atendimento[0]) + '/' + str(atendimento[1])
+            codigo = str(atendimento[0]) + "/" + str(atendimento[1])
             descricao = str(atendimento[config.campo])
             listaresumo.append(" ".join([codigo, " ", descricao]))
 
         return listaresumo
 
-
     def montaDictVocabulario(self, lista):
         # Percorre todos os subitens COM descricao completa.
-        stopwords = nltk.corpus.stopwords.words('portuguese')
+        stopwords = nltk.corpus.stopwords.words("portuguese")
         vocab = {}
         # Cria vocabulario atraves desta descricao completa
         index = 0
-        for linha in (lista):
+        for linha in lista:
             codigo = linha[:8]
             descricao = linha[10:]
             listadepalavras = descricao.split()
@@ -132,7 +136,7 @@ class BagOfWords(modelo.Base):
     def montaVetores(self, plista, pvocab):
         vetorVocab = np.zeros(len(pvocab), dtype=np.int16)
         vetores = {}
-        for linha in (plista):
+        for linha in plista:
             codigo = linha[:10]
             descricao = linha[11:]
             listadepalavras = descricao.split()
@@ -145,7 +149,6 @@ class BagOfWords(modelo.Base):
 
             vetores[codigo] = tecvector
         return vetores, vetorVocab
-
 
     def pontuaVetores(self, ptexto, pvocab, pvetores, vetorVocab, ponderado=False):
         # Por eficiencia, selecionar somente as colunas com palavras que ocorrem na busca
@@ -161,16 +164,20 @@ class BagOfWords(modelo.Base):
             if palavra in pvocab:
                 index = pvocab[palavra]
                 vetor = matrizVetores[:, index]
-                explicacao = explicacao + palavra + ' ' + str(vetorVocab[index]) + ' '
+                explicacao = explicacao + palavra + " " + str(vetorVocab[index]) + " "
                 matrizSoma = np.add(matrizSoma, vetor)
         indicesnaozero = np.nonzero(matrizSoma)
-        matrizTemp = np.vstack((matrizCodigos[indicesnaozero], matrizSoma[indicesnaozero]))
+        matrizTemp = np.vstack(
+            (matrizCodigos[indicesnaozero], matrizSoma[indicesnaozero])
+        )
         indices = matrizTemp[1, :].argsort()
         indices = indices[::-1]
         matrizCodigoePontuacao = matrizTemp[:, indices]
         return matrizCodigoePontuacao, explicacao
 
-    def pontuaVetores_tfidf(self, ptexto, pvocab, pvetores, vetorVocab, ponderado=False):
+    def pontuaVetores_tfidf(
+        self, ptexto, pvocab, pvetores, vetorVocab, ponderado=False
+    ):
         # Por eficiencia, selecionar somente as colunas com palavras que ocorrem na busca
         # Portanto, primeiro converter a lista vetores de uma Matriz de dimensoes
         # numero x tamanhodoVocabulario
@@ -188,10 +195,12 @@ class BagOfWords(modelo.Base):
             if palavra in pvocab:
                 index = pvocab[palavra]
                 vetor = matriz_tfidf[:, index]
-                explicacao = explicacao + palavra + ' ' + str(vetorVocab[index]) + ' '
+                explicacao = explicacao + palavra + " " + str(vetorVocab[index]) + " "
                 matrizSoma = np.add(matrizSoma, vetor)
         indicesnaozero = np.nonzero(matrizSoma)
-        matrizTemp = np.vstack((matrizCodigos[indicesnaozero], matrizSoma[indicesnaozero]))
+        matrizTemp = np.vstack(
+            (matrizCodigos[indicesnaozero], matrizSoma[indicesnaozero])
+        )
         indices = matrizTemp[1, :].argsort()
         indices = indices[::-1]
         matrizCodigoePontuacao = matrizTemp[:, indices]

@@ -2,8 +2,6 @@ import PostgresBase
 
 
 class Postgres(PostgresBase.Base):
-
-
     @staticmethod
     def avaliacao(self, atendimento, item, relacionado, relacionadoitem, valor):
         sql = f" update resultados set util = {valor}"
@@ -17,7 +15,6 @@ class Postgres(PostgresBase.Base):
         self.cur.execute(sql)
         self.con.commit()
 
-
     @staticmethod
     def metricas(self, campo):
         sql = "  select " + str(campo)
@@ -28,8 +25,8 @@ class Postgres(PostgresBase.Base):
         registros = self.cur.fetchall()
         for registro in registros:
             conta = registro[0]
-            
+
         return conta
-        
+
     def __init__(self):
         super().__init__()

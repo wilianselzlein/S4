@@ -9,16 +9,17 @@ ARQUIVO = "cosine_distance"
 
 
 class CosineDistance(modelo.Base):
-
     @staticmethod
     def avaliar(self, texto, atendimentos):
 
         dic = {}
         r = 0
         for atendimento in atendimentos:
-            codigo = str(atendimento[0]) + '/' + str(atendimento[1])
+            codigo = str(atendimento[0]) + "/" + str(atendimento[1])
             descricao = str(atendimento[config.campo])
-            dic[codigo] = self.sentence_similarity(texto[0][config.campo].split(), descricao.split())
+            dic[codigo] = self.sentence_similarity(
+                texto[0][config.campo].split(), descricao.split()
+            )
 
         score = 0
         salt = 0
@@ -30,7 +31,7 @@ class CosineDistance(modelo.Base):
             item = salt[7:8]
             salt = atendimento[0:6]
             break
-            #print (dic[atendimento])
+            # print (dic[atendimento])
 
         return salt, item, score
 

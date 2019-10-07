@@ -8,10 +8,11 @@ ARQUIVO = "doc2vec_" + config.cli + "_" + str(config.campo)
 
 
 class Doc2Vec(modelo.Base):
-
     @staticmethod
     def avaliar(self, texto, atendimentos):
-        model = gensim.models.doc2vec.Doc2Vec(vector_size=200, min_count=5, seed=1, max_vocab_size=20000, workers=1) #, epochs=40
+        model = gensim.models.doc2vec.Doc2Vec(
+            vector_size=200, min_count=5, seed=1, max_vocab_size=20000, workers=1
+        )  # , epochs=40
         if os.path.isfile(ARQUIVO):
             model = gensim.models.doc2vec.Doc2Vec.load(ARQUIVO)
         else:
@@ -27,7 +28,9 @@ class Doc2Vec(modelo.Base):
         self.train_corpus = list(self.read_corpus(atendimentos))
 
         model.build_vocab(self.train_corpus)
-        model.train(self.train_corpus, total_examples=model.corpus_count, epochs=model.epochs)
+        model.train(
+            self.train_corpus, total_examples=model.corpus_count, epochs=model.epochs
+        )
         # print('infer', model.infer_vector(['intimacao']))
         model.save(ARQUIVO)
 
@@ -44,7 +47,9 @@ class Doc2Vec(modelo.Base):
             else:
                 # For training data, add tags
                 # yield gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(line), [i])
-                yield gensim.models.doc2vec.TaggedDocument(line.split(), [str(atendimento[0]) + '/' + str(atendimento[1])])
+                yield gensim.models.doc2vec.TaggedDocument(
+                    line.split(), [str(atendimento[0]) + "/" + str(atendimento[1])]
+                )
 
     @property
     def arquivo(self):

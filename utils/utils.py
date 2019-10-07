@@ -6,6 +6,7 @@ from colorlog import ColoredFormatter
 import config
 import coloredlogs
 
+
 def get_logger(name):
     # logger.debug("this is a debugging message")
     # logger.info("this is an informational message")
@@ -23,8 +24,8 @@ def get_logger(name):
     # stream.setLevel(logging.INFO)
     # stream.setFormatter(formatter)
 
-    logger = logging.getLogger('{:15s}'.format(name))
-    coloredlogs.install(level='DEBUG', logger=logger)
+    logger = logging.getLogger("{:15s}".format(name))
+    coloredlogs.install(level="DEBUG", logger=logger)
     # logger.addHandler(stream)
     logger.propagate = False
 

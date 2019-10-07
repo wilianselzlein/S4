@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
+    <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="Correcoes Importacao">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/importar/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/executar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/NMPESSOA.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt/NMPESSOA.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/texto.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/texto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -510,7 +508,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570028664153</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Correcoes Importacao">
+      <created>1570126597998</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1570126597998</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -537,7 +542,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="FontAwesome" />
     <MESSAGE value="Ajax" />
     <MESSAGE value="CSS" />
     <MESSAGE value="sh" />
@@ -562,7 +566,8 @@
     <MESSAGE value="Remove search elastic access by flask" />
     <MESSAGE value="Remove model avaliation by flask" />
     <MESSAGE value="Start swagger" />
-    <option name="LAST_COMMIT_MESSAGE" value="Start swagger" />
+    <MESSAGE value="Correcoes Importacao" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correcoes Importacao" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,3 +1,3 @@
 from server.executar import executar
 
-__all__ = ['executar']
+__all__ = ["executar"]

@@ -1,7 +1,7 @@
 import os
 import logging
 
-cli = "pj"
+cli = os.environ.get("CLI", "pj")
 
 ultima_importacao = "2016-01-01"
 data_avaliacao = "2017-01-01"

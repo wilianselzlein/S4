@@ -283,4 +283,4 @@ def executar():
         cors.add(route)
 
     setup_swagger(app, swagger_url="/api/v1/doc", swagger_from_file="swagger.yaml")
-    web.run_app(app, host=config.server_url, port=config.server_port)
+    web.run_app(app, host=config.server_host, port=config.server_port)

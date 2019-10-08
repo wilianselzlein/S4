@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/avaliar/postgres.py" beforeDir="false" afterPath="$PROJECT_DIR$/avaliar/postgres.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jupyter/DB2.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jupyter/DocSim.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jupyter/DocSim.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jupyter/ElasticSearch.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jupyter/LSA.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jupyter/Texto.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jupyter/summarize.ipynb" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -522,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570458164331</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="docker compose">
+      <created>1570475468070</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1570475468070</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -549,7 +562,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="CSS" />
     <MESSAGE value="sh" />
     <MESSAGE value="intro js" />
     <MESSAGE value="refactor importer sql sac" />
@@ -574,7 +586,8 @@
     <MESSAGE value="Start swagger" />
     <MESSAGE value="Correcoes Importacao" />
     <MESSAGE value="Black" />
-    <option name="LAST_COMMIT_MESSAGE" value="Black" />
+    <MESSAGE value="docker compose" />
+    <option name="LAST_COMMIT_MESSAGE" value="docker compose" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

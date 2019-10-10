@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/avaliar/postgres.py" beforeDir="false" afterPath="$PROJECT_DIR$/avaliar/postgres.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fila/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/fila/executar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fila/postgres.py" beforeDir="false" afterPath="$PROJECT_DIR$/fila/postgres.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/importar/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/importar/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/executar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/importar/sql_sac.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/sql_sac.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/executar.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +56,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.__main__ --importar">
+  <component name="RunManager" selected="Python.__main__ --server">
     <configuration name="__main__ --fila A" type="PythonConfigurationType" factoryName="Python">
       <module name="S4" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -536,7 +544,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570551822973</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Var cli">
+      <created>1570552299326</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1570552299326</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -563,7 +578,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="intro js" />
     <MESSAGE value="refactor importer sql sac" />
     <MESSAGE value="S⁴" />
     <MESSAGE value="Rabbit" />
@@ -588,90 +602,146 @@
     <MESSAGE value="Black" />
     <MESSAGE value="docker compose" />
     <MESSAGE value="Removido Jupyter Notebooks" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removido Jupyter Notebooks" />
+    <MESSAGE value="Var cli" />
+    <option name="LAST_COMMIT_MESSAGE" value="Var cli" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/avaliar/bagofwords.py</url>
           <line>13</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/postgres.py</url>
           <line>37</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fila/executar.py</url>
-          <line>11</line>
+          <line>13</line>
           <option name="timeStamp" value="84" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/avaliar/bm25.py</url>
           <line>17</line>
           <option name="timeStamp" value="87" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/avaliar/bm25.py</url>
           <line>57</line>
           <option name="timeStamp" value="88" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fila/executar.py</url>
-          <line>21</line>
+          <line>29</line>
           <option name="timeStamp" value="97" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fila/executar.py</url>
-          <line>55</line>
+          <line>100</line>
           <option name="timeStamp" value="98" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>258</line>
-          <option name="timeStamp" value="105" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>269</line>
-          <option name="timeStamp" value="106" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server/executar.py</url>
-          <line>62</line>
+          <line>63</line>
           <option name="timeStamp" value="108" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
           <line>165</line>
           <option name="timeStamp" value="113" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
           <line>115</line>
           <option name="timeStamp" value="117" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
           <line>202</line>
           <option name="timeStamp" value="124" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
           <line>224</line>
           <option name="timeStamp" value="126" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
           <line>89</line>
           <option name="timeStamp" value="127" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
           <line>87</line>
           <option name="timeStamp" value="129" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>259</line>
+          <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>33</line>
+          <option name="timeStamp" value="131" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="132" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>77</line>
+          <option name="timeStamp" value="133" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>24</line>
+          <option name="timeStamp" value="135" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/server/executar.py</url>
+          <line>265</line>
+          <option name="timeStamp" value="138" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/server/executar.py</url>
+          <line>79</line>
+          <option name="timeStamp" value="139" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/fila/executar.py</url>
+          <line>17</line>
+          <option name="timeStamp" value="143" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>294</line>
+          <option name="timeStamp" value="144" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/fila/executar.py</url>
+          <line>33</line>
+          <option name="timeStamp" value="145" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/importar/executar.py</url>
+          <line>266</line>
+          <option name="timeStamp" value="150" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/fila/executar.py</url>
+          <line>40</line>
+          <option name="timeStamp" value="152" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/fila/executar.py</url>
+          <line>76</line>
+          <option name="timeStamp" value="154" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

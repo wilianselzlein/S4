@@ -3,7 +3,7 @@ import logging
 
 cli = os.environ.get("CLI", "pj")
 
-ultima_importacao = "2016-01-01"
+ultima_importacao = "2019-10-01"
 data_avaliacao = "2017-01-01"
 quantidade = 3  # Retorno de atendimentos por modelo
 campo = 3  # 2 texto tratado 3 stemming
@@ -24,7 +24,8 @@ rabbitmq_use = False
 rabbitmq = "localhost"
 rabbitmq_import = "s4_import" + cli
 rabbitmq_validate = "s4_validate" + cli
-rabbitmq_limit = 100000
+rabbitmq_day_import = "s4_day_import" + cli
+rabbitmq_limit = 1000
 
 postgres_host = os.environ.get("POSTGRE_URI", "127.0.0.1")
 postgres_db = "s4" + cli

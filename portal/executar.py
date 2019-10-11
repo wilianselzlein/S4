@@ -16,7 +16,7 @@ DISLIKE = False
 
 
 def executar():
-    app.run(host=config.server_host)
+    app.run(host="0.0.0.0")
 
 
 def _host():

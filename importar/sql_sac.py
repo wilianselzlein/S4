@@ -17,7 +17,7 @@ atendimentos = """
 
 atendimentos_filtro = " AND ia.NUATENDIMENTO = {} AND ia.NUITEM = {}"
 
-atendimentos_data = " AND VARCHAR_FORMAT (ra.DTREGISTRO,'YYYY-MM-DD') > '{}'"
+atendimentos_data = " AND VARCHAR_FORMAT (ra.DTREGISTRO,'YYYY-MM-DD') >= '{}'"
 
 atendimentos_order = " ORDER BY ra.DTREGISTRO DESC"
 

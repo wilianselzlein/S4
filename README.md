@@ -15,7 +15,8 @@ Ferramenta que orienta o colaborador sobre os passos mais eficazes para a resolu
 -  O  foi desenvolvida para realizar classificação do atendimentos a partir dos dados do processo e do texto extraído de outros atendimentos. 
     A classificação é feita através de modelos de machine learning
 
-#r# Instalação
+## Instalação
+- https://docs.docker.com/install/linux/docker-ce/ubuntu/
 - sudo docker-compose up --build
 
 ## Utilização

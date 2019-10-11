@@ -7,7 +7,7 @@ from avaliar.cosine_distance import CosineDistance
 from avaliar.bm25 import Bm25
 from avaliar.lsa import Lsa
 
-# import importar
+import importar
 import sys
 from utils import utils
 import pika
@@ -25,7 +25,7 @@ def avaliar(salt):
     atendimento = str(salt).split("/")[0]
     item = str(salt).split("/")[1]
 
-    # importar.executar(atendimento, item)
+    importar.executar(atendimento, item)
     texto = postgres.atendimento(postgres, atendimento, item)
 
     if len(texto) == 0:
@@ -94,23 +94,23 @@ def avaliar(salt):
                 score,
             )
 
-        bm25 = Bm25()
-        relacionado, relacionadoitem, score = postgres.consultar(
-            postgres, atendimento, item, bm25.arquivo
-        )
-        if relacionado == 0:
-            relacionado, relacionadoitem, score = bm25.avaliar(
-                bm25, texto, atendimentos
-            )
-            postgres.relacionar(
-                postgres,
-                atendimento,
-                item,
-                bm25.arquivo,
-                relacionado,
-                relacionadoitem,
-                score,
-            )
+        # bm25 = Bm25()
+        # relacionado, relacionadoitem, score = postgres.consultar(
+        #     postgres, atendimento, item, bm25.arquivo
+        # )
+        # if relacionado == 0:
+        #     relacionado, relacionadoitem, score = bm25.avaliar(
+        #         bm25, texto, atendimentos
+        #     )
+        #     postgres.relacionar(
+        #         postgres,
+        #         atendimento,
+        #         item,
+        #         bm25.arquivo,
+        #         relacionado,
+        #         relacionadoitem,
+        #         score,
+        #     )
 
         # bagofwords = BagOfWords()
         # relacionado, relacionadoitem, score = postgres.consultar(postgres, atendimento, item, bagofwords.arquivo)

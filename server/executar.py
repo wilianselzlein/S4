@@ -11,7 +11,8 @@ from elasticsearch import Elasticsearch
 from datetime import datetime
 import json
 from decimal import Decimal
-
+import importar as _importar
+import fila as _fila
 
 log = utils.get_logger("Server")
 
@@ -255,6 +256,22 @@ async def searchs(request):
     return web.json_response(results)
 
 
+async def importar(request):
+    _importar.executar()
+    results = {"importacao": "ok"}
+    return web.json_response(results)
+
+
+async def fila(request):
+    data = await request.json()
+    log.info(f"Fila Request data: {data}")
+    search = get_key("fila", data)
+    _fila.executar(search)
+    # "Importar (D)ia, (I)mportar Atividades, (A)valiar"
+    results = {"fila": "ok"}
+    return web.json_response(results)
+
+
 def executar():
     app = web.Application(logger=log, middlewares=[wraps_exception])
 
@@ -276,6 +293,8 @@ def executar():
             web.post("/v1/server/start", start),
             web.post("/avaliacao", avaliacao),
             web.post("/avaliar", avaliar),
+            web.post("/importar", importar),
+            web.post("/fila", fila),
         ]
     )
 

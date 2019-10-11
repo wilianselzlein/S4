@@ -1,7 +1,7 @@
 import os
 import logging
 
-cli = "pj"
+cli = os.environ.get("CLI", "pj")
 
 ultima_importacao = "2016-01-01"
 data_avaliacao = "2017-01-01"
@@ -24,7 +24,8 @@ rabbitmq_use = False
 rabbitmq = "localhost"
 rabbitmq_import = "s4_import" + cli
 rabbitmq_validate = "s4_validate" + cli
-rabbitmq_limit = 100000
+rabbitmq_day_import = "s4_day_import" + cli
+rabbitmq_limit = 1000
 
 postgres_host = os.environ.get("POSTGRES_URI", "127.0.0.1")
 postgres_db = "s4" + cli

@@ -1,5 +1,6 @@
 import PostgresBase
 import config
+from datetime import date
 
 
 class Postgres(PostgresBase.Base):
@@ -25,6 +26,7 @@ class Postgres(PostgresBase.Base):
 
         self.cur.execute(sql)
         return self.cur.fetchall()
+
 
     def __init__(self):
         super().__init__()

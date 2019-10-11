@@ -23,7 +23,12 @@ parser.add_argument(
     help="Ativa portal Ex: http://127.0.0.1:5000/salt/000000/0",
     action="store_true",
 )
-parser.add_argument("--fila", help="(I)mportar ou (A)valiar", default="", type=str)
+parser.add_argument(
+    "--fila", 
+    help="Importar (D)ia, (I)mportar Atividades, (A)valiar", 
+    default="", 
+    type=str
+)
 parser.add_argument("--server", help="Iniciar servidor", action="store_true")
 
 log = utils.get_logger("main")

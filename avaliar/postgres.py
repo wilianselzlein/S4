@@ -76,7 +76,7 @@ class Postgres(PostgresBase.Base):
     def resultados(self, sac, item):
         sql = (
             "  select distinct ' ' as algoritmo, r.relacionado, r.relacionadoitem, 0.00 as score, "
-            "  s.severidade, s.tempo, s.original,  s.encerramento, r.util, count(*) as conta "
+            "  s.severidade, s.tempo, s.original,  s.encerramento, r.util "
         )
         sql += " from resultados r"
         sql += " join sac s"
@@ -84,7 +84,6 @@ class Postgres(PostgresBase.Base):
         sql += " where r.atendimento = " + str(sac)
         sql += " and r.item = " + str(item)
         sql += f" and (r.util <> {False} or r.util is null) "
-        sql += " order by r.relacionado desc;"
         sql += " order by r.relacionado desc;"
         self.cur.execute(sql)
         return self.cur.fetchall()

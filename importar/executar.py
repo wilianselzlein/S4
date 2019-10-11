@@ -123,8 +123,8 @@ def atendimento(salt=None, item=None):
         )
 
         doc = {
-            "atendimento": row[0],
-            "item": row[1],
+            "atendimento": str(row[0]),
+            "item": str(row[1]),
             "original": original,
             "texto": tratado,
             "data": row[4],
@@ -296,7 +296,7 @@ def atividades(salt=None, item=None):
         tratado = replace_grams_pickle(tratado)
 
         doc = {
-            "atendimento": row[0],
+            "atendimento": str(row[0]),
             "item": str(row[1]) + "/" + str(row[2]),
             "original": original,
             "texto": tratado,

@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__main__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/avaliar/postgres.py" beforeDir="false" afterPath="$PROJECT_DIR$/avaliar/postgres.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fila/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/fila/executar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fila/postgres.py" beforeDir="false" afterPath="$PROJECT_DIR$/fila/postgres.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/importar/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/importar/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/executar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/importar/sql_sac.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/sql_sac.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/executar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/avaliar/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/avaliar/executar.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -551,7 +543,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570552299326</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Call importar in Server">
+      <created>1570735866853</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1570735866853</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -578,7 +577,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="refactor importer sql sac" />
     <MESSAGE value="S⁴" />
     <MESSAGE value="Rabbit" />
     <MESSAGE value="Movs TXTs" />
@@ -603,7 +601,8 @@
     <MESSAGE value="docker compose" />
     <MESSAGE value="Removido Jupyter Notebooks" />
     <MESSAGE value="Var cli" />
-    <option name="LAST_COMMIT_MESSAGE" value="Var cli" />
+    <MESSAGE value="Call importar in Server" />
+    <option name="LAST_COMMIT_MESSAGE" value="Call importar in Server" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

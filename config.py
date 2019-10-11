@@ -3,7 +3,7 @@ import logging
 
 cli = os.environ.get("CLI", "pj")
 
-ultima_importacao = "2019-10-01"
+ultima_importacao = "2016-01-01"
 data_avaliacao = "2017-01-01"
 quantidade = 3  # Retorno de atendimentos por modelo
 campo = 3  # 2 texto tratado 3 stemming

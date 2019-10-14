@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/avaliar/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/avaliar/executar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -550,7 +550,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570735866853</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Importar atendimento na avaliação">
+      <created>1570801613597</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1570801613597</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -577,7 +584,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="S⁴" />
     <MESSAGE value="Rabbit" />
     <MESSAGE value="Movs TXTs" />
     <MESSAGE value="Elastic" />
@@ -602,7 +608,8 @@
     <MESSAGE value="Removido Jupyter Notebooks" />
     <MESSAGE value="Var cli" />
     <MESSAGE value="Call importar in Server" />
-    <option name="LAST_COMMIT_MESSAGE" value="Call importar in Server" />
+    <MESSAGE value="Importar atendimento na avaliação" />
+    <option name="LAST_COMMIT_MESSAGE" value="Importar atendimento na avaliação" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -741,6 +748,16 @@
           <url>file://$PROJECT_DIR$/fila/executar.py</url>
           <line>76</line>
           <option name="timeStamp" value="154" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/server/executar.py</url>
+          <line>275</line>
+          <option name="timeStamp" value="155" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/server/executar.py</url>
+          <line>259</line>
+          <option name="timeStamp" value="156" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

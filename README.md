@@ -18,6 +18,8 @@ Ferramenta que orienta o colaborador sobre os passos mais eficazes para a resolu
 ## Instalação
 - https://docs.docker.com/install/linux/docker-ce/ubuntu/
 - sudo docker-compose up --build
+- https://tecadmin.net/install-rabbitmq-server-on-ubuntu/
+
 
 ## Utilização
 
@@ -55,6 +57,8 @@ sudo python3 -m nltk.downloader punkt
 sudo python3 -m nltk.downloader stopwords
 sudo python3 -m nltk.downloader words
 sudo python3 -m spacy download pt
+
+sysctl -w vm.max_map_count=262144
 
 $ make install
 ```

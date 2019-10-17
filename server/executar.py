@@ -293,7 +293,7 @@ def executar():
             web.post("/v1/server/start", start),
             web.post("/avaliacao", avaliacao),
             web.post("/avaliar", avaliar),
-            web.post("/importar", importar),
+            web.get("/importar", importar),
             web.post("/fila", fila),
         ]
     )

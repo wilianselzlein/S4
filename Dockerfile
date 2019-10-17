@@ -13,4 +13,4 @@ COPY ./ ./
 
 RUN pip install -qr ./requirements.txt
 
-RUN python -c "import nltk; nltk.download('stopwords'); nltk.download('rslp');"
+RUN python -c "import nltk; nltk.download('stopwords'); nltk.download('rslp'); nltk.download('punkt');"

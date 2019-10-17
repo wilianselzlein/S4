@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -557,7 +556,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570801613597</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Add in readme Install rabbitmq and vm config">
+      <created>1571060956314</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1571060956314</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -584,7 +590,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Rabbit" />
     <MESSAGE value="Movs TXTs" />
     <MESSAGE value="Elastic" />
     <MESSAGE value="Host" />
@@ -609,7 +614,8 @@
     <MESSAGE value="Var cli" />
     <MESSAGE value="Call importar in Server" />
     <MESSAGE value="Importar atendimento na avaliação" />
-    <option name="LAST_COMMIT_MESSAGE" value="Importar atendimento na avaliação" />
+    <MESSAGE value="Add in readme Install rabbitmq and vm config" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add in readme Install rabbitmq and vm config" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

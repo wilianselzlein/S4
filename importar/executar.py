@@ -41,6 +41,7 @@ def atendimento(salt=None, item=None):
     texto = Texto()
     postgres = Postgres()
     es = Elasticsearch([config.elasticsearch])
+    print(config.elasticsearch)
 
     if config.rabbitmq_use:
         rabbit_conn = pika.BlockingConnection(
@@ -131,7 +132,8 @@ def atendimento(salt=None, item=None):
             "timestamp": row[4],  # datetime.now(),
         }
         es_id = str(row[0]) + "/" + str(row[1])
-        es.index(index=config.elasticsearch_db, id=es_id, body=doc)
+        print(config.elasticsearch_db)
+        es.index(index=config.elasticsearch_db, id=es_id, body=doc, request_timeout=30)
 
         # if config.rabbitmq_use:
         # if rabbit_conn.is_open:

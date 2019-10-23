@@ -1,1 +1,6 @@
 jupyter/
+txt/pj_*
+__pycache__/
+.idea/
+postgres-data/
+venv/

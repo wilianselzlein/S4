@@ -29,6 +29,8 @@ O serviço será executado na porta **5000**
 
 > http://localhost:5000/S4/salt/232580/1
 
+> http://127.0.0.1:8081/api/v1/doc/
+
 ### Montando o ambiente de desenvolvimento
 
 Clonar o projeto no [repositório](https://github.com/wilianselzlein/S4.git) e entrar no mesmo.

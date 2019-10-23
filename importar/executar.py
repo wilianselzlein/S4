@@ -41,7 +41,6 @@ def atendimento(salt=None, item=None):
     texto = Texto()
     postgres = Postgres()
     es = Elasticsearch([config.elasticsearch])
-    print(config.elasticsearch)
 
     if config.rabbitmq_use:
         rabbit_conn = pika.BlockingConnection(
@@ -55,7 +54,6 @@ def atendimento(salt=None, item=None):
     users = {}
     log.info("Iniciando consulta base")
 
-    print(sql)
     rows = conn.cursor()
     rows.execute(sql)
 
@@ -67,8 +65,6 @@ def atendimento(salt=None, item=None):
     rows = list(rows)
 
     for index, row in enumerate(rows):
-        if len(rows) > 10:
-            print(str(index) + "/" + str(len(rows)), end="\r")
         texto_salt += " " + texto.tratar(texto, str(row[2]), remove=True)
 
     texto_salt += texto.RemoverNomes(texto_salt, nomes)
@@ -96,8 +92,6 @@ def atendimento(salt=None, item=None):
     total = 0
 
     for row in rows:
-        if len(rows) > 10:
-            print("\t" + str(total) + "/" + str(len(rows)), end="\r")
         total += 1
 
         # NUATENDIMENTO  NUITEM  DEATENDIMENTO   NUORDEM     DTREGISTRO  QTHORASREAL
@@ -132,7 +126,6 @@ def atendimento(salt=None, item=None):
             "timestamp": row[4],  # datetime.now(),
         }
         es_id = str(row[0]) + "/" + str(row[1])
-        print(config.elasticsearch_db)
         es.index(index=config.elasticsearch_db, id=es_id, body=doc, request_timeout=30)
 
         # if config.rabbitmq_use:
@@ -152,17 +145,6 @@ def atendimento(salt=None, item=None):
             row[4],
             texto.RemoveQuotes(row[6]),
         )
-
-    print(
-        json.dumps(
-            dict(sorted(nomes.items(), key=lambda x: x[1], reverse=True)), indent=4
-        )
-    )
-    print(
-        json.dumps(
-            dict(sorted(users.items(), key=lambda x: x[1], reverse=True)), indent=4
-        )
-    )
 
     # row = ibm_db.fetch_assoc(stmt)
     es.indices.refresh(index=config.elasticsearch_db)

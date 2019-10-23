@@ -78,9 +78,6 @@ def add_day(rabbit_public):
     rows = list(rows)
 
     for index, row in enumerate(rows):
-        if len(rows) > 10:
-            print(str(index) + "/" + str(len(rows)), end="\r")
-
         es_id = str(row[0]) + "/" + str(row[1])
         rabbit_public.basic_publish(
             exchange="", routing_key=config.rabbitmq_day_import, body=es_id

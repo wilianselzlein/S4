@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="57f5ed96-ebba-4453-910c-5e37492a77b1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fila/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/fila/executar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/importar/executar.py" beforeDir="false" afterPath="$PROJECT_DIR$/importar/executar.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -219,13 +223,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1560350549705</updated>
-    </task>
-    <task id="LOCAL-00001" summary="Log collor + grams">
-      <created>1563216402872</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1563216402872</updated>
     </task>
     <task id="LOCAL-00002" summary="Log collor + grams">
       <created>1563220625464</created>
@@ -563,7 +560,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571060956314</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Elastic Docker">
+      <created>1571330734840</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1571330734841</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -590,7 +594,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Movs TXTs" />
     <MESSAGE value="Elastic" />
     <MESSAGE value="Host" />
     <MESSAGE value="Melhorias pesquisa" />
@@ -615,7 +618,8 @@
     <MESSAGE value="Call importar in Server" />
     <MESSAGE value="Importar atendimento na avaliação" />
     <MESSAGE value="Add in readme Install rabbitmq and vm config" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add in readme Install rabbitmq and vm config" />
+    <MESSAGE value="Elastic Docker" />
+    <option name="LAST_COMMIT_MESSAGE" value="Elastic Docker" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -652,7 +656,7 @@
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fila/executar.py</url>
-          <line>100</line>
+          <line>97</line>
           <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
@@ -662,37 +666,37 @@
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>165</line>
+          <line>149</line>
           <option name="timeStamp" value="113" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>115</line>
+          <line>110</line>
           <option name="timeStamp" value="117" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>202</line>
+          <line>186</line>
           <option name="timeStamp" value="124" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>224</line>
+          <line>208</line>
           <option name="timeStamp" value="126" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>89</line>
+          <line>86</line>
           <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>87</line>
+          <line>84</line>
           <option name="timeStamp" value="129" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>259</line>
+          <line>243</line>
           <option name="timeStamp" value="130" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
@@ -707,7 +711,7 @@
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>77</line>
+          <line>74</line>
           <option name="timeStamp" value="133" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
@@ -732,7 +736,7 @@
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>294</line>
+          <line>278</line>
           <option name="timeStamp" value="144" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
@@ -742,7 +746,7 @@
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/importar/executar.py</url>
-          <line>266</line>
+          <line>250</line>
           <option name="timeStamp" value="150" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
